@@ -86,10 +86,10 @@ public abstract class Epoque {
     protected Position repositionIfOutOfBounds(Position pos, boolean vertical, int length){
 
         if (vertical){
-            if (pos.getY()+length >= Map.NBCASES ){
+            if (pos.getY()+length > Map.NBCASES ){
                 return new Position(pos.getX(), pos.getY()-(pos.getY()+length-Map.NBCASES));
             }
-        } else if (pos.getX()+length >= Map.NBCASES ){
+        } else if (pos.getX()+length > Map.NBCASES ){
             return new Position(pos.getX()-(pos.getX()+length-Map.NBCASES), pos.getY());
         }
 

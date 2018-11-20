@@ -1,7 +1,10 @@
 package battleship;
 
 import battleship.epoque.Epoque;
+import battleship.epoque.MoyenAge;
+import battleship.epoque.Renaissance;
 import battleship.player.Human;
+import battleship.player.IACroix;
 import battleship.player.IARandom;
 import battleship.player.Player;
 
@@ -47,4 +50,32 @@ public class Game {
     public Epoque getEpoque() {
         return epoque;
     }
+
+    public void setScore(int id, int score) {
+        this.score[id] = score;
+    }
+
+    public void setTypeofPlayer(int k, String t){
+
+        if(t.equals("Human")){
+            players[k]=new Human(k);
+        }else if(t.equals("IACroix")){
+            players[k]=new IACroix(k);
+        }else if(t.equals("IARandom")){
+            players[k]=new IARandom(k);
+        }
+    }
+
+    public void setEpoque(String t){
+
+        if(t.equals("MoyenAge")){
+            epoque = new MoyenAge();
+        }else if(t.equals("Renaissance")){
+            epoque = new Renaissance();
+        }
+    }
+
+
+
+
 }
