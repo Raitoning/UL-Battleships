@@ -18,4 +18,9 @@ public class Renaissance extends Epoque {
     public String getCheminTexture() {
         return null;
     }
+
+    @Override
+    public String name() {
+        return "Renaissance";
+    }
 }

@@ -12,4 +12,9 @@ public class IARandom extends Player {
     public Position play(Map m) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "IARandom";
+    }
 }

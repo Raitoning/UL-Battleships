@@ -123,6 +123,9 @@ public abstract class Epoque {
         return null;
     }
 
+    public Case getCaseAt(int i,int  x, int y){
+        return maps[i].at(x,y);
+    }
 
     @Override
     public String toString() {
@@ -130,4 +133,6 @@ public abstract class Epoque {
                  Arrays.toString(maps) +
                 '\n';
     }
+
+    public abstract String name();
 }

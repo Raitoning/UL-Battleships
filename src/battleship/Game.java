@@ -36,4 +36,15 @@ public class Game {
 
     }
 
+    public int getScore(int k) {
+        return score[k];
+    }
+
+    public String getTypeofPlayer(int k){
+        return players[k].toString();
+    }
+
+    public Epoque getEpoque() {
+        return epoque;
+    }
 }

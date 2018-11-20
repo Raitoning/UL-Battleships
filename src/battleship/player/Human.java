@@ -15,4 +15,9 @@ public class Human extends Player {
         //Todo: to be Written Graphically
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Human";
+    }
 }

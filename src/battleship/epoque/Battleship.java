@@ -71,6 +71,7 @@ public class Battleship {
         return largeur == 1;
     }
 
-
-
+    public int getPv() {
+        return pv;
+    }
 }

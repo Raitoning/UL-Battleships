@@ -51,4 +51,9 @@ public class MoyenAge extends Epoque {
     public String getCheminTexture() {
         return null;
     }
+
+    @Override
+    public String name() {
+        return "MoyenAge";
+    }
 }
