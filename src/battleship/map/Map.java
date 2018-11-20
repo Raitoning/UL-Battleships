@@ -24,7 +24,6 @@ public class Map {
      * @param b
      */
     public void add(Battleship b){
-
         for (int i=0; i<b.getLength();i++){
             if (b.isVertical()){
                 updateAt(Case.Bateau, b.getPosition().getX(), b.getPosition().getY()+i);
@@ -86,5 +85,18 @@ public class Map {
         }
 
         return sb.toString();
+    }
+
+    public Position nextGood(){
+        int i =0;
+        int j = 0;
+        Position p = null;
+        while(i < NBCASES && p == null){
+            while(j < NBCASES && p == null){
+                if(cases[i][j] == Case.Vide || cases[i][j] == Case.Bateau)
+                    p = new Position(i,j);
+            }
+        }
+        return p;
     }
 }

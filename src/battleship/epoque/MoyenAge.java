@@ -10,13 +10,6 @@ public class MoyenAge extends Epoque {
 
     public MoyenAge() {
         super();
-
-        maps[0] = new Map();
-        maps[1] = new Map();
-
-        battleshipInit(0);
-        battleshipInit(1);
-
     }
 
     @Override

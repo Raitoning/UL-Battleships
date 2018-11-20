@@ -20,6 +20,13 @@ public abstract class Epoque {
     public Epoque() {
         this.maps = new Map[2];
         this.battleships = new ArrayList[2];
+
+
+        maps[0] = new Map();
+        maps[1] = new Map();
+
+        battleshipInit(0);
+        battleshipInit(1);
     }
 
     /**
@@ -38,6 +45,7 @@ public abstract class Epoque {
     }
 
 
+    //TODO: verifier si toujours necessaire
     /**
      * A implementer, Chemin vers les textures a afficher des bateaux
      * @return
