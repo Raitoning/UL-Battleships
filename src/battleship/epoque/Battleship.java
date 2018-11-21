@@ -36,8 +36,8 @@ public class Battleship {
 
         this.coinHautGauche = coinHautGauche;
 
-        map.add(this);
-
+        if (map!=null)
+            map.add(this);
     }
 
     /**

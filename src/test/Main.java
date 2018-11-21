@@ -10,11 +10,11 @@ public class Main {
 
         Game g = new Game(new MoyenAge());
 
-        GameSaverFactory.getInstance().load(g);
+        //GameSaverFactory.getInstance().save(g);
+
+        //GameSaverFactory.getInstance().load(g);
 
         System.out.println(g.getEpoque().toString());
 
-        System.out.println("score "+g.getScore(0)+" "+g.getScore(1));
-        System.out.println("type "+g.getTypeofPlayer(0)+" "+g.getTypeofPlayer(1));
     }
 }

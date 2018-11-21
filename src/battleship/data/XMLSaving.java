@@ -4,13 +4,14 @@ import battleship.Game;
 import battleship.epoque.Battleship;
 import battleship.map.Case;
 import battleship.map.Map;
+import battleship.map.Position;
 
 import java.io.*;
 import java.util.Scanner;
 
 public class XMLSaving extends GameSaverFactory {
 
-    public XMLSaving() {
+    XMLSaving() {
 
     }
 
@@ -81,18 +82,109 @@ public class XMLSaving extends GameSaverFactory {
                 } else if (i==9){
                     if (!line.equals("\t</type>"))
                     System.out.println("No player type closing found");
-                } else if (i==9) {
-                    if (!line.equals("\t</type>"))
-                        System.out.println("No player type closing found");
-                } else if (i==10) {
+                }  else if (i==10) {
                     if (!line.equals("\t<epoque>"))
                         System.out.println("No epoque found");
-                } else if (i==12) {
+                } else if (i==11) {
                     String tmp;
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
 
                     game.setEpoque(tmp);
+                } else if (i==12) {
+                    if (!line.equals("\t\t<map>"))
+                        System.out.println("No map found");
+                } else if (i==13) {
+                    if (!line.equals("\t\t\t<joueur id='0'>"))
+                        System.out.println("No player id=0 found");
+                } else if (i<114) {
+                    String tmp;
+                    tmp = line.split("'")[1];
+                    int x = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int y = Integer.parseInt(""+tmp.charAt(0));
+
+
+                    tmp = line.split(">")[1];
+                    tmp = tmp.split("<")[0];
+                    game.getEpoque().updateCaseAt(0,x,y,Case.fromString(tmp));
+                } else if (i==114) {
+                    if (!line.equals("\t\t\t</joueur>"))
+                        System.out.println("No player type closing found");
+                } else if (i==115) {
+                    if (!line.equals("\t\t\t<joueur id='1'>"))
+                        System.out.println("No player id=1 found");
+                } else if (i<216) {
+                    String tmp;
+                    tmp = line.split("'")[1];
+                    int x = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int y = Integer.parseInt(""+tmp.charAt(0));
+
+
+                    tmp = line.split(">")[1];
+                    tmp = tmp.split("<")[0];
+                    game.getEpoque().updateCaseAt(1,x,y,Case.fromString(tmp));
+                } else if (i==216) {
+                    if (!line.equals("\t\t\t</joueur>"))
+                        System.out.println("No player type closing found");
+                } else if (i==217) {
+                    if (!line.equals("\t\t</map>"))
+                        System.out.println("No map closing found");
+                } else if (i==218) {
+                    if (!line.equals("\t\t<battleships>"))
+                        System.out.println("No battleships found");
+                } else if (i==219) {
+                    if (!line.equals("\t\t\t<joueur id='0'>"))
+                        System.out.println("No player id=0 found");
+                } else if (i<224) {
+                    String tmp;
+                    tmp = line.split("'")[1];
+                    int x = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int y = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int l = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    boolean v = Boolean.parseBoolean(tmp);
+                    tmp = line.split("'")[3];
+                    int h = Integer.parseInt(""+tmp.charAt(0));
+
+                    game.getEpoque().addShip(0,
+                            new Battleship(new Position(x,y),h,l,v,null));
+                } else if (i==224) {
+                    if (!line.equals("\t\t\t</joueur>"))
+                        System.out.println("No player type closing found");
+                } else if (i==225) {
+                    if (!line.equals("\t\t\t<joueur id='1'>"))
+                        System.out.println("No player id=1 found");
+                } else if (i<230) {
+                    String tmp;
+                    tmp = line.split("'")[1];
+                    int x = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int y = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    int l = Integer.parseInt(""+tmp.charAt(0));
+                    tmp = line.split("'")[3];
+                    boolean v = Boolean.parseBoolean(tmp);
+                    tmp = line.split("'")[3];
+                    int h = Integer.parseInt(""+tmp.charAt(0));
+
+                    game.getEpoque().addShip(1,
+                        new Battleship(new Position(x,y),h,l,v,null));
+                } else if (i==230) {
+                    if (!line.equals("\t\t\t</joueur>"))
+                        System.out.println("No player type closing found");
+                } else if (i==231) {
+                    if (!line.equals("\t\t</battleships>"))
+                        System.out.println("No battleship closing found");
+                } else if (i==232) {
+                    if (!line.equals("\t</epoque>"))
+                        System.out.println("No battleship closing found");
+                } else if (i==233) {
+                    if (!line.equals("</game>"))
+                        System.out.println("No game closing found");
                 }
             }
             sc.close();
@@ -161,10 +253,9 @@ public class XMLSaving extends GameSaverFactory {
 
             for (Battleship b :game.getEpoque().getBattleships(i)) {
 
-                flotFiltre.println("\t\t\t\t<battleship x='" + b.getPosition().getX()+
+                flotFiltre.println("\t\t\t\t</battleship x='" + b.getPosition().getX()+
                             "' y='"+ b.getPosition().getY()+"' l='"+b.getLength()+"' v='" +
                             b.isVertical() + "' h='"+ b.getPv()+"'>");
-                flotFiltre.println("\t\t\t\t</battleship>");
             }
 
 
@@ -174,8 +265,7 @@ public class XMLSaving extends GameSaverFactory {
 
         flotFiltre.println("\t\t</battleships>");
 
-
-
+        flotFiltre.println("\t</epoque>");
 
         flotFiltre.println("</game>");
 

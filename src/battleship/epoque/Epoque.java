@@ -17,9 +17,20 @@ public abstract class Epoque {
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
-    public Epoque() {
+    public Epoque(boolean init) {
         this.maps = new Map[2];
         this.battleships = new ArrayList[2];
+
+
+        maps[0] = new Map();
+        maps[1] = new Map();
+
+        if (init) {
+            battleshipInit(0);
+            battleshipInit(1);
+        } else {
+            battleshipsVoidInit();
+        }
     }
 
     /**
@@ -86,10 +97,10 @@ public abstract class Epoque {
     protected Position repositionIfOutOfBounds(Position pos, boolean vertical, int length){
 
         if (vertical){
-            if (pos.getY()+length > Map.NBCASES ){
+            if (pos.getY()+length >= Map.NBCASES ){
                 return new Position(pos.getX(), pos.getY()-(pos.getY()+length-Map.NBCASES));
             }
-        } else if (pos.getX()+length > Map.NBCASES ){
+        } else if (pos.getX()+length >= Map.NBCASES ){
             return new Position(pos.getX()-(pos.getX()+length-Map.NBCASES), pos.getY());
         }
 
@@ -135,4 +146,17 @@ public abstract class Epoque {
     }
 
     public abstract String name();
+
+    public void updateCaseAt(int i, int x, int y, Case c){
+        maps[i].updateAt(c,x,y);
+    }
+
+    public void addShip(int i,Battleship b){
+        battleships[i].add(b);
+    }
+
+    private void battleshipsVoidInit(){
+        battleships[0]= new ArrayList<>(4);
+        battleships[1]= new ArrayList<>(4);
+    }
 }

@@ -6,7 +6,7 @@ public class Renaissance extends Epoque {
 
     //Todo: Implementer (se baser sur MoyenAge)
     public Renaissance() {
-        super();
+        super(true);
     }
 
     @Override

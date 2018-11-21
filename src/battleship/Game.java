@@ -69,7 +69,7 @@ public class Game {
     public void setEpoque(String t){
 
         if(t.equals("MoyenAge")){
-            epoque = new MoyenAge();
+            epoque = new MoyenAge(false);
         }else if(t.equals("Renaissance")){
             epoque = new Renaissance();
         }

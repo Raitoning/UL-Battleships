@@ -9,13 +9,14 @@ import java.util.Random;
 public class MoyenAge extends Epoque {
 
     public MoyenAge() {
-        super();
+        super(true);
+    }
+
+    public MoyenAge(boolean init) {
+        super(init);
 
         maps[0] = new Map();
         maps[1] = new Map();
-
-        battleshipInit(0);
-        battleshipInit(1);
 
     }
 
@@ -25,16 +26,16 @@ public class MoyenAge extends Epoque {
         Random r = new Random();
         battleships[idPlayer]= new ArrayList<>(4);
 
-        int x= r.nextInt(Map.NBCASES);
-        int y= r.nextInt(Map.NBCASES);
+        int x= r.nextInt(Map.NBCASES-1);
+        int y= r.nextInt(Map.NBCASES-1);
         Position p = new Position(x,y);
         boolean v =r.nextBoolean();
 
         for (int i =2; i<=5; i++) {
 
             while (isThereAShipOnTheWay(idPlayer, x, y, i, v)) {
-                x = r.nextInt(Map.NBCASES);
-                y = r.nextInt(Map.NBCASES);
+                x = r.nextInt(Map.NBCASES-1);
+                y = r.nextInt(Map.NBCASES-1);
                 v = r.nextBoolean();
                 p = new Position(x,y);
                 p = repositionIfOutOfBounds(p,v,i);
