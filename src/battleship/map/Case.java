@@ -1,44 +1,30 @@
 package battleship.map;
 
-public enum Case {
+public interface Case {
 
-    Vide,Bateau,TirRate,TirSurBateau,BateauDetruit;
-
+    static String VIDE = "[ ]";
+    static String BATEAU = "[B]";
+    static String TIRRATE = "[o]";
+    static String TIRSURBATEAU = "[x]";
+    static String BATEAUDETRUIT = "[^]";
 
     public static Case fromString(String s){
 
-        if (s.equals(Vide.toString())){
-            return Vide;
-        } else if(s.equals(Bateau.toString())){
-            return Bateau;
-        }else if (s.equals(TirRate.toString())){
-            return TirRate;
-        } else if (s.equals(TirSurBateau.toString())){
-            return TirSurBateau;
-        } else if (s.equals(BateauDetruit.toString())){
-            return BateauDetruit;
+        if (s.equals(VIDE)){
+            return new CaseVide();
+        } else if(s.equals(BATEAU)){
+            return new Bateau();
+        }else if (s.equals(TIRRATE)){
+            return new TirRate();
+        } else if (s.equals(TIRSURBATEAU)){
+            return new TirSurBateau();
+        } else if (s.equals(BATEAUDETRUIT)){
+            return new BateauDetruit();
         } else{
             return null;
         }
     }
 
     @Override
-    public String toString() {
-
-        if(this == Vide){
-            return "[ ]";
-        } else if(this == Bateau){
-            return "[B]";
-        }else if (this == TirRate){
-            return "[o]";
-        } else if (this == TirSurBateau){
-            return "[x]";
-        } else if (this == BateauDetruit){
-            return "[^]";
-        } else{
-            return "[R]";//Case D'erreur
-        }
-
-
-    }
+    public String toString();
 }
