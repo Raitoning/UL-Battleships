@@ -1,7 +1,7 @@
-package battleship.epoque;
+package assets.scripts.epoque;
 
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,15 +9,13 @@ import java.util.Random;
 public class MoyenAge extends Epoque {
 
     public MoyenAge() {
+
         super(true);
     }
 
     public MoyenAge(boolean init) {
+
         super(init);
-
-        maps[0] = new Map();
-        maps[1] = new Map();
-
     }
 
     @Override

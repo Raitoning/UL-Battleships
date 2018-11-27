@@ -1,6 +1,4 @@
-package battleship.epoque;
-
-import battleship.map.Map;
+package assets.scripts.epoque;
 
 public class Renaissance extends Epoque {
 

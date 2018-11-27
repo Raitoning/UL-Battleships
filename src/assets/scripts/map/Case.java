@@ -1,4 +1,4 @@
-package battleship.map;
+package assets.scripts.map;
 
 public interface Case {
 

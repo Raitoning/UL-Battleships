@@ -1,13 +1,20 @@
-package battleship.player;
+package assets.scripts.player;
 
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
+import engine.Vector2;
 
 public class Human extends Player {
 
 
     public Human(int idJoueur) {
+
         super(idJoueur);
+
+        transform.position().setX(4.5f);
+        transform.position().setY(4.5f);
+
+        camera.setMaxRenderArea(new Vector2(0.5f, 1f));
     }
 
     @Override

@@ -1,6 +1,6 @@
-package battleship.data;
+package assets.scripts.data;
 
-import battleship.Game;
+import assets.scripts.Game;
 
 public abstract class GameSaverFactory {
 

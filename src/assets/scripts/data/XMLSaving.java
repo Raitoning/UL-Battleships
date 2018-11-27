@@ -1,10 +1,10 @@
-package battleship.data;
+package assets.scripts.data;
 
-import battleship.Game;
-import battleship.epoque.Battleship;
-import battleship.map.Case;
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.Game;
+import assets.scripts.epoque.Battleship;
+import assets.scripts.map.Case;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 
 import java.io.*;
 import java.util.Scanner;
@@ -178,10 +178,10 @@ public class XMLSaving extends GameSaverFactory {
                         System.out.println("No player type closing found");
                 } else if (i==231) {
                     if (!line.equals("\t\t</battleships>"))
-                        System.out.println("No battleship closing found");
+                        System.out.println("No assets.battleship closing found");
                 } else if (i==232) {
                     if (!line.equals("\t</epoque>"))
-                        System.out.println("No battleship closing found");
+                        System.out.println("No assets.battleship closing found");
                 } else if (i==233) {
                     if (!line.equals("</game>"))
                         System.out.println("No game closing found");
@@ -253,7 +253,7 @@ public class XMLSaving extends GameSaverFactory {
 
             for (Battleship b :game.getEpoque().getBattleships(i)) {
 
-                flotFiltre.println("\t\t\t\t</battleship x='" + b.getPosition().getX()+
+                flotFiltre.println("\t\t\t\t</assets.battleship x='" + b.getPosition().getX()+
                             "' y='"+ b.getPosition().getY()+"' l='"+b.getLength()+"' v='" +
                             b.isVertical() + "' h='"+ b.getPv()+"'>");
             }

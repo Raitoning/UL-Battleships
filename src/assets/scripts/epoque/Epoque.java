@@ -1,8 +1,8 @@
-package battleship.epoque;
+package assets.scripts.epoque;
 
-import battleship.map.Case;
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.map.Case;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,20 +10,20 @@ import java.util.Arrays;
 public abstract class Epoque {
 
     protected Map maps[];
-
     protected ArrayList<Battleship>[] battleships;
-
 
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
+    // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
     public Epoque(boolean init) {
+
         this.maps = new Map[2];
         this.battleships = new ArrayList[2];
 
 
-        maps[0] = new Map();
-        maps[1] = new Map();
+        maps[0] = new Map(0);
+        maps[1] = new Map(1);
 
         if (init) {
             battleshipInit(0);
@@ -70,13 +70,13 @@ public abstract class Epoque {
         for (int i=0;i<length;i++) {
             if (vertical) {
                 if (!(y + i >= 10)){
-                    if (maps[idPlayer].at(x, y + i) == Case.Bateau) {
+                    if (maps[idPlayer].at(x, y + i).toString().equals(Case.BATEAU)) {
                         return true;
                     }
                 }
             } else {
                 if (!(x + i >= 10)) {
-                    if (maps[idPlayer].at(x + i, y) == Case.Bateau) {
+                    if (maps[idPlayer].at(x + i, y).toString().equals(Case.BATEAU)) {
                         return true;
                     }
                 }
@@ -103,9 +103,6 @@ public abstract class Epoque {
         } else if (pos.getX()+length >= Map.NBCASES ){
             return new Position(pos.getX()-(pos.getX()+length-Map.NBCASES), pos.getY());
         }
-
-
-
         return pos;
     }
 

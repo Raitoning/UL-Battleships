@@ -1,7 +1,7 @@
-package battleship.player;
+package assets.scripts.player;
 
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 
 public class IACroix extends Player {
     public IACroix(int idJoueur) {

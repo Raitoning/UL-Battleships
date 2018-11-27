@@ -1,7 +1,7 @@
-package battleship.epoque;
+package assets.scripts.epoque;
 
-import battleship.map.Map;
-import battleship.map.Position;
+import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 
 public class Battleship {
 
