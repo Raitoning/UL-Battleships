@@ -1,6 +1,7 @@
 package engine.input;
 
 import engine.Mathf;
+
 import java.util.ArrayList;
 
 public class InputAxis {
