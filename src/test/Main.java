@@ -1,14 +1,12 @@
 package test;
 
-import battleship.Game;
-import battleship.epoque.MoyenAge;
-import battleship.epoque.Renaissance;
+import engine.Engine;
 
 public class Main {
 
     public static void main (String[] args){
 
+        Engine.getInstance();
 
-        new Game(new Renaissance());
     }
 }
