@@ -35,10 +35,10 @@ public class Map {
 
             if (b.isVertical()) {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, idJoueur), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY()), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), idJoueur), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }

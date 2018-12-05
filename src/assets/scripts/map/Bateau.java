@@ -9,15 +9,15 @@ public class Bateau extends GameObject implements Case {
 
     public Bateau() {}
 
-    public Bateau(int x, int y) {
+    public Bateau(int x, int y, int idJoueur) {
 
         transform.setPosition(x, y);
 
-        System.out.println(transform.position());
+        if (idJoueur == 0) {
 
-        spriteRenderer = new SpriteRenderer("Boat", this);
-
-        addComponent(spriteRenderer);
+            spriteRenderer = new SpriteRenderer("Boat", this);
+            addComponent(spriteRenderer);
+        }
     }
 
 

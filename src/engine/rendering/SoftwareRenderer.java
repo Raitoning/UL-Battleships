@@ -55,7 +55,7 @@ public class SoftwareRenderer {
 
         aspectRatio = (float)width/(float)height;
 
-        window = new JFrame("Software rendering tests");
+        window = new JFrame("UL-Battleships");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.add(new JLabel(new ImageIcon(outputImage)));
         window.setSize(width, height);
