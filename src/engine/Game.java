@@ -27,7 +27,6 @@ import java.util.Random;
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
-    private Epoque epoque;
 
     /** Constructs a new level. Only once should be used at run-time.
      *
@@ -41,11 +40,10 @@ public class Game {
 
         assets.scripts.Game g = null;
         try {
-            g = new assets.scripts.Game();
+            g = new assets.scripts.Game("MoyenAge");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        g.setEpoque("MoyenAge");
 
         try {
             new RMIServer("battleships", g);

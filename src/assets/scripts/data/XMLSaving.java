@@ -90,7 +90,7 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
 
-                    game.setEpoque(tmp);
+                    game.setEpoque(tmp,false);
                 } else if (i==12) {
                     if (!line.equals("\t\t<map>"))
                         System.out.println("No map found");
