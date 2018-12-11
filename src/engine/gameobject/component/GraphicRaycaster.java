@@ -26,7 +26,6 @@ public class GraphicRaycaster implements Component {
     }
 
     public void raycasted() {
-
         gameObject.onRaycast();
     }
 

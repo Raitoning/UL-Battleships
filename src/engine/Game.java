@@ -31,7 +31,8 @@ public class Game {
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
 
-        assets.scripts.Game g = new assets.scripts.Game(new MoyenAge());
+        assets.scripts.Game g = new assets.scripts.Game();
+        g.setEpoque("MoyenAge");
 
         //GameSaverFactory.getInstance().save(g);
 

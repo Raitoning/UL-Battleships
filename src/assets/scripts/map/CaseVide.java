@@ -1,23 +1,23 @@
 package assets.scripts.map;
 
-import engine.gameobject.component.SpriteRenderer;
+import assets.scripts.Game;
 
 public class CaseVide extends Case {
 
-    private SpriteRenderer spriteRenderer;
+    public CaseVide(){
+        super();
+    }
 
-    public CaseVide() {}
-
-    public CaseVide (int x, int y) {
-
-        transform.position().setX(x);
-        transform.position().setY(y);
-        transform.position().setZ(1f);
-
-        spriteRenderer = new SpriteRenderer("Water", this);
+    public CaseVide(int x, int y, Game m){
+        super(x,y,m);
     }
 
     public String toString(){
         return VIDE;
+    }
+
+    @Override
+    public String nomSprite() {
+        return "Water";
     }
 }

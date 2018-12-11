@@ -1,7 +1,7 @@
 package assets.scripts.player;
 
-import assets.scripts.map.Map;
-import assets.scripts.map.Position;
+import assets.scripts.epoque.Epoque;
+import assets.scripts.map.Case;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.Camera;
 
@@ -19,7 +19,7 @@ public abstract class Player extends GameObject {
         addComponent(camera);
     }
 
-    public abstract Position play(Map m);
+    public abstract void play(Case c, Epoque e, int numMap);
 
     /**
      * Retourne l'ID du joueur adversaire.

@@ -1,7 +1,7 @@
 package assets.scripts.player;
 
-import assets.scripts.map.Map;
-import assets.scripts.map.Position;
+import assets.scripts.epoque.Epoque;
+import assets.scripts.map.Case;
 import engine.Vector2;
 
 public class IARandom extends Player {
@@ -17,9 +17,7 @@ public class IARandom extends Player {
     }
 
     @Override
-    public Position play(Map m) {
-
-        return null;
+    public void play(Case c, Epoque e, int numMap) {
     }
 
     @Override

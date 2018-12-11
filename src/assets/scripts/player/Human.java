@@ -1,7 +1,7 @@
 package assets.scripts.player;
 
-import assets.scripts.map.Map;
-import assets.scripts.map.Position;
+import assets.scripts.epoque.Epoque;
+import assets.scripts.map.Case;
 import engine.Vector2;
 
 public class Human extends Player {
@@ -18,9 +18,8 @@ public class Human extends Player {
     }
 
     @Override
-    public Position play(Map m) {
-        //Todo: to be Written Graphically
-        return null;
+    public void play(Case c, Epoque e, int numMap) {
+        System.out.println("oui");
     }
 
     @Override

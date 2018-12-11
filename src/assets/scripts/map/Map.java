@@ -1,24 +1,26 @@
 package assets.scripts.map;
 
+import assets.scripts.Game;
 import assets.scripts.epoque.Battleship;
 
 public class Map {
 
     private Case cases[][];
     private int idJoueur;
+    private Game model;
 
     public static final int NBCASES = 10;
 
     /**
      * Constructeur de la Map par défaut, initialise les cases à vide
      */
-    public Map() {
-
+    public Map(Game m) {
+        model = m;
         casesEmptyInit();
     }
 
-    public Map(int idJoueur) {
-
+    public Map(int idJoueur,Game m) {
+        model = m;
         this.idJoueur = idJoueur;
 
         casesEmptyInit();
@@ -35,10 +37,10 @@ public class Map {
 
             if (b.isVertical()) {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, idJoueur), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, idJoueur,model), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), idJoueur), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), idJoueur,model), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }
@@ -55,7 +57,7 @@ public class Map {
 
             for (int j = 0;j < cases[0].length; j++) {
 
-                cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j);
+                cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j,model);
             }
         }
     }

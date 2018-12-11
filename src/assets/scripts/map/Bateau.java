@@ -1,15 +1,21 @@
 package assets.scripts.map;
 
+import assets.scripts.Game;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
 public class Bateau extends Case {
 
-    private SpriteRenderer spriteRenderer;
+    @Override
+    public String nomSprite() {
+        return "Boat";
+    }
 
-    public Bateau() {}
+    public Bateau(){
+        super();
+    }
 
-    public Bateau(int x, int y, int idJoueur) {
+    public Bateau(int x, int y, int idJoueur, Game m) {
 
         transform.setPosition(x, y);
 
