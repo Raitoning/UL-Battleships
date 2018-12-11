@@ -37,6 +37,6 @@ public class IARandom extends Player implements IA{
         x = (int)(Math.random()*(Map.NBCASES));
         y = (int)(Math.random()*(Map.NBCASES));
 
-        return model.getEpoque().getCaseAt(model.getPlayerTurn(),x,y);
+        return model.getEpoque().getCaseAt(super.opponentID(),x,y);
     }
 }
