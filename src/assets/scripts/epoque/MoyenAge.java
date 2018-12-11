@@ -4,18 +4,20 @@ import assets.scripts.Game;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MoyenAge extends Epoque {
 
-    public MoyenAge(Game m) {
+    public MoyenAge(Game m) throws RemoteException {
 
         super(true,m);
     }
 
-    public MoyenAge(boolean init,Game m) {
-        super(init,m);
+    public MoyenAge(boolean init, Game m) throws RemoteException {
+
+        super(init, m);
     }
 
     @Override

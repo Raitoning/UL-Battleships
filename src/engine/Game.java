@@ -1,8 +1,15 @@
 package engine;
 
+import assets.scripts.epoque.Epoque;
 import assets.scripts.epoque.MoyenAge;
 import engine.gameobject.GameObject;
+import engine.networking.RMIClient;
+import engine.networking.RMIServer;
 
+import javax.naming.NamingException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,6 +27,7 @@ import java.util.Random;
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
+    private Epoque epoque;
 
     /** Constructs a new level. Only once should be used at run-time.
      *
@@ -31,8 +39,19 @@ public class Game {
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
 
-        assets.scripts.Game g = new assets.scripts.Game();
+        assets.scripts.Game g = null;
+        try {
+            g = new assets.scripts.Game();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         g.setEpoque("MoyenAge");
+
+        try {
+            new RMIServer("battleships", g);
+        } catch (RemoteException | NamingException | AlreadyBoundException e) {
+            e.printStackTrace();
+        }
 
         //GameSaverFactory.getInstance().save(g);
 
@@ -46,19 +65,19 @@ public class Game {
      */
     public void update() {
 
-        for (int i = 0; i < gameObjects.size(); i++) {
+        for (GameObject gameObject : gameObjects) {
 
-            gameObjects.get(i).update();
+            gameObject.update();
         }
     }
 
     public GameObject findGameObjectByName(String name) {
 
-        for (int i = 0; i < gameObjects.size(); i++) {
+        for (GameObject gameObject : gameObjects) {
 
-            if (gameObjects.get(i).getName().equals(name)) {
+            if (gameObject.getName().equals(name)) {
 
-                return gameObjects.get(i);
+                return gameObject;
             }
         }
 

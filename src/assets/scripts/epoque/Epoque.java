@@ -5,6 +5,8 @@ import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,8 +20,8 @@ public abstract class Epoque {
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
     // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
-    public Epoque(boolean init,Game m) {
-        model = m;
+    public Epoque(boolean init, Game m) throws RemoteException {
+
         this.maps = new Map[2];
         this.battleships = new ArrayList[2];
 
