@@ -1,5 +1,6 @@
 package assets.scripts.player;
 
+import assets.scripts.Game;
 import assets.scripts.epoque.Epoque;
 import assets.scripts.map.Case;
 import engine.gameobject.GameObject;
@@ -8,10 +9,11 @@ import engine.gameobject.component.Camera;
 public abstract class Player extends GameObject {
 
     private int idJoueur;
-    Camera camera;
+    protected Camera camera;
+    protected Game model;
 
-    Player(int idJoueur) {
-
+    Player(int idJoueur, Game m) {
+        model = m;
         this.idJoueur = idJoueur;
 
         camera = new Camera(10.5f, 0f, 10f, this);

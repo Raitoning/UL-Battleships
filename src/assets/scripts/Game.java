@@ -23,19 +23,20 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Game() throws RemoteException {
+    public Game(String e) throws RemoteException {
         super();
-
+        setEpoque(e,true);
         this.score = new int[2];
         Arrays.fill(score,0);
 
         this.players = new Player[2];
 
-        this.players[0]=new Human(0);
+        this.players[0] = new Human(0,this);
 
-        this.players[1]= new IARandom(1);
+        this.players[1] = new IARandom(1,this);
 
         playerTurn = 0;
+
     }
 
     public int getScore(int k) {
@@ -58,31 +59,36 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
         if ("Human".equals(t)) {
 
-            players[k] = new Human(k);
+            players[k] = new Human(k,this);
 
         } else if ("IACroix".equals(t)) {
 
-            players[k] = new IACroix(k);
+            players[k] = new IACroix(k,this);
 
         } else if ("IARandom".equals(t)) {
 
-            players[k] = new IARandom(k);
+            players[k] = new IARandom(k,this);
         }
     }
 
-    public void setEpoque(String t) {
+    /**
+     * Set l'epoque du jeu
+     * @param t
+     * @param b false : pas de generation de bateau
+     */
+    public void setEpoque(String t, boolean b) {
 
         if(t.equals("MoyenAge")) {
 
             try {
-                epoque = new MoyenAge(this);
+                epoque = new MoyenAge(b,this);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         } else if(t.equals("Renaissance")) {
 
             try {
-                epoque = new Renaissance(this);
+                epoque = new Renaissance(b, this);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -95,5 +101,9 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
     public Player getPlayer(int k){
         return players[k];
+    }
+
+    public void nextTurn(){
+        playerTurn = (playerTurn+1)%2;
     }
 }

@@ -37,11 +37,10 @@ public abstract class Case extends GameObject{
     }
 
     @Override
-    public void onRaycast(){
-        //TODO : getCameraNum
-        int numMap = 0;
+    public void onRaycast(int num){
+        int numMap = num;
         int numJoueur = model.getPlayerTurn();
-        if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human")){
+        if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human") && num == 1){
             model.getPlayer(model.getPlayerTurn()).play(this,model.getEpoque(),numMap);
         }
     }

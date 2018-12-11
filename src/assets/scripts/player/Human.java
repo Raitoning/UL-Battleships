@@ -1,5 +1,6 @@
 package assets.scripts.player;
 
+import assets.scripts.Game;
 import assets.scripts.epoque.Epoque;
 import assets.scripts.map.Case;
 import engine.Vector2;
@@ -7,9 +8,9 @@ import engine.Vector2;
 public class Human extends Player {
 
 
-    public Human(int idJoueur) {
+    public Human(int idJoueur,Game m) {
 
-        super(idJoueur);
+        super(idJoueur,m);
 
         transform.position().setX(4.5f);
         transform.position().setY(4.5f);
@@ -19,7 +20,12 @@ public class Human extends Player {
 
     @Override
     public void play(Case c, Epoque e, int numMap) {
-        System.out.println("oui");
+        System.out.println(c.toString());
+        if(c.toString().equals("[ ]") || c.toString().equals("[B]")){
+            System.out.println("oui");
+            model.nextTurn();
+        }
+
     }
 
     @Override
