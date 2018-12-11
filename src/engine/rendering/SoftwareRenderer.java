@@ -22,7 +22,7 @@ import java.util.Arrays;
  * </p>
  *
  * @author  Raitoning
- * @version 2018.12.03
+ * @version 2018.12.11
  * @since   2018.11.14
  */
 public class SoftwareRenderer {
@@ -246,5 +246,14 @@ public class SoftwareRenderer {
     public int getHeight() {
 
         return height;
+    }
+
+    /** Get the output window
+     *
+     * @return The output window
+     */
+    public JFrame getWindow() {
+
+        return window;
     }
 }
