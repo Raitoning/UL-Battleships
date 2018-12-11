@@ -3,9 +3,10 @@ package assets.scripts.player;
 import assets.scripts.Game;
 import assets.scripts.epoque.Epoque;
 import assets.scripts.map.Case;
+import assets.scripts.map.Map;
 import engine.Vector2;
 
-public class IARandom extends Player {
+public class IARandom extends Player implements IA{
 
     public IARandom(int idJoueur, Game m) {
 
@@ -27,5 +28,15 @@ public class IARandom extends Player {
     public String toString() {
 
         return "IARandom";
+    }
+
+    @Override
+    public Case jeuxIA() {
+
+        int x,y;
+        x = (int)(Math.random()*(Map.NBCASES));
+        y = (int)(Math.random()*(Map.NBCASES));
+
+        return model.getEpoque().getCaseAt(model.getPlayerTurn(),x,y);
     }
 }

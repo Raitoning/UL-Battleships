@@ -3,10 +3,7 @@ package assets.scripts;
 import assets.scripts.epoque.Epoque;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Renaissance;
-import assets.scripts.player.Human;
-import assets.scripts.player.IACroix;
-import assets.scripts.player.IARandom;
-import assets.scripts.player.Player;
+import assets.scripts.player.*;
 import engine.gameobject.GameObject;
 
 import java.rmi.RemoteException;
@@ -105,5 +102,10 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
     public void nextTurn(){
         playerTurn = (playerTurn+1)%2;
+
+        if(!getTypeofPlayer(playerTurn).equals("Human")){
+            getPlayer(playerTurn).play(((IA)getPlayer(playerTurn)).jeuxIA());
+        }
+
     }
 }

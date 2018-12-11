@@ -38,6 +38,7 @@ public class Game {
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
         SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/Miss.png");
+        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/Break.png");
 
         assets.scripts.Game g = null;
         try {
