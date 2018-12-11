@@ -107,7 +107,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.getEpoque().updateCaseAt(0,x,y,Case.fromString(tmp));
+                    game.getEpoque().updateCaseAt(0,x,y,Case.fromString(tmp,x,y,game));
                 } else if (i==114) {
                     if (!line.equals("\t\t\t</joueur>"))
                         System.out.println("No player type closing found");
@@ -124,7 +124,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.getEpoque().updateCaseAt(1,x,y,Case.fromString(tmp));
+                    game.getEpoque().updateCaseAt(1,x,y,Case.fromString(tmp,x,y,game));
                 } else if (i==216) {
                     if (!line.equals("\t\t\t</joueur>"))
                         System.out.println("No player type closing found");

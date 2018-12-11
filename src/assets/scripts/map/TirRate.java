@@ -4,10 +4,6 @@ import assets.scripts.Game;
 
 public class TirRate extends Case {
 
-    public TirRate(){
-        super();
-    }
-
     public TirRate(int x,int y,Game m){
         super(x,y,m);
     }

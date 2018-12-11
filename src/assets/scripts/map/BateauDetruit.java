@@ -4,10 +4,6 @@ import assets.scripts.Game;
 
 public class BateauDetruit extends Case {
 
-    public BateauDetruit(){
-        super();
-    }
-
     public BateauDetruit(int x, int y,Game m){
         super(x,y,m);
     }

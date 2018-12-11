@@ -19,8 +19,6 @@ public abstract class Case extends GameObject{
     protected int posX;
     protected int posY;
 
-    public Case(){}
-
     public Case (int x, int y, Game m) {
 
         model = m;
@@ -48,18 +46,18 @@ public abstract class Case extends GameObject{
         }
     }
 
-    public static Case fromString(String s){
+    public static Case fromString(String s, int x, int y, Game m){
 
         if (s.equals(VIDE)){
-            return new CaseVide();
+            return new CaseVide(x,y, m);
         } else if(s.equals(BATEAU)){
-            return new Bateau();
+            return new Bateau(x,y,m);
         }else if (s.equals(TIRRATE)){
-            return new TirRate();
+            return new TirRate(x,y,m);
         } else if (s.equals(TIRSURBATEAU)){
-            return new TirSurBateau();
+            return new TirSurBateau(x,y,m);
         } else if (s.equals(BATEAUDETRUIT)){
-            return new BateauDetruit();
+            return new BateauDetruit(x,y,m);
         } else{
             return null;
         }

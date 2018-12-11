@@ -37,10 +37,10 @@ public class Map {
 
             if (b.isVertical()) {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, idJoueur,model), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), idJoueur,model), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }
@@ -94,7 +94,7 @@ public class Map {
 
             for (int j = 0;j < cases[0].length; j++) {
 
-                sb.append(cases[i][j].toString());
+                sb.append(cases[j][i].toString());
             }
             sb.append('\n');
         }

@@ -4,13 +4,14 @@ import assets.scripts.Game;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
+import engine.networking.RMIRegistry;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Epoque {
+public abstract class Epoque implements RMIRegistry {
 
     protected Map maps[];
     protected ArrayList<Battleship>[] battleships;
