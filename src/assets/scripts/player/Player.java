@@ -21,7 +21,12 @@ public abstract class Player extends GameObject {
         addComponent(camera);
     }
 
-    public abstract void play(Case c, Epoque e, int numMap);
+    public void play(Case c){
+        if(c.toString().equals("[ ]") || c.toString().equals("[B]")){
+            System.out.println("oui");
+            model.nextTurn();
+        }
+    }
 
     /**
      * Retourne l'ID du joueur adversaire.

@@ -18,7 +18,9 @@ public class IARandom extends Player {
     }
 
     @Override
-    public void play(Case c, Epoque e, int numMap) {
+    public void play(Case c) {
+        super.play(c);
+        //TODO
     }
 
     @Override

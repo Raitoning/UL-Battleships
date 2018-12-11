@@ -19,12 +19,8 @@ public class Human extends Player {
     }
 
     @Override
-    public void play(Case c, Epoque e, int numMap) {
-        System.out.println(c.toString());
-        if(c.toString().equals("[ ]") || c.toString().equals("[B]")){
-            System.out.println("oui");
-            model.nextTurn();
-        }
+    public void play(Case c) {
+        super.play(c);
 
     }
 

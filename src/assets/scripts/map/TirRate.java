@@ -15,6 +15,6 @@ public class TirRate extends Case {
 
     @Override
     public String nomSprite() {
-        return "tirRate";
+        return "Miss";
     }
 }

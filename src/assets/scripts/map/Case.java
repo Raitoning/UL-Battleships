@@ -38,10 +38,8 @@ public abstract class Case extends GameObject{
 
     @Override
     public void onRaycast(int num){
-        int numMap = num;
-        int numJoueur = model.getPlayerTurn();
         if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human") && num == 1){
-            model.getPlayer(model.getPlayerTurn()).play(this,model.getEpoque(),numMap);
+            model.getPlayer(model.getPlayerTurn()).play(this);
         }
     }
 
@@ -63,5 +61,23 @@ public abstract class Case extends GameObject{
     }
 
     public abstract String nomSprite();
+
+    public int getPosX(){
+        return posX;
+    }
+
+    public int getPosY(){
+        return posY;
+    }
+
+    public int matriceX(){
+        if(getPosX() > 10)
+            return getPosX()-11;
+        else return getPosX();
+    }
+
+    public int matriceY(){
+        return getPosY();
+    }
 
 }
