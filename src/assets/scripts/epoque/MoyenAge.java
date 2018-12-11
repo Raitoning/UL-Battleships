@@ -1,5 +1,6 @@
 package assets.scripts.epoque;
 
+import assets.scripts.Game;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
 
@@ -8,14 +9,13 @@ import java.util.Random;
 
 public class MoyenAge extends Epoque {
 
-    public MoyenAge() {
+    public MoyenAge(Game m) {
 
-        super(true);
+        super(true,m);
     }
 
-    public MoyenAge(boolean init) {
-
-        super(init);
+    public MoyenAge(boolean init,Game m) {
+        super(init,m);
     }
 
     @Override

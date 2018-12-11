@@ -1,5 +1,6 @@
 package assets.scripts.epoque;
 
+import assets.scripts.Game;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
@@ -11,19 +12,20 @@ public abstract class Epoque {
 
     protected Map maps[];
     protected ArrayList<Battleship>[] battleships;
+    private Game model;
 
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
     // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
-    public Epoque(boolean init) {
-
+    public Epoque(boolean init,Game m) {
+        model = m;
         this.maps = new Map[2];
         this.battleships = new ArrayList[2];
 
 
-        maps[0] = new Map(0);
-        maps[1] = new Map(1);
+        maps[0] = new Map(0,model);
+        maps[1] = new Map(1,model);
 
         if (init) {
             battleshipInit(0);

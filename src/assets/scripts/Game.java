@@ -15,12 +15,12 @@ public class Game {
     private int score[];
     private Player players[];
     private Epoque epoque;
+    private int playerTurn;
 
     /**
-     * Construit une instance du jeu à partir d'une Epoque donnée en parametre
-     * @param epoque L'époque à utiliser dans la partie.
+     * Construit une instance du jeu
      */
-    public Game(Epoque epoque) {
+    public Game() {
 
         this.score = new int[2];
         Arrays.fill(score,0);
@@ -31,10 +31,7 @@ public class Game {
 
         this.players[1]= new IARandom(1);
 
-        this.epoque = epoque;
-
-        System.out.println(epoque.toString());
-
+        playerTurn = 0;
     }
 
     public int getScore(int k) {
@@ -73,10 +70,18 @@ public class Game {
 
         if(t.equals("MoyenAge")) {
 
-            epoque = new MoyenAge(false);
+            epoque = new MoyenAge(this);
         } else if(t.equals("Renaissance")) {
 
-            epoque = new Renaissance();
+            epoque = new Renaissance(this);
         }
+    }
+
+    public int getPlayerTurn(){
+        return playerTurn;
+    }
+
+    public Player getPlayer(int k){
+        return players[k];
     }
 }

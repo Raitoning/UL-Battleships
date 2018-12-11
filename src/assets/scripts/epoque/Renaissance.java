@@ -1,10 +1,12 @@
 package assets.scripts.epoque;
 
+import assets.scripts.Game;
+
 public class Renaissance extends Epoque {
 
     //Todo: Implementer (se baser sur MoyenAge)
-    public Renaissance() {
-        super(true);
+    public Renaissance(Game m) {
+        super(true,m);
     }
 
     @Override
