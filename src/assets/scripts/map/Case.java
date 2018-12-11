@@ -13,6 +13,8 @@ public abstract class Case extends GameObject{
     public static String TIRSURBATEAU = "[x]";
     public static String BATEAUDETRUIT = "[^]";
 
+    protected boolean estToucher;
+
     protected SpriteRenderer spriteRenderer;
     protected Game model;
 
@@ -22,6 +24,7 @@ public abstract class Case extends GameObject{
     public Case (int x, int y, Game m) {
 
         model = m;
+        estToucher = false;
 
         posX = x;
         posY = y;
@@ -38,26 +41,13 @@ public abstract class Case extends GameObject{
 
     @Override
     public void onRaycast(int num){
-        if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human") && num == 1){
+        if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human") && num == 1 && !estToucher){
             model.getPlayer(model.getPlayerTurn()).play(this);
         }
     }
 
     public static Case fromString(String s, int x, int y, Game m){
-
-        if (s.equals(VIDE)){
-            return new CaseVide(x,y, m);
-        } else if(s.equals(BATEAU)){
-            return new Bateau(x,y,m);
-        }else if (s.equals(TIRRATE)){
-            return new TirRate(x,y,m);
-        } else if (s.equals(TIRSURBATEAU)){
-            return new TirSurBateau(x,y,m);
-        } else if (s.equals(BATEAUDETRUIT)){
-            return new BateauDetruit(x,y,m);
-        } else{
-            return null;
-        }
+        return null;
     }
 
     public abstract String nomSprite();
@@ -70,14 +60,13 @@ public abstract class Case extends GameObject{
         return posY;
     }
 
-    public int matriceX(){
-        if(getPosX() > 10)
-            return getPosX()-11;
-        else return getPosX();
+    public void subitTir(){
+        estToucher = true;
+        spriteRenderer.setName(nomSprite());
     }
 
-    public int matriceY(){
-        return getPosY();
+    public boolean estToucher(){
+        return estToucher;
     }
 
 }

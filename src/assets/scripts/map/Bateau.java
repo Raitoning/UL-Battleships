@@ -8,19 +8,14 @@ public class Bateau extends Case {
 
     @Override
     public String nomSprite() {
-        return "Boat";
+
+        if(estToucher())
+            return "Break";
+        else return "Boat";
     }
 
     public Bateau(int x, int y, Game m) {
-
         super(x,y,m);
-
-        transform.setPosition(x, y);
-
-
-        spriteRenderer = new SpriteRenderer("Boat", this);
-        addComponent(spriteRenderer);
-
     }
 
     @Override

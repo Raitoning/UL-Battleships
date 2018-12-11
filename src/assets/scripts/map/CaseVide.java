@@ -15,6 +15,8 @@ public class CaseVide extends Case {
 
     @Override
     public String nomSprite() {
-        return "Water";
+        if(estToucher())
+            return "Miss";
+        else return "Water";
     }
 }

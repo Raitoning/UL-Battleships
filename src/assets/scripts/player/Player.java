@@ -1,7 +1,6 @@
 package assets.scripts.player;
 
 import assets.scripts.Game;
-import assets.scripts.epoque.Epoque;
 import assets.scripts.map.Case;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.Camera;
@@ -22,8 +21,8 @@ public abstract class Player extends GameObject {
     }
 
     public void play(Case c){
-        if(c.toString().equals("[ ]") || c.toString().equals("[B]")){
-            System.out.println("oui");
+        if(!c.estToucher()){
+            c.subitTir();
             model.nextTurn();
         }
     }
