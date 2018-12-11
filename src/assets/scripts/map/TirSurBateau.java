@@ -1,6 +1,6 @@
 package assets.scripts.map;
 
-public class TirSurBateau implements Case {
+public class TirSurBateau extends Case {
 
 
     @Override

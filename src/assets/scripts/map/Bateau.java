@@ -3,7 +3,7 @@ package assets.scripts.map;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
-public class Bateau extends GameObject implements Case {
+public class Bateau extends Case {
 
     private SpriteRenderer spriteRenderer;
 
@@ -19,7 +19,6 @@ public class Bateau extends GameObject implements Case {
             addComponent(spriteRenderer);
         }
     }
-
 
     @Override
     public String toString() {

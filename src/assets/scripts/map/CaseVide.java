@@ -1,9 +1,8 @@
 package assets.scripts.map;
 
-import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
-public class CaseVide extends GameObject implements Case {
+public class CaseVide extends Case {
 
     private SpriteRenderer spriteRenderer;
 

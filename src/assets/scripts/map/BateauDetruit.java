@@ -1,6 +1,6 @@
 package assets.scripts.map;
 
-public class BateauDetruit implements Case {
+public class BateauDetruit extends Case {
 
     @Override
     public String toString() {

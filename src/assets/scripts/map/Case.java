@@ -1,12 +1,15 @@
 package assets.scripts.map;
 
-public interface Case {
+import assets.scripts.Game;
+import engine.gameobject.GameObject;
 
-    static String VIDE = "[ ]";
-    static String BATEAU = "[B]";
-    static String TIRRATE = "[o]";
-    static String TIRSURBATEAU = "[x]";
-    static String BATEAUDETRUIT = "[^]";
+public abstract class Case extends GameObject{
+
+    public static String VIDE = "[ ]";
+    public static String BATEAU = "[B]";
+    public static String TIRRATE = "[o]";
+    public static String TIRSURBATEAU = "[x]";
+    public static String BATEAUDETRUIT = "[^]";
 
     public static Case fromString(String s){
 
@@ -26,5 +29,8 @@ public interface Case {
     }
 
     @Override
-    public String toString();
+    public void update(){
+        System.out.println("55555");
+    }
+
 }

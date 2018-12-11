@@ -1,6 +1,6 @@
 package assets.scripts.map;
 
-public class TirRate implements Case {
+public class TirRate extends Case {
 
 
     @Override
