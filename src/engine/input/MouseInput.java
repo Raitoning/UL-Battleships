@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * @author  Raitoning
- * @version 2018.12.03
+ * @version 2018.12.11
  * @since   2018.11.14
  */
 public class MouseInput extends MouseAdapter {
@@ -46,14 +46,8 @@ public class MouseInput extends MouseAdapter {
 
                         if (e.getY() <= (int) (screenHeight * renderer.getCamera(i).getMaxRenderArea().getY())) {
 
-                            System.out.println("Camera #" + i);
-
-                            System.out.println("X: " + e.getX() + "(" + (screenWidth * renderer.getCamera(i).getMinRenderArea().getX()) + " - " + (screenWidth * renderer.getCamera(i).getMaxRenderArea().getX()) + ")");
-
-                            System.out.println("X: " + e.getY() + "(" + (screenWidth * renderer.getCamera(i).getMinRenderArea().getY()) + " - " + (screenWidth * renderer.getCamera(i).getMaxRenderArea().getY()) + ")");
-
                             raycast(screenToCamera(e.getX(), e.getY(), i), i);
-//                            return;
+                            return;
                         }
                     }
                 }
@@ -113,7 +107,7 @@ public class MouseInput extends MouseAdapter {
                 if (worldCoordinates.getY() >= transform.position().getY() - (transform.scale().getY() / 2f) &&
                         worldCoordinates.getY() <= transform.position().getY() + (transform.scale().getY() / 2f)) {
 
-                    listener.raycasted();
+                    listener.raycasted(indexOfCamera);
                 }
             }
         }
@@ -133,8 +127,6 @@ public class MouseInput extends MouseAdapter {
 
         float cameraY =
                 1f - ((y - (screenHeight * camera.getMinRenderArea().getY())) / (screenHeight * (camera.getMaxRenderArea().getY() - camera.getMinRenderArea().getY())));
-
-        System.out.println(new Vector2(cameraX, cameraY));
 
         return new Vector2(cameraX, cameraY);
     }

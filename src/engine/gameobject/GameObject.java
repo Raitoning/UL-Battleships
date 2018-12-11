@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/GameObject.html">https://docs.unity3d.com/ScriptReference/GameObject.html</a>
  *
  * @author  Raitoning
- * @version 2018.12.03
+ * @version 2018.12.11
  * @since   2018.11.14
  */
 public class GameObject {
@@ -82,7 +82,7 @@ public class GameObject {
      * Determines if the cursor is over a Graphics element in the Scene.
      *
      */
-    public void onRaycast() {}
+    public void onRaycast(int cameraIndex) {}
 
     /** Get the Transform attached to this GameObject.
      *
