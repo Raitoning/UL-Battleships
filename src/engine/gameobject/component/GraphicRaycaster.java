@@ -7,7 +7,7 @@ import engine.input.Input;
 
 /**
  * @author  Raitoning
- * @version 2018.12.03
+ * @version 2018.12.11
  * @since   2018.11.14
  */
 public class GraphicRaycaster implements Component {
@@ -25,8 +25,8 @@ public class GraphicRaycaster implements Component {
         return gameObject;
     }
 
-    public void raycasted() {
-        gameObject.onRaycast();
+    public void raycasted(int cameraIndex) {
+        gameObject.onRaycast(cameraIndex);
     }
 
     @Override

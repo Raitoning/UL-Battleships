@@ -4,9 +4,6 @@ import assets.scripts.Game;
 
 public class CaseVide extends Case {
 
-    public CaseVide(){
-        super();
-    }
 
     public CaseVide(int x, int y, Game m){
         super(x,y,m);

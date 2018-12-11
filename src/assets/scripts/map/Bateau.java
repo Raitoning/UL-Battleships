@@ -11,19 +11,16 @@ public class Bateau extends Case {
         return "Boat";
     }
 
-    public Bateau(){
-        super();
-    }
+    public Bateau(int x, int y, Game m) {
 
-    public Bateau(int x, int y, int idJoueur, Game m) {
+        super(x,y,m);
 
         transform.setPosition(x, y);
 
-        if (idJoueur == 0) {
 
-            spriteRenderer = new SpriteRenderer("Boat", this);
-            addComponent(spriteRenderer);
-        }
+        spriteRenderer = new SpriteRenderer("Boat", this);
+        addComponent(spriteRenderer);
+
     }
 
     @Override

@@ -7,10 +7,13 @@ import assets.scripts.player.Human;
 import assets.scripts.player.IACroix;
 import assets.scripts.player.IARandom;
 import assets.scripts.player.Player;
+import engine.gameobject.GameObject;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 
-public class Game {
+public class Game extends UnicastRemoteObject implements NetworkedGame {
 
     private int score[];
     private Player players[];
@@ -18,9 +21,10 @@ public class Game {
     private int playerTurn;
 
     /**
-     * Construit une instance du jeu
+     * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Game() {
+    public Game() throws RemoteException {
+        super();
 
         this.score = new int[2];
         Arrays.fill(score,0);
@@ -70,10 +74,18 @@ public class Game {
 
         if(t.equals("MoyenAge")) {
 
-            epoque = new MoyenAge(this);
+            try {
+                epoque = new MoyenAge(this);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         } else if(t.equals("Renaissance")) {
 
-            epoque = new Renaissance(this);
+            try {
+                epoque = new Renaissance(this);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
