@@ -5,6 +5,7 @@ import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Renaissance;
 import assets.scripts.player.*;
 import engine.gameobject.GameObject;
+import engine.gameobject.component.SpriteRenderer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -16,21 +17,24 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
     private Player players[];
     private Epoque epoque;
     private int playerTurn;
+    private boolean isGameEnded = false;
+    private int gameID;
 
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Game(String e) throws RemoteException {
+    public Game(String e, int gameID) throws RemoteException {
         super();
+        this.gameID = gameID;
         setEpoque(e,true);
         this.score = new int[2];
         Arrays.fill(score,0);
 
         this.players = new Player[2];
 
-        this.players[0] = new Human(0,this);
+        this.players[0] = new Human(0,this, gameID);
 
-        this.players[1] = new IARandom(1,this);
+        this.players[1] = new IARandom(1,this, gameID);
 
         playerTurn = 0;
 
@@ -56,15 +60,15 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
         if ("Human".equals(t)) {
 
-            players[k] = new Human(k,this);
+            players[k] = new Human(k,this, gameID);
 
         } else if ("IACroix".equals(t)) {
 
-            players[k] = new IACroix(k,this);
+            players[k] = new IACroix(k,this, gameID);
 
         } else if ("IARandom".equals(t)) {
 
-            players[k] = new IARandom(k,this);
+            players[k] = new IARandom(k,this, gameID);
         }
     }
 
@@ -78,14 +82,14 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
         if(t.equals("MoyenAge")) {
 
             try {
-                epoque = new MoyenAge(b,this);
+                epoque = new MoyenAge(b,this, gameID);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         } else if(t.equals("Renaissance")) {
 
             try {
-                epoque = new Renaissance(b, this);
+                epoque = new Renaissance(b, this, gameID);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -111,5 +115,31 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
     public boolean hasWon(int idJoueur){
         return epoque.hasLost(players[idJoueur].opponentID());
+    }
+
+    public void endGame() {
+
+        GameObject endGame = new GameObject(gameID);
+        endGame.getTransform().setPosition(10.5f, 5f);
+        endGame.getTransform().setScale(10f, 10f);
+
+        endGame.addComponent(new SpriteRenderer("Victoire", endGame));
+
+        if(isGameEnded) {
+            try {
+
+                Thread.sleep(5000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        isGameEnded = true;
+    }
+
+    public int getGameID() {
+
+        return gameID;
     }
 }

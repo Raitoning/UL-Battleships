@@ -12,9 +12,9 @@ public class IARandom extends Player implements IA{
 
     private ArrayList<Case> ar;
 
-    public IARandom(int idJoueur, Game m) {
+    public IARandom(int idJoueur, Game m, int gameID) {
 
-        super(idJoueur, m);
+        super(idJoueur, m, gameID);
 
         ar =new ArrayList<>();
 
