@@ -21,7 +21,6 @@ public abstract class Epoque implements RMIRegistry {
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
-    // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
     public Epoque(boolean init, Game m) throws RemoteException {
 
         this.maps = new Map[2];
@@ -38,6 +37,8 @@ public abstract class Epoque implements RMIRegistry {
         } else {
             battleshipsVoidInit();
         }
+        maps[0].casesEmptyInit();
+        maps[1].casesEmptyInit();
     }
 
     /**
@@ -102,15 +103,17 @@ public abstract class Epoque implements RMIRegistry {
         for (int i=0;i<length;i++) {
             if (vertical) {
                 if (!(y + i >= 10)){
-                    if (maps[idPlayer].at(x, y + i).toString().equals(Case.BATEAU)) {
-                        return true;
-                    }
+                    if(maps[idPlayer].at(x, y+i) != null)
+                        if (maps[idPlayer].at(x, y + i).toString().equals(Case.BATEAU)) {
+                            return true;
+                        }
                 }
             } else {
                 if (!(x + i >= 10)) {
-                    if (maps[idPlayer].at(x + i, y).toString().equals(Case.BATEAU)) {
-                        return true;
-                    }
+                    if(maps[idPlayer].at(x + i, y) != null)
+                        if (maps[idPlayer].at(x + i, y).toString().equals(Case.BATEAU)) {
+                            return true;
+                        }
                 }
             }
         }

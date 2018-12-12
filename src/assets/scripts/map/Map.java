@@ -14,16 +14,15 @@ public class Map {
     /**
      * Constructeur de la Map par défaut, initialise les cases à vide
      */
-    public Map(Game m) {
-        model = m;
-        casesEmptyInit();
-    }
-
     public Map(int idJoueur,Game m) {
+
+        this.cases = new Case[NBCASES][NBCASES];
+
+
         model = m;
         this.idJoueur = idJoueur;
 
-        casesEmptyInit();
+        //casesEmptyInit();
     }
 
 
@@ -49,14 +48,14 @@ public class Map {
     /**
      * Methode privée pour intialiser le tableau des cases, puis initialiser les cases a vide
      */
-    private void casesEmptyInit(){
+    public void casesEmptyInit(){
 
-        this.cases = new Case[NBCASES][NBCASES];
 
         for(int i = 0; i < cases.length; i++) {
 
             for (int j = 0;j < cases[0].length; j++) {
 
+                if (cases[i][j]==null)
                 cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j,model);
             }
         }

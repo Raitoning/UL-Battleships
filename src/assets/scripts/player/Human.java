@@ -21,7 +21,6 @@ public class Human extends Player {
     @Override
     public void play(Case c) {
         super.play(c);
-
     }
 
     @Override

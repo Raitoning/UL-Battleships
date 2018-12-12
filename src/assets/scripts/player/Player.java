@@ -25,10 +25,6 @@ public abstract class Player extends GameObject {
             c.subitTir();
             model.nextTurn();
         }
-        else{
-            if(!toString().equals("Human"))
-                play(((IA)this).jeuxIA());
-        }
     }
 
     /**

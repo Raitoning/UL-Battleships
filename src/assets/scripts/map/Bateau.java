@@ -11,7 +11,9 @@ public class Bateau extends Case {
 
         if(estToucher())
             return "Break";
-        else return "Boat";
+        else if(posX > 10) //la posX correspont forcement a la map de droite
+                return "Water";
+            else return "Boat";
     }
 
     public Bateau(int x, int y, Game m) {
