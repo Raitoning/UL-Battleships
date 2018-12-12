@@ -74,4 +74,8 @@ public class Battleship {
     public int getPv() {
         return pv;
     }
+
+    public boolean isAlive(){
+        return pv>0;
+    }
 }

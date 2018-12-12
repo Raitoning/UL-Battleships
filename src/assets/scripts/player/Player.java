@@ -35,7 +35,7 @@ public abstract class Player extends GameObject {
      * Retourne l'ID du joueur adversaire.
      * @return L'identifiant du joueur adversaire.
      */
-    protected int opponentID(){
+    public int opponentID(){
         if (idJoueur == 1){
             return 0;
         }else

@@ -108,4 +108,8 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
         }
 
     }
+
+    public boolean hasWon(int idJoueur){
+        return epoque.hasLost(players[idJoueur].opponentID());
+    }
 }

@@ -188,4 +188,16 @@ public abstract class Epoque implements RMIRegistry {
         battleships[0]= new ArrayList<>(4);
         battleships[1]= new ArrayList<>(4);
     }
+
+    public boolean hasLost(int idJoueur){
+        boolean r = true;
+
+        for(Battleship b:battleships[idJoueur]){
+            if(b.isAlive()){
+               r = false;
+            }
+        }
+
+        return r;
+    }
 }
