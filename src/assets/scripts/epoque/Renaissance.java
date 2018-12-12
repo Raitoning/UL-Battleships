@@ -3,6 +3,8 @@ package assets.scripts.epoque;
 import java.rmi.RemoteException;
 
 import assets.scripts.Game;
+import assets.scripts.map.Case;
+import assets.scripts.map.Position;
 
 
 public class Renaissance extends Epoque {
@@ -20,4 +22,5 @@ public class Renaissance extends Epoque {
     public String name() {
         return "Renaissance";
     }
+
 }

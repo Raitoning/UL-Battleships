@@ -31,15 +31,27 @@ public class Map {
      * @param b Le bateau à ajouter.
      */
     public void add(Battleship b){
-
+        String name;
         for (int i = 0; i < b.getLength(); i++) {
 
             if (b.isVertical()) {
-
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model), b.getPosition().getX(), b.getPosition().getY() + i);
+                name = "vertical";
+                if(i == 0){
+                    name += "Queue";
+                }
+                else if(i == b.getLength()-1)
+                    name += "Tete";
+                else name += "Middle";
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model,name), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
-
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model), b.getPosition().getX() + i, b.getPosition().getY());
+                name = "horizontal";
+                if(i == 0){
+                    name += "Tete";
+                }
+                else if(i == b.getLength()-1)
+                    name += "Queue";
+                else name += "Middle";
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, name), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }

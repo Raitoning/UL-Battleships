@@ -1,6 +1,10 @@
 package assets.scripts.epoque;
 
 import assets.scripts.Game;
+import assets.scripts.map.Bateau;
+import assets.scripts.map.Case;
+import assets.scripts.map.Position;
+
 import java.rmi.RemoteException;
 
 
@@ -21,4 +25,5 @@ public class MoyenAge extends Epoque {
     public String name() {
         return "MoyenAge";
     }
+
 }

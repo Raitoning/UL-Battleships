@@ -7,7 +7,6 @@ import engine.Vector2;
 
 public class Human extends Player {
 
-
     public Human(int idJoueur,Game m) {
 
         super(idJoueur,m);
