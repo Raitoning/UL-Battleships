@@ -16,9 +16,9 @@ public class IACroixLineaire extends Player implements IA{
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroixLineaire(int idJoueur, Game m) {
+    public IACroixLineaire(int idJoueur, Game m,int gameID) {
 
-        super(idJoueur, m);
+        super(idJoueur, m,gameID);
 
         ar =new ArrayList<>();
         priority =new ArrayList<>();
