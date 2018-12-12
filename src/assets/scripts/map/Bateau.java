@@ -7,6 +7,12 @@ public class Bateau extends Case {
 
     private String texture = "Water";
 
+    public Bateau(int x, int y, Game m,String t, int id) {
+        super(x,y,m,id);
+        texture =t;
+        spriteRenderer.setName(nomSprite());
+    }
+
     @Override
     public String nomSprite() {
         String res = texture;
@@ -20,11 +26,7 @@ public class Bateau extends Case {
         return res;
     }
 
-    public Bateau(int x, int y, Game m,String t) {
-        super(x,y,m);
-        texture =t;
-        spriteRenderer.setName(nomSprite());
-    }
+
 
     @Override
     public String toString() {

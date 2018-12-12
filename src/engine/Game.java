@@ -45,7 +45,6 @@ public class Game {
         SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/Break.png");
         SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
 
-        SpriteFactory.getInstance().addSprite("Head", "src/assets/textures/Head.png");
         SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/horizontalMiddle.png");
         SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/verticalMiddle.png");
         SpriteFactory.getInstance().addSprite("horizontalQueue", "src/assets/textures/horizontalQueue.png");

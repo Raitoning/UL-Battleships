@@ -44,7 +44,7 @@ public class Map {
                 else if(i == b.getLength()-1)
                     name += "Tete";
                 else name += "Middle";
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model,name), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model,name,gameID), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
                 name = "horizontal";
                 if(i == 0){
@@ -53,7 +53,7 @@ public class Map {
                 else if(i == b.getLength()-1)
                     name += "Queue";
                 else name += "Middle";
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, name), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, name,gameID), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }
