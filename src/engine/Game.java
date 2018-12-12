@@ -31,6 +31,8 @@ public class Game {
     private assets.scripts.Game g;
     private static int gameID = 0;
 
+    private RMIServer rmiServer;
+
     /** Constructs a new level. Only once should be used at run-time.
      *
      */
@@ -59,7 +61,7 @@ public class Game {
         }
 
         try {
-            new RMIServer("battleships", g);
+            rmiServer = new RMIServer("battleships", g);
         } catch (RemoteException | NamingException | AlreadyBoundException e) {
             e.printStackTrace();
         }
@@ -83,8 +85,23 @@ public class Game {
 
         if(Input.getKey(KeyEvent.VK_SPACE)) {
 
-            g.endGame();
+            endGame();
         }
+    }
+
+    /**
+     * @version 18.12.12-tailored-wastelands
+     * @since 18.12.12-tailored-wastelads
+     */
+    private void endGame() {
+
+        g.endGame();
+
+//        try {
+//            rmiServer.closeServer();
+//        } catch (RemoteException | NotBoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public GameObject findGameObjectByName(String name) {
@@ -109,5 +126,11 @@ public class Game {
     public static int getGameID() {
 
         return gameID;
+    }
+
+    public static void setGameID(int value) {
+
+        gameID = value;
+        System.out.println(value);
     }
 }

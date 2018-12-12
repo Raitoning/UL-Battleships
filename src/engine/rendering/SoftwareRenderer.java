@@ -50,6 +50,16 @@ public class SoftwareRenderer {
 
         width = w;
         height = h;
+
+        newOuputWindow(w, h);
+
+        sprites = new ArrayList<>();
+        renderQueue = new ArrayList<>();
+        cameras = new ArrayList<>();
+    }
+
+    public void newOuputWindow(int w, int h) {
+
         outputImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         frameBuffer = outputImage.createGraphics();
         rawFrameBuffer = ((DataBufferInt) outputImage.getRaster().getDataBuffer()).getData();
@@ -64,9 +74,12 @@ public class SoftwareRenderer {
 
         window.addKeyListener(Input.getKeyboardInput());
         window.getContentPane().addMouseListener(Input.getMouseInput());
-        sprites = new ArrayList<>();
-        renderQueue = new ArrayList<>();
-        cameras = new ArrayList<>();
+    }
+
+    public void closeOuputWindow() {
+
+        window.dispose();
+        window = null;
     }
 
     /** Cull, sort and render sprites to the rendering zone. Can clear the buffer with a determined color before rendering.
@@ -75,52 +88,55 @@ public class SoftwareRenderer {
      */
     public void update() {
 
-        Arrays.fill(rawFrameBuffer, CLEARCOLOR);
+        if(window != null) {
 
-        cameraSort();
+            Arrays.fill(rawFrameBuffer, CLEARCOLOR);
 
-        for (int i = cameras.size() - 1; i > -1; i--) {
+            cameraSort();
 
-            if(cameras.get(i).getGameObject().getGameID() == Game.getGameID()) {
+            for (int i = cameras.size() - 1; i > -1; i--) {
 
-                activeCamera = cameras.get(i);
+                if(cameras.get(i).getGameObject().getGameID() == Game.getGameID()) {
 
-                cull();
-                zSort();
+                    activeCamera = cameras.get(i);
 
-                int x;
-                int y;
-                SpriteRenderer sprite;
-                Vector2 projectedPosition;
+                    cull();
+                    zSort();
 
-                BufferedImage renderTexture = new BufferedImage((int) (width * (activeCamera.getMaxRenderArea().getX() - activeCamera.getMinRenderArea().getX())), (int) (height * (activeCamera.getMaxRenderArea().getY() - activeCamera.getMinRenderArea().getY())), BufferedImage.TYPE_INT_ARGB);
-                Graphics2D renderTextureFrameBuffer = renderTexture.createGraphics();
+                    int x;
+                    int y;
+                    SpriteRenderer sprite;
+                    Vector2 projectedPosition;
 
-                for (int j = renderQueue.size() - 1; j > -1; j--) {
+                    BufferedImage renderTexture = new BufferedImage((int) (width * (activeCamera.getMaxRenderArea().getX() - activeCamera.getMinRenderArea().getX())), (int) (height * (activeCamera.getMaxRenderArea().getY() - activeCamera.getMinRenderArea().getY())), BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D renderTextureFrameBuffer = renderTexture.createGraphics();
 
-                    sprite = renderQueue.get(j);
-                    projectedPosition = activeCamera.worldToCamera(sprite.getGameObject().getTransform().position());
+                    for (int j = renderQueue.size() - 1; j > -1; j--) {
 
-                    BufferedImage spriteToRender = SpriteFactory.getInstance().getScaledSprite(sprite.getName(), sprite.getGameObject());
+                        sprite = renderQueue.get(j);
+                        projectedPosition = activeCamera.worldToCamera(sprite.getGameObject().getTransform().position());
+
+                        BufferedImage spriteToRender = SpriteFactory.getInstance().getScaledSprite(sprite.getName(), sprite.getGameObject());
 
 
-                    x = (int) ((renderTexture.getWidth() * projectedPosition.getX()) - spriteToRender.getWidth() / 2f);
-                    y = (int) ((renderTexture.getHeight() * projectedPosition.getY()) - spriteToRender.getHeight() / 2f);
+                        x = (int) ((renderTexture.getWidth() * projectedPosition.getX()) - spriteToRender.getWidth() / 2f);
+                        y = (int) ((renderTexture.getHeight() * projectedPosition.getY()) - spriteToRender.getHeight() / 2f);
 
-                    renderTextureFrameBuffer.drawImage(spriteToRender, null, x, y);
+                        renderTextureFrameBuffer.drawImage(spriteToRender, null, x, y);
+                    }
+
+
+                    x = (int) (width * activeCamera.getMinRenderArea().getX());
+
+                    y = (int) (height * ( 1f - activeCamera.getMaxRenderArea().getY()));
+
+                    frameBuffer.drawImage(renderTexture, null, x, y);
+
+                    renderTextureFrameBuffer.dispose();
                 }
-
-
-                x = (int) (width * activeCamera.getMinRenderArea().getX());
-
-                y = (int) (height * ( 1f - activeCamera.getMaxRenderArea().getY()));
-
-                frameBuffer.drawImage(renderTexture, null, x, y);
-
-                renderTextureFrameBuffer.dispose();
             }
+            window.repaint();
         }
-        window.repaint();
     }
 
     /**

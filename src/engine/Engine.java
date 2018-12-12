@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
  * </p>
  *
  * @author  Raitoning
- * @version 2018.12.03
+ * @version 2018.12.12-tailored-wastelands
  * @since   2018.11.14
  */
 public class Engine {
@@ -127,6 +127,11 @@ public class Engine {
         }
 
         return instance;
+    }
+
+    public static void exit() {
+
+        instance.getRenderer().closeOuputWindow();
     }
 
     /** Get the Renderer instance.

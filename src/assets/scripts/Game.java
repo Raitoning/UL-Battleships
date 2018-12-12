@@ -4,6 +4,7 @@ import assets.scripts.epoque.Epoque;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Renaissance;
 import assets.scripts.player.*;
+import engine.Engine;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
@@ -127,8 +128,9 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
         if(isGameEnded) {
             try {
-
                 Thread.sleep(5000);
+                engine.Game.setGameID(engine.Game.getGameID() + 1);
+                Engine.exit();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
