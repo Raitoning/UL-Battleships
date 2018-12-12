@@ -21,10 +21,11 @@ public abstract class Case extends GameObject{
     protected int posX;
     protected int posY;
 
-    public Case (int x, int y, Game m) {
+    public Case (int x, int y, Game m, int gameID) {
 
         model = m;
         estToucher = false;
+        this.gameID = gameID;
 
         posX = x;
         posY = y;

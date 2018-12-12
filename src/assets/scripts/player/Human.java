@@ -8,9 +8,9 @@ import engine.Vector2;
 public class Human extends Player {
 
 
-    public Human(int idJoueur,Game m) {
+    public Human(int idJoueur,Game m, int gameID) {
 
-        super(idJoueur,m);
+        super(idJoueur,m, gameID);
 
         transform.position().setX(4.5f);
         transform.position().setY(4.5f);

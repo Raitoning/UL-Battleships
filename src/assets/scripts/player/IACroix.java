@@ -1,12 +1,8 @@
 package assets.scripts.player;
 
 import assets.scripts.Game;
-import assets.scripts.epoque.Battleship;
-import assets.scripts.epoque.Epoque;
-import assets.scripts.map.Bateau;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
-import assets.scripts.map.Position;
 import engine.Vector2;
 
 import java.util.ArrayList;
@@ -16,9 +12,9 @@ public class IACroix extends Player implements IA{
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroix(int idJoueur, Game m) {
+    public IACroix(int idJoueur, Game m, int gameID) {
 
-        super(idJoueur, m);
+        super(idJoueur, m, gameID);
 
         ar =new ArrayList<>();
         priority =new ArrayList<>();
@@ -40,6 +36,7 @@ public class IACroix extends Player implements IA{
     @Override
     public void play(Case c) {
         super.play(c);
+        //TODO
     }
 
     @Override
@@ -84,22 +81,22 @@ public class IACroix extends Player implements IA{
 
         if(x>0){
             if (!model.getEpoque().getCaseAt(opponentID(),x-1,y).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x-1,y));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x-1,y));
         }
 
         if(x<Map.NBCASES-1){
             if (!model.getEpoque().getCaseAt(opponentID(),x+1,y).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x+1,y));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x+1,y));
         }
 
         if(y>0){
             if (!model.getEpoque().getCaseAt(opponentID(),x,y-1).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x,y-1));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x,y-1));
         }
 
         if(y<Map.NBCASES-1){
             if (!model.getEpoque().getCaseAt(opponentID(),x,y+1).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x,y+1));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x,y+1));
         }
     }
 

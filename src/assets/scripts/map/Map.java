@@ -8,19 +8,21 @@ public class Map {
     private Case cases[][];
     private int idJoueur;
     private Game model;
+    private int gameID;
 
     public static final int NBCASES = 10;
 
     /**
      * Constructeur de la Map par défaut, initialise les cases à vide
      */
-    public Map(int idJoueur,Game m) {
+    public Map(int idJoueur,Game m, int gameID) {
 
         this.cases = new Case[NBCASES][NBCASES];
 
 
         model = m;
         this.idJoueur = idJoueur;
+        this.gameID = gameID;
 
         //casesEmptyInit();
     }
@@ -36,10 +38,10 @@ public class Map {
 
             if (b.isVertical()) {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model, gameID), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
 
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, gameID), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }
@@ -56,7 +58,7 @@ public class Map {
             for (int j = 0;j < cases[0].length; j++) {
 
                 if (cases[i][j]==null)
-                cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j,model);
+                cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j,model, gameID);
             }
         }
     }
@@ -99,5 +101,16 @@ public class Map {
         }
 
         return sb.toString();
+    }
+
+    public void destroy() {
+
+        for(Case[] ligne: cases) {
+
+            for(Case c: ligne) {
+
+                c.destroy();
+            }
+        }
     }
 }
