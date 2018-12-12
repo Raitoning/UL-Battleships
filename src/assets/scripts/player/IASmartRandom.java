@@ -1,37 +1,34 @@
 package assets.scripts.player;
 
 import assets.scripts.Game;
-import assets.scripts.epoque.Battleship;
-import assets.scripts.epoque.Epoque;
-import assets.scripts.map.Bateau;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
-import assets.scripts.map.Position;
 import engine.Vector2;
 
 import java.util.ArrayList;
 
-public class IACroixLineaire extends Player implements IA{
+public class IASmartRandom extends Player implements IA{
 
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroixLineaire(int idJoueur, Game m,int gameID) {
 
-        super(idJoueur, m,gameID);
+    public IASmartRandom(int idJoueur, Game m, int gameID) {
+
+        super(idJoueur, m, gameID);
 
         ar =new ArrayList<>();
         priority =new ArrayList<>();
+
 
         transform.position().setX(15.5f);
         transform.position().setY(4.5f);
 
         camera.setMinRenderArea(new Vector2(0.5f, 0f));
 
-        for(int i =0; i < Map.NBCASES;i++){
+        for(int i = 0; i < Map.NBCASES; i++){
             for (int j =0;j < Map.NBCASES;j++){
-                if((i%2==0&&j%2==1)||(i%2==1&&j%2==0))
-                    ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
+                ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
             }
         }
         System.out.println(ar.size());
@@ -45,12 +42,13 @@ public class IACroixLineaire extends Player implements IA{
     @Override
     public String toString() {
 
-        return "IACroixLineaire";
+        return "IARandom";
     }
 
     @Override
     public Case jeuxIA() {
-        int x; Case res;
+
+        int x ; Case res;
 
         clean();
 
@@ -60,11 +58,11 @@ public class IACroixLineaire extends Player implements IA{
             priority.remove(x);
 
         }else {
-            res = ar.get(ar.size()-1);
+            x= (int)(Math.random()*(ar.size()));
+            res = ar.get(x);
         }
 
-        if (ar.contains(res))
-            ar.remove(res);
+        ar.remove(x);
 
         if (ar.isEmpty()){
             extreme();
