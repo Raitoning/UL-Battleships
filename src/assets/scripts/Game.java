@@ -30,7 +30,7 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
         this.players[0] = new Human(0,this);
 
-        this.players[1] = new IARandom(1,this);
+        this.players[1] = new IACroixLineaire(1,this);
 
         playerTurn = 0;
 

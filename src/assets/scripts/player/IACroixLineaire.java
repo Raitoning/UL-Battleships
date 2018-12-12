@@ -11,12 +11,12 @@ import engine.Vector2;
 
 import java.util.ArrayList;
 
-public class IACroix extends Player implements IA{
+public class IACroixLineaire extends Player implements IA{
 
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroix(int idJoueur, Game m) {
+    public IACroixLineaire(int idJoueur, Game m) {
 
         super(idJoueur, m);
 
@@ -30,7 +30,7 @@ public class IACroix extends Player implements IA{
 
         for(int i =0; i < Map.NBCASES;i++){
             for (int j =0;j < Map.NBCASES;j++){
-                if(i%2==0||j%2==0)
+                if((i%2==0&&j%2==1)||(i%2==1&&j%2==0))
                     ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
             }
         }
@@ -60,8 +60,7 @@ public class IACroix extends Player implements IA{
             priority.remove(x);
 
         }else {
-            x= (int)(Math.random()*(ar.size()));
-            res = ar.get(x);
+            res = ar.get(ar.size()-1);
         }
 
         if (ar.contains(res))
@@ -84,22 +83,22 @@ public class IACroix extends Player implements IA{
 
         if(x>0){
             if (!model.getEpoque().getCaseAt(opponentID(),x-1,y).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x-1,y));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x-1,y));
         }
 
         if(x<Map.NBCASES-1){
             if (!model.getEpoque().getCaseAt(opponentID(),x+1,y).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x+1,y));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x+1,y));
         }
 
         if(y>0){
             if (!model.getEpoque().getCaseAt(opponentID(),x,y-1).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x,y-1));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x,y-1));
         }
 
         if(y<Map.NBCASES-1){
             if (!model.getEpoque().getCaseAt(opponentID(),x,y+1).estToucher())
-            priority.add(model.getEpoque().getCaseAt(opponentID(),x,y+1));
+                priority.add(model.getEpoque().getCaseAt(opponentID(),x,y+1));
         }
     }
 
