@@ -11,9 +11,10 @@ public abstract class Player extends GameObject {
     protected Camera camera;
     protected Game model;
 
-    Player(int idJoueur, Game m) {
+    Player(int idJoueur, Game m, int gameID) {
         model = m;
         this.idJoueur = idJoueur;
+        this.gameID = gameID;
 
         camera = new Camera(10.5f, 0f, 10f, this);
 

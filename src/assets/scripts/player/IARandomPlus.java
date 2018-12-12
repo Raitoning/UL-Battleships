@@ -7,27 +7,28 @@ import engine.Vector2;
 
 import java.util.ArrayList;
 
-public class IACroix extends Player implements IA{
+public class IARandomPlus extends Player implements IA{
 
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroix(int idJoueur, Game m, int gameID) {
+
+    public IARandomPlus(int idJoueur, Game m, int gameID) {
 
         super(idJoueur, m, gameID);
 
         ar =new ArrayList<>();
         priority =new ArrayList<>();
 
+
         transform.position().setX(15.5f);
         transform.position().setY(4.5f);
 
         camera.setMinRenderArea(new Vector2(0.5f, 0f));
 
-        for(int i =0; i < Map.NBCASES;i++){
+        for(int i = 0; i < Map.NBCASES; i++){
             for (int j =0;j < Map.NBCASES;j++){
-                if(i%2==0||j%2==0)
-                    ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
+                ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
             }
         }
         System.out.println(ar.size());
@@ -36,18 +37,18 @@ public class IACroix extends Player implements IA{
     @Override
     public void play(Case c) {
         super.play(c);
-        //TODO
     }
 
     @Override
     public String toString() {
 
-        return "IACroix";
+        return "IARandom";
     }
 
     @Override
     public Case jeuxIA() {
-        int x; Case res;
+
+        int x ; Case res;
 
         clean();
 
@@ -59,10 +60,10 @@ public class IACroix extends Player implements IA{
         }else {
             x= (int)(Math.random()*(ar.size()));
             res = ar.get(x);
+            addVoisins(res);
         }
 
-        if (ar.contains(res))
-            ar.remove(res);
+        ar.remove(x);
 
         if (ar.isEmpty()){
             extreme();

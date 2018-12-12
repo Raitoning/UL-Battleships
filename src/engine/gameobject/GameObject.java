@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/GameObject.html">https://docs.unity3d.com/ScriptReference/GameObject.html</a>
  *
  * @author  Raitoning
- * @version 2018.12.11
+ * @version 2018.12.12-tailored-wastelands
  * @since   2018.11.14
  */
 public class GameObject {
@@ -23,6 +23,7 @@ public class GameObject {
     protected String name;
     protected Transform transform;
     protected ArrayList<Component> components;
+    protected int gameID;
 
     private String tag;
 
@@ -61,6 +62,16 @@ public class GameObject {
         transform.setPosition(new Vector3(x, y, z));
     }
 
+    /** Construcs a new GameObject with a specified GameID.
+     *
+     * @param gameID The GameID this GameObject belongs to.
+     */
+    public GameObject(int gameID) {
+
+        this();
+        this.gameID = gameID;
+    }
+
     /** The update() function is called once every frame. This is where you put all your logic, for instance movements or inputs.
      *
      */
@@ -76,7 +87,6 @@ public class GameObject {
     public void onTriggerStay2D(Collider other) {}
 
     public void onTriggerExit2D(Collider other) {}
-
 
     /** Sent each frame where a click happened on this GameObject.
      * Determines if the cursor is over a Graphics element in the Scene.
@@ -175,6 +185,16 @@ public class GameObject {
         for (Component component : components) {
 
             component.destroy();
+            components.remove(component);
         }
+    }
+
+    /** Returns the GameID of the Game this GameObject belongs to.
+     *
+     * @return The GameID of the Game this GameObject belongs to.
+     */
+    public int getGameID() {
+
+        return gameID;
     }
 }

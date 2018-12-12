@@ -1,5 +1,6 @@
 package engine.rendering;
 
+import engine.Game;
 import engine.SpriteFactory;
 import engine.Vector2;
 import engine.gameobject.component.Camera;
@@ -22,7 +23,7 @@ import java.util.Arrays;
  * </p>
  *
  * @author  Raitoning
- * @version 2018.12.11
+ * @version 2018.12.12-tailored-wastelands
  * @since   2018.11.14
  */
 public class SoftwareRenderer {
@@ -70,6 +71,7 @@ public class SoftwareRenderer {
 
     /** Cull, sort and render sprites to the rendering zone. Can clear the buffer with a determined color before rendering.
      *
+     * @version 18.12.12-tailored-wastelands
      */
     public void update() {
 
@@ -79,44 +81,51 @@ public class SoftwareRenderer {
 
         for (int i = cameras.size() - 1; i > -1; i--) {
 
-            activeCamera = cameras.get(i);
+            if(cameras.get(i).getGameObject().getGameID() == Game.getGameID()) {
 
-            cull();
-            zSort();
+                activeCamera = cameras.get(i);
 
-            int x;
-            int y;
-            SpriteRenderer sprite;
-            Vector2 projectedPosition;
+                cull();
+                zSort();
 
-            BufferedImage renderTexture = new BufferedImage((int) (width * (activeCamera.getMaxRenderArea().getX() - activeCamera.getMinRenderArea().getX())), (int) (height * (activeCamera.getMaxRenderArea().getY() - activeCamera.getMinRenderArea().getY())), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D renderTextureFrameBuffer = renderTexture.createGraphics();
+                int x;
+                int y;
+                SpriteRenderer sprite;
+                Vector2 projectedPosition;
 
-            for (int j = renderQueue.size() - 1; j > -1; j--) {
+                BufferedImage renderTexture = new BufferedImage((int) (width * (activeCamera.getMaxRenderArea().getX() - activeCamera.getMinRenderArea().getX())), (int) (height * (activeCamera.getMaxRenderArea().getY() - activeCamera.getMinRenderArea().getY())), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D renderTextureFrameBuffer = renderTexture.createGraphics();
 
-                sprite = renderQueue.get(j);
-                projectedPosition = activeCamera.worldToCamera(sprite.getGameObject().getTransform().position());
+                for (int j = renderQueue.size() - 1; j > -1; j--) {
 
-                BufferedImage spriteToRender = SpriteFactory.getInstance().getScaledSprite(sprite.getName(), sprite.getGameObject());
+                    sprite = renderQueue.get(j);
+                    projectedPosition = activeCamera.worldToCamera(sprite.getGameObject().getTransform().position());
+
+                    BufferedImage spriteToRender = SpriteFactory.getInstance().getScaledSprite(sprite.getName(), sprite.getGameObject());
 
 
-                x = (int) ((renderTexture.getWidth() * projectedPosition.getX()) - spriteToRender.getWidth() / 2f);
-                y = (int) ((renderTexture.getHeight() * projectedPosition.getY()) - spriteToRender.getHeight() / 2f);
+                    x = (int) ((renderTexture.getWidth() * projectedPosition.getX()) - spriteToRender.getWidth() / 2f);
+                    y = (int) ((renderTexture.getHeight() * projectedPosition.getY()) - spriteToRender.getHeight() / 2f);
 
-                renderTextureFrameBuffer.drawImage(spriteToRender, null, x, y);
+                    renderTextureFrameBuffer.drawImage(spriteToRender, null, x, y);
+                }
+
+
+                x = (int) (width * activeCamera.getMinRenderArea().getX());
+
+                y = (int) (height * ( 1f - activeCamera.getMaxRenderArea().getY()));
+
+                frameBuffer.drawImage(renderTexture, null, x, y);
+
+                renderTextureFrameBuffer.dispose();
             }
-
-            x = (int) (width * activeCamera.getMinRenderArea().getX());
-
-            y = (int) (height * ( 1f - activeCamera.getMaxRenderArea().getY()));
-
-            frameBuffer.drawImage(renderTexture, null, x, y);
-
-            renderTextureFrameBuffer.dispose();
         }
         window.repaint();
     }
 
+    /**
+     * @version 18.12.12-tailored-wastelands
+     */
     private void cull() {
 
          renderQueue.clear();
@@ -126,20 +135,24 @@ public class SoftwareRenderer {
 
         for (SpriteRenderer spriteRenderer : sprites) {
 
-            sprite = spriteRenderer;
-            transform = sprite.getGameObject().getTransform();
+            if(spriteRenderer.getGameObject().getGameID() == Game.getGameID()) {
 
-            if (transform.position().getX() + transform.scale().getX() >= -((activeCamera.getOrthographicSize() * activeCamera.getAspectRatio()) / 2) + activeCamera.getGameObject().getTransform().position().getX() && transform.position().getX() - transform.scale().getX() <= ((activeCamera.getOrthographicSize() * activeCamera.getAspectRatio()) / 2) + activeCamera.getGameObject().getTransform().position().getX()) {
+                sprite = spriteRenderer;
+                transform = sprite.getGameObject().getTransform();
+
+                if (transform.position().getX() + transform.scale().getX() >= -((activeCamera.getOrthographicSize() * activeCamera.getAspectRatio()) / 2) + activeCamera.getGameObject().getTransform().position().getX() && transform.position().getX() - transform.scale().getX() <= ((activeCamera.getOrthographicSize() * activeCamera.getAspectRatio()) / 2) + activeCamera.getGameObject().getTransform().position().getX()) {
 
 
-                if (transform.position().getY() + transform.scale().getY() >= -(activeCamera.getOrthographicSize() / 2) + activeCamera.getGameObject().getTransform().position().getY() && transform.position().getY() - transform.scale().getY() <= (activeCamera.getOrthographicSize() / 2) + activeCamera.getGameObject().getTransform().position().getY()) {
+                    if (transform.position().getY() + transform.scale().getY() >= -(activeCamera.getOrthographicSize() / 2) + activeCamera.getGameObject().getTransform().position().getY() && transform.position().getY() - transform.scale().getY() <= (activeCamera.getOrthographicSize() / 2) + activeCamera.getGameObject().getTransform().position().getY()) {
 
-                    if (transform.position().getZ() >= activeCamera.getNearClippingPlane() && transform.position().getZ() <= activeCamera.getFarClippingPlane()) {
+                        if (transform.position().getZ() >= activeCamera.getNearClippingPlane() && transform.position().getZ() <= activeCamera.getFarClippingPlane()) {
 
-                        renderQueue.add(sprite);
+                            renderQueue.add(sprite);
+                        }
                     }
                 }
             }
+
         }
 
 //         System.out.println("Sprite to render: " + renderQueue.size());

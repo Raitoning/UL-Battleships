@@ -11,8 +11,8 @@ import java.rmi.RemoteException;
 
 public class MoyenAge extends Epoque {
 
-    public MoyenAge(boolean init,Game m) throws RemoteException {
-        super(init,m);
+    public MoyenAge(boolean init,Game m, int gameID) throws RemoteException {
+        super(init,m, gameID);
     }
 
 

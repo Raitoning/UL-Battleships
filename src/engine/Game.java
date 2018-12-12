@@ -1,12 +1,13 @@
 package engine;
 
-import assets.scripts.epoque.Epoque;
-import assets.scripts.epoque.MoyenAge;
 import engine.gameobject.GameObject;
+import engine.input.Input;
 import engine.networking.RMIClient;
 import engine.networking.RMIServer;
 
 import javax.naming.NamingException;
+import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -21,12 +22,14 @@ import java.util.Random;
  * </p>
  *
  * @author  Raitoning
- * @version 2018-11-14
- * @since   2018-11-14
+ * @version 2018.12.12-tailored-wastelands
+ * @since   2018.11.14
  */
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
+    private assets.scripts.Game g;
+    private static int gameID = 0;
 
     /** Constructs a new level. Only once should be used at run-time.
      *
@@ -37,7 +40,11 @@ public class Game {
 
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
+        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/break.png");
         SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/Miss.png");
+        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/Break.png");
+        SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
+
         SpriteFactory.getInstance().addSprite("Head", "src/assets/textures/Head.png");
         SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/horizontalMiddle.png");
         SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/verticalMiddle.png");
@@ -47,7 +54,7 @@ public class Game {
         SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/verticalTete.png");
         assets.scripts.Game g = null;
         try {
-            g = new assets.scripts.Game("MoyenAge");
+            g = new assets.scripts.Game("MoyenAge", gameID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -74,6 +81,11 @@ public class Game {
 
             gameObject.update();
         }
+
+        if(Input.getKey(KeyEvent.VK_SPACE)) {
+
+            g.endGame();
+        }
     }
 
     public GameObject findGameObjectByName(String name) {
@@ -87,5 +99,16 @@ public class Game {
         }
 
         return null;
+    }
+
+    /** Returns the GameID of the runnning Game.
+     *
+     * @return The GameID of the runnning Game.
+     * @version 2018.12.12-tailored-wastelands
+     * @since 2018.12.12-tailored-wastelands
+     */
+    public static int getGameID() {
+
+        return gameID;
     }
 }

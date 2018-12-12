@@ -1,7 +1,6 @@
 package assets.scripts.map;
 
 import assets.scripts.Game;
-import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
 public class Bateau extends Case {
@@ -29,6 +28,7 @@ public class Bateau extends Case {
 
     @Override
     public String toString() {
+
         return BATEAU;
     }
 

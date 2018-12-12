@@ -75,6 +75,11 @@ public class Battleship {
         return pv;
     }
 
+    public void destroy() {
+
+        coinHautGauche = null;
+    }
+
     public boolean isAlive(){
         return pv>0;
     }

@@ -17,19 +17,22 @@ public abstract class Epoque implements RMIRegistry {
     protected Map maps[];
     protected ArrayList<Battleship>[] battleships;
     private Game model;
+    private int gameID;
 
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
-    public Epoque(boolean init, Game m) throws RemoteException {
+    // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
+    public Epoque(boolean init, Game m, int gameID) throws RemoteException {
 
+        this.gameID = gameID;
         this.maps = new Map[2];
         model = m;
         this.battleships = new ArrayList[2];
 
 
-        maps[0] = new Map(0,model);
-        maps[1] = new Map(1,model);
+        maps[0] = new Map(0,model, gameID);
+        maps[1] = new Map(1,model, gameID);
 
         if (init) {
             battleshipInit(0);
@@ -190,6 +193,22 @@ public abstract class Epoque implements RMIRegistry {
     private void battleshipsVoidInit(){
         battleships[0]= new ArrayList<>(4);
         battleships[1]= new ArrayList<>(4);
+    }
+
+    public void destroy() {
+
+        maps[0].destroy();
+        maps[1].destroy();
+
+        for(ArrayList<Battleship> ships : battleships) {
+
+            for (Battleship ship: ships) {
+
+                ship.destroy();
+            }
+        }
+
+        model = null;
     }
 
     public boolean hasLost(int idJoueur){

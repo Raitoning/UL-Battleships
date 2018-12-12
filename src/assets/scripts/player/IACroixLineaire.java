@@ -1,20 +1,24 @@
 package assets.scripts.player;
 
 import assets.scripts.Game;
+import assets.scripts.epoque.Battleship;
+import assets.scripts.epoque.Epoque;
+import assets.scripts.map.Bateau;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
+import assets.scripts.map.Position;
 import engine.Vector2;
 
 import java.util.ArrayList;
 
-public class IACroix extends Player implements IA{
+public class IACroixLineaire extends Player implements IA{
 
     private ArrayList<Case> ar;
     private ArrayList<Case> priority;
 
-    public IACroix(int idJoueur, Game m, int gameID) {
+    public IACroixLineaire(int idJoueur, Game m,int gameID) {
 
-        super(idJoueur, m, gameID);
+        super(idJoueur, m,gameID);
 
         ar =new ArrayList<>();
         priority =new ArrayList<>();
@@ -26,7 +30,7 @@ public class IACroix extends Player implements IA{
 
         for(int i =0; i < Map.NBCASES;i++){
             for (int j =0;j < Map.NBCASES;j++){
-                if(i%2==0||j%2==0)
+                if((i%2==0&&j%2==1)||(i%2==1&&j%2==0))
                     ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
             }
         }
@@ -36,13 +40,12 @@ public class IACroix extends Player implements IA{
     @Override
     public void play(Case c) {
         super.play(c);
-        //TODO
     }
 
     @Override
     public String toString() {
 
-        return "IACroix";
+        return "IACroixLineaire";
     }
 
     @Override
@@ -57,8 +60,7 @@ public class IACroix extends Player implements IA{
             priority.remove(x);
 
         }else {
-            x= (int)(Math.random()*(ar.size()));
-            res = ar.get(x);
+            res = ar.get(ar.size()-1);
         }
 
         if (ar.contains(res))

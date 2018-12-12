@@ -1,6 +1,7 @@
 package engine.input;
 
 import engine.Engine;
+import engine.Game;
 import engine.Vector2;
 import engine.gameobject.component.Camera;
 import engine.gameobject.component.GraphicRaycaster;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * @author  Raitoning
- * @version 2018.12.11
+ * @version 2018.12.12-tailored-wastelands
  * @since   2018.11.14
  */
 public class MouseInput extends MouseAdapter {
@@ -107,7 +108,10 @@ public class MouseInput extends MouseAdapter {
                 if (worldCoordinates.getY() >= transform.position().getY() - (transform.scale().getY() / 2f) &&
                         worldCoordinates.getY() <= transform.position().getY() + (transform.scale().getY() / 2f)) {
 
-                    listener.raycasted(indexOfCamera);
+                    if(listener.getGameObject().getGameID() == Game.getGameID()) {
+
+                        listener.raycasted(indexOfCamera);
+                    }
                 }
             }
         }

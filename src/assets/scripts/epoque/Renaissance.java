@@ -9,8 +9,8 @@ import assets.scripts.map.Position;
 
 public class Renaissance extends Epoque {
 
-    public Renaissance(boolean b, Game m) throws RemoteException {
-        super(b,m);
+    public Renaissance(boolean b, Game m, int gameID) throws RemoteException {
+        super(b,m, gameID);
     }
 
     @Override
