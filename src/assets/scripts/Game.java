@@ -34,7 +34,7 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
 
         this.players[0] = new Human(0,this, gameID);
 
-        this.players[1] = new IASmartRandom(1,this, gameID);
+        this.players[1] = new IARandomPlus(1,this, gameID);
 
         playerTurn = 0;
 
