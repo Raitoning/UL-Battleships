@@ -1,6 +1,6 @@
 package assets.scripts.map;
 
-import assets.scripts.Game;
+import assets.scripts.Model;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.GraphicRaycaster;
 import engine.gameobject.component.SpriteRenderer;
@@ -16,12 +16,12 @@ public abstract class Case extends GameObject{
     protected boolean estToucher;
 
     protected SpriteRenderer spriteRenderer;
-    protected Game model;
+    protected Model model;
 
     protected int posX;
     protected int posY;
 
-    public Case (int x, int y, Game m, int gameID) {
+    public Case (int x, int y, Model m, int gameID) {
 
         model = m;
         estToucher = false;
@@ -47,7 +47,7 @@ public abstract class Case extends GameObject{
         }
     }
 
-    public static Case fromString(String s, int x, int y, Game m){
+    public static Case fromString(String s, int x, int y, Model m){
         return null;
     }
 

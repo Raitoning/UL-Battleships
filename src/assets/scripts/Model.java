@@ -8,11 +8,12 @@ import engine.Engine;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
+import javax.swing.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 
-public class Game extends UnicastRemoteObject implements NetworkedGame {
+public class Model extends UnicastRemoteObject implements NetworkedGame {
 
     private int score[];
     private Player players[];
@@ -24,9 +25,12 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Game(String e, int gameID) throws RemoteException {
+    public Model(String e, int gameID) throws RemoteException {
         super();
         this.gameID = gameID;
+
+        replay();
+
         setEpoque(e,true);
         this.score = new int[2];
         Arrays.fill(score,0);
@@ -143,5 +147,19 @@ public class Game extends UnicastRemoteObject implements NetworkedGame {
     public int getGameID() {
 
         return gameID;
+    }
+
+    private void replay(){
+
+        boolean solo;
+        JOptionPane d = new JOptionPane();
+        // les textes figurant // sur les boutons
+        String lesTextes[]={ "Solo", "Reseau"};
+        int retour = d.showOptionDialog(null, "le message", "le titre", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, lesTextes,  lesTextes[0]);
+        if( retour!=JOptionPane.CLOSED_OPTION){
+
+        } else{
+
+        }
     }
 }

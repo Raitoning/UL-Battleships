@@ -1,13 +1,12 @@
 package assets.scripts.map;
 
-import assets.scripts.Game;
-import engine.gameobject.component.SpriteRenderer;
+import assets.scripts.Model;
 
 public class Bateau extends Case {
 
     private String texture = "Water";
 
-    public Bateau(int x, int y, Game m,String t, int id) {
+    public Bateau(int x, int y, Model m, String t, int id) {
         super(x,y,m,id);
         texture =t;
         spriteRenderer.setName(nomSprite());

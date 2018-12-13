@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * <h1>Game</h1>
+ * <h1>Model</h1>
  * Temporary class supposed to represent a single level (Scene)
  * <p>
  * This class is mostly used for debugging purposes.
@@ -28,7 +28,7 @@ import java.util.Random;
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
-    private assets.scripts.Game g;
+    private Model g;
     private static int gameID = 0;
 
     private RMIServer rmiServer;
@@ -42,9 +42,10 @@ public class Game {
 
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
+        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/break.png");
         SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/Miss.png");
-        SpriteFactory.getInstance().addSprite("Exploded", "src/assets/textures/exploded.png");
-
+        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/Break.png");
+        SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
 
         SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/horizontalMiddle.png");
         SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/verticalMiddle.png");
@@ -52,6 +53,7 @@ public class Game {
         SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/verticalQueue.png");
         SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/horizontalTete.png");
         SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/verticalTete.png");
+        Model g = null;
         SpriteFactory.getInstance().addSprite("horizontalMiddleFeu", "src/assets/textures/horizontalMiddleFeu.png");
         SpriteFactory.getInstance().addSprite("verticalMiddleFeu", "src/assets/textures/verticalMiddleFeu.png");
         SpriteFactory.getInstance().addSprite("horizontalQueueFeu", "src/assets/textures/horizontalQueueFeu.png");
@@ -62,7 +64,7 @@ public class Game {
 
         assets.scripts.Game g = null;
         try {
-            g = new assets.scripts.Game("MoyenAge", gameID);
+            g = new Model("MoyenAge", gameID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -124,9 +126,9 @@ public class Game {
         return null;
     }
 
-    /** Returns the GameID of the runnning Game.
+    /** Returns the GameID of the runnning Model.
      *
-     * @return The GameID of the runnning Game.
+     * @return The GameID of the runnning Model.
      * @version 2018.12.12-tailored-wastelands
      * @since 2018.12.12-tailored-wastelands
      */

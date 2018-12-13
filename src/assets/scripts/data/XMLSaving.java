@@ -1,6 +1,6 @@
 package assets.scripts.data;
 
-import assets.scripts.Game;
+import assets.scripts.Model;
 import assets.scripts.epoque.Battleship;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
@@ -16,10 +16,10 @@ public class XMLSaving extends GameSaverFactory {
     }
 
     @Override
-    public void load(Game game) {
+    public void load(Model model) {
 
         try {
-            loadFile(new File("random.xml"),game);
+            loadFile(new File("random.xml"), model);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,9 +27,9 @@ public class XMLSaving extends GameSaverFactory {
     }
 
     @Override
-    public void save(Game game) {
+    public void save(Model model) {
         try {
-            saveFile(new File("random.xml"),game);
+            saveFile(new File("random.xml"), model);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class XMLSaving extends GameSaverFactory {
      * @param file fichier à lire
      * @throws IOException erreure de lecture fichier
      */
-    public void loadFile(File file,Game game) throws IOException {
+    public void loadFile(File file,Model model) throws IOException {
         FileReader flot ;
         BufferedReader flotFiltre ;
         if (file.exists()){
@@ -51,8 +51,8 @@ public class XMLSaving extends GameSaverFactory {
                 ++i;
                 String line = sc.nextLine();
                 if(i==1){
-                    if (!line.equals("<game>"))
-                        System.out.println("No game found");
+                    if (!line.equals("<model>"))
+                        System.out.println("No model found");
                 } else if (i==2){
                     if (!line.equals("\t<score>"))
                         System.out.println("No score found");
@@ -63,7 +63,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.setScore(p,Integer.parseInt(tmp));
+                    model.setScore(p,Integer.parseInt(tmp));
                 }else if (i==5) {
                     if (!line.equals("\t</score>"))
                         System.out.println("No score closing found");
@@ -77,7 +77,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.setTypeofPlayer(p,tmp);
+                    model.setTypeofPlayer(p,tmp);
 
                 } else if (i==9){
                     if (!line.equals("\t</type>"))
@@ -90,7 +90,7 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
 
-                    game.setEpoque(tmp,false);
+                    model.setEpoque(tmp,false);
                 } else if (i==12) {
                     if (!line.equals("\t\t<map>"))
                         System.out.println("No map found");
@@ -107,7 +107,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.getEpoque().updateCaseAt(0,x,y,Case.fromString(tmp,x,y,game));
+                    model.getEpoque().updateCaseAt(0,x,y,Case.fromString(tmp,x,y, model));
                 } else if (i==114) {
                     if (!line.equals("\t\t\t</joueur>"))
                         System.out.println("No player type closing found");
@@ -124,7 +124,7 @@ public class XMLSaving extends GameSaverFactory {
 
                     tmp = line.split(">")[1];
                     tmp = tmp.split("<")[0];
-                    game.getEpoque().updateCaseAt(1,x,y,Case.fromString(tmp,x,y,game));
+                    model.getEpoque().updateCaseAt(1,x,y,Case.fromString(tmp,x,y, model));
                 } else if (i==216) {
                     if (!line.equals("\t\t\t</joueur>"))
                         System.out.println("No player type closing found");
@@ -150,7 +150,7 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split("'")[3];
                     int h = Integer.parseInt(""+tmp.charAt(0));
 
-                    game.getEpoque().addShip(0,
+                    model.getEpoque().addShip(0,
                             new Battleship(new Position(x,y),h,l,v,null));
                 } else if (i==224) {
                     if (!line.equals("\t\t\t</joueur>"))
@@ -171,7 +171,7 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split("'")[3];
                     int h = Integer.parseInt(""+tmp.charAt(0));
 
-                    game.getEpoque().addShip(1,
+                    model.getEpoque().addShip(1,
                         new Battleship(new Position(x,y),h,l,v,null));
                 } else if (i==230) {
                     if (!line.equals("\t\t\t</joueur>"))
@@ -183,8 +183,8 @@ public class XMLSaving extends GameSaverFactory {
                     if (!line.equals("\t</epoque>"))
                         System.out.println("No assets.battleship closing found");
                 } else if (i==233) {
-                    if (!line.equals("</game>"))
-                        System.out.println("No game closing found");
+                    if (!line.equals("</model>"))
+                        System.out.println("No model closing found");
                 }
             }
             sc.close();
@@ -197,32 +197,32 @@ public class XMLSaving extends GameSaverFactory {
      * @param file fichier à ecrire
      * @throws IOException erreure de lecture/ecriture fichier
      */
-    public void saveFile(File file,Game game) throws IOException{
+    public void saveFile(File file,Model model) throws IOException{
 
         FileWriter flot ;
         PrintWriter flotFiltre ;
         flot = new FileWriter(file, false) ;
         flotFiltre = new PrintWriter(new BufferedWriter(flot)) ;
 
-        flotFiltre.println("<game>");
+        flotFiltre.println("<model>");
 
         // ----------Scores-------------------
         flotFiltre.println("\t<score>");
         for (int i=0;i<2;i++) {
-            flotFiltre.println("\t\t<joueur id='"+i+"'>"+game.getScore(i)+"</joueur>");
+            flotFiltre.println("\t\t<joueur id='"+i+"'>"+ model.getScore(i)+"</joueur>");
 
         }
         flotFiltre.println("\t</score>");
         // ----------Type de Joueur-------------------
         flotFiltre.println("\t<type>");
         for (int i=0;i<2;i++) {
-            flotFiltre.println("\t\t<joueur id='"+i+"'>"+game.getTypeofPlayer(i)+"</joueur>");
+            flotFiltre.println("\t\t<joueur id='"+i+"'>"+ model.getTypeofPlayer(i)+"</joueur>");
         }
         flotFiltre.println("\t</type>");
 
         // ----------Epoque-------------------
         flotFiltre.println("\t<epoque>");
-        flotFiltre.println("\t\t<name>"+game.getEpoque().name()+"</name>");
+        flotFiltre.println("\t\t<name>"+ model.getEpoque().name()+"</name>");
 
         // ----------Map-------------------
         flotFiltre.println("\t\t<map>");
@@ -232,7 +232,7 @@ public class XMLSaving extends GameSaverFactory {
 
             for(int k=0; k< Map.NBCASES;k++){
                 for (int j=0;j<Map.NBCASES;j++){
-                    flotFiltre.println("\t\t\t\t<case x='"+k+"' y='"+j+"'>"+game.getEpoque().getCaseAt(i,k,j)+"</case>");
+                    flotFiltre.println("\t\t\t\t<case x='"+k+"' y='"+j+"'>"+ model.getEpoque().getCaseAt(i,k,j)+"</case>");
                 }
             }
 
@@ -251,7 +251,7 @@ public class XMLSaving extends GameSaverFactory {
 
 
 
-            for (Battleship b :game.getEpoque().getBattleships(i)) {
+            for (Battleship b : model.getEpoque().getBattleships(i)) {
 
                 flotFiltre.println("\t\t\t\t</assets.battleship x='" + b.getPosition().getX()+
                             "' y='"+ b.getPosition().getY()+"' l='"+b.getLength()+"' v='" +
@@ -267,7 +267,7 @@ public class XMLSaving extends GameSaverFactory {
 
         flotFiltre.println("\t</epoque>");
 
-        flotFiltre.println("</game>");
+        flotFiltre.println("</model>");
 
         flotFiltre.close() ;
     }

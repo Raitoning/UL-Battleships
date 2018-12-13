@@ -189,9 +189,9 @@ public class GameObject {
         }
     }
 
-    /** Returns the GameID of the Game this GameObject belongs to.
+    /** Returns the GameID of the Model this GameObject belongs to.
      *
-     * @return The GameID of the Game this GameObject belongs to.
+     * @return The GameID of the Model this GameObject belongs to.
      */
     public int getGameID() {
 
