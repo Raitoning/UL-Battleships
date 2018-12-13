@@ -4,12 +4,12 @@ import assets.scripts.Model;
 import engine.gameobject.GameObject;
 import engine.input.Input;
 import engine.networking.RMIServer;
-
 import javax.naming.NamingException;
 import java.awt.event.KeyEvent;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 
 /**
  * <h1>Model</h1>
@@ -39,10 +39,9 @@ public class Game {
 
         SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
         SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
-        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/break.png");
         SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/Miss.png");
-        SpriteFactory.getInstance().addSprite("Break", "src/assets/textures/Break.png");
-        SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
+        SpriteFactory.getInstance().addSprite("Exploded", "src/assets/textures/Exploded.png");
+        //SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
 
         SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/horizontalMiddle.png");
         SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/verticalMiddle.png");
@@ -50,6 +49,14 @@ public class Game {
         SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/verticalQueue.png");
         SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/horizontalTete.png");
         SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/verticalTete.png");
+
+        SpriteFactory.getInstance().addSprite("horizontalMiddleFeu", "src/assets/textures/horizontalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalMiddleFeu", "src/assets/textures/verticalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite("horizontalQueueFeu", "src/assets/textures/horizontalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalQueueFeu", "src/assets/textures/verticalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite("horizontalTeteFeu", "src/assets/textures/horizontalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalTeteFeu", "src/assets/textures/verticalTeteFeu.png");
+
         Model g = null;
         try {
             g = new Model("MoyenAge", gameID);

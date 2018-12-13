@@ -15,10 +15,12 @@ public class Bateau extends Case {
     @Override
     public String nomSprite() {
         String res = texture;
-        if(getPosX() > 10){
+        if(estToucher()&& getPosX() < Map.NBCASES)
+            res +="Feu";
+        if(getPosX() > Map.NBCASES){
             res = "Water";
             if(estToucher()){
-                res = texture;
+                res = "Exploded";
             }
         }
 
