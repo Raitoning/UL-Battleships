@@ -1,14 +1,13 @@
 package assets.scripts.player;
 
-import assets.scripts.Game;
-import assets.scripts.epoque.Epoque;
+import assets.scripts.Model;
 import assets.scripts.map.Case;
 import engine.Vector2;
 
 public class Human extends Player {
 
 
-    public Human(int idJoueur,Game m, int gameID) {
+    public Human(int idJoueur, Model m, int gameID) {
 
         super(idJoueur,m, gameID);
 

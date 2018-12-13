@@ -1,13 +1,12 @@
 package assets.scripts.epoque;
 
-import assets.scripts.Game;
+import assets.scripts.Model;
 import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 import assets.scripts.map.Position;
 import engine.networking.RMIRegistry;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -16,14 +15,14 @@ public abstract class Epoque implements RMIRegistry {
 
     protected Map maps[];
     protected ArrayList<Battleship>[] battleships;
-    private Game model;
+    private Model model;
     private int gameID;
 
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
     // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
-    public Epoque(boolean init, Game m, int gameID) throws RemoteException {
+    public Epoque(boolean init, Model m, int gameID) throws RemoteException {
 
         this.gameID = gameID;
         this.maps = new Map[2];

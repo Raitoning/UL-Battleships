@@ -1,14 +1,14 @@
 package assets.scripts.data;
 
-import assets.scripts.Game;
+import assets.scripts.Model;
 
 public abstract class GameSaverFactory {
 
     private static GameSaverFactory instance;
 
-    public abstract void load (Game game);
+    public abstract void load (Model model);
 
-    public abstract void save (Game game);
+    public abstract void save (Model model);
 
     public static GameSaverFactory getInstance() {
 

@@ -1,13 +1,13 @@
 package assets.scripts.map;
 
-import assets.scripts.Game;
+import assets.scripts.Model;
 import assets.scripts.epoque.Battleship;
 
 public class Map {
 
     private Case cases[][];
     private int idJoueur;
-    private Game model;
+    private Model model;
     private int gameID;
 
     public static final int NBCASES = 10;
@@ -15,7 +15,7 @@ public class Map {
     /**
      * Constructeur de la Map par défaut, initialise les cases à vide
      */
-    public Map(int idJoueur,Game m, int gameID) {
+    public Map(int idJoueur, Model m, int gameID) {
 
         this.cases = new Case[NBCASES][NBCASES];
 

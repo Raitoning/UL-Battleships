@@ -152,9 +152,9 @@ public class Engine {
         return physics;
     }
 
-    /** Get the Game instance.
+    /** Get the Model instance.
      *
-     * @return The running Game.
+     * @return The running Model.
      */
     public Game getGame() {
 

@@ -1,21 +1,18 @@
 package engine;
 
+import assets.scripts.Model;
 import engine.gameobject.GameObject;
 import engine.input.Input;
-import engine.networking.RMIClient;
 import engine.networking.RMIServer;
 
 import javax.naming.NamingException;
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
- * <h1>Game</h1>
+ * <h1>Model</h1>
  * Temporary class supposed to represent a single level (Scene)
  * <p>
  * This class is mostly used for debugging purposes.
@@ -28,7 +25,7 @@ import java.util.Random;
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
-    private assets.scripts.Game g;
+    private Model g;
     private static int gameID = 0;
 
     private RMIServer rmiServer;
@@ -53,9 +50,9 @@ public class Game {
         SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/verticalQueue.png");
         SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/horizontalTete.png");
         SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/verticalTete.png");
-        assets.scripts.Game g = null;
+        Model g = null;
         try {
-            g = new assets.scripts.Game("MoyenAge", gameID);
+            g = new Model("MoyenAge", gameID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -117,9 +114,9 @@ public class Game {
         return null;
     }
 
-    /** Returns the GameID of the runnning Game.
+    /** Returns the GameID of the runnning Model.
      *
-     * @return The GameID of the runnning Game.
+     * @return The GameID of the runnning Model.
      * @version 2018.12.12-tailored-wastelands
      * @since 2018.12.12-tailored-wastelands
      */
