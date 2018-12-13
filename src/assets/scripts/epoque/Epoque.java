@@ -21,7 +21,6 @@ public abstract class Epoque implements RMIRegistry {
     /**
      * Constructeur d'une Epoque Initialisant les tableaux et pas les contenus du tableau !
      */
-    // HACK: Array of ArrayList, deprecated, should be changed as fast as possible.
     public Epoque(boolean init, Model m, int gameID) throws RemoteException {
 
         this.gameID = gameID;
@@ -57,7 +56,7 @@ public abstract class Epoque implements RMIRegistry {
         Position p = new Position(x,y);
         boolean v =r.nextBoolean();
 
-        for (int i =2; i<=5; i++) {
+        for (int i =2; i<=6; i++) {
 
             while (isThereAShipOnTheWay(idPlayer, x, y, i, v)) {
                 x = r.nextInt(Map.NBCASES-1);
@@ -67,11 +66,18 @@ public abstract class Epoque implements RMIRegistry {
                 p = repositionIfOutOfBounds(p,v,i);
             }
 
-            getBattleships(idPlayer).add(
-                    new Battleship(p, i/2, i, v,maps[idPlayer]));
-
+            if (i == 6){
+                addboat(idPlayer, i/2 , i/2, v, p);
+            } else {
+                addboat(idPlayer, i , i/2, v, p);
+            }
         }
 
+    }
+
+    private void addboat(int idPlayer, int length, int hp,boolean v,Position p){
+        getBattleships(idPlayer).add(
+                new Battleship(p, hp, length, v,maps[idPlayer]));
     }
 
     /**
