@@ -29,8 +29,6 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         super();
         this.gameID = gameID;
 
-        replay();
-
         setEpoque(e,true);
         this.score = new int[2];
         Arrays.fill(score,0);
@@ -134,7 +132,7 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
             try {
                 Thread.sleep(5000);
                 engine.Game.setGameID(engine.Game.getGameID() + 1);
-                Engine.exit();
+                Engine.getInstance().exit();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -149,17 +147,4 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         return gameID;
     }
 
-    private void replay(){
-
-        boolean solo;
-        JOptionPane d = new JOptionPane();
-        // les textes figurant // sur les boutons
-        String lesTextes[]={ "Solo", "Reseau"};
-        int retour = d.showOptionDialog(null, "le message", "le titre", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, lesTextes,  lesTextes[0]);
-        if( retour!=JOptionPane.CLOSED_OPTION){
-
-        } else{
-
-        }
-    }
 }

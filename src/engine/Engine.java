@@ -129,9 +129,10 @@ public class Engine {
         return instance;
     }
 
-    public static void exit() {
+    public void exit() {
 
         instance.getRenderer().closeOuputWindow();
+        isRunning = false;
     }
 
     /** Get the Renderer instance.
