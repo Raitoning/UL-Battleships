@@ -37,25 +37,25 @@ public class Game {
 
         gameObjects = new ArrayList<>();
 
-        SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/Water.png");
-        SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/Boat.png");
-        SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/Miss.png");
-        SpriteFactory.getInstance().addSprite("Exploded", "src/assets/textures/Exploded.png");
+        SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/MoyenAge/Water.png");
+        SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/MoyenAge/Boat.png");
+        SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/MoyenAge/Miss.png");
+        SpriteFactory.getInstance().addSprite("Exploded", "src/assets/textures/MoyenAge/Exploded.png");
         //SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
 
-        SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/horizontalMiddle.png");
-        SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/verticalMiddle.png");
-        SpriteFactory.getInstance().addSprite("horizontalQueue", "src/assets/textures/horizontalQueue.png");
-        SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/verticalQueue.png");
-        SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/horizontalTete.png");
-        SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/verticalTete.png");
+        SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
+        SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
+        SpriteFactory.getInstance().addSprite("horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
+        SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
+        SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
+        SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
 
-        SpriteFactory.getInstance().addSprite("horizontalMiddleFeu", "src/assets/textures/horizontalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalMiddleFeu", "src/assets/textures/verticalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite("horizontalQueueFeu", "src/assets/textures/horizontalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalQueueFeu", "src/assets/textures/verticalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite("horizontalTeteFeu", "src/assets/textures/horizontalTeteFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalTeteFeu", "src/assets/textures/verticalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite("horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite("horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite("horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite("verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
 
         Model g = null;
         try {
