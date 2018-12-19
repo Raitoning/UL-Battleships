@@ -5,6 +5,10 @@ import engine.gameobject.GameObject;
 import engine.input.Input;
 import engine.networking.RMIServer;
 import javax.naming.NamingException;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -57,7 +61,8 @@ public class Game {
         SpriteFactory.getInstance().addSprite("horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
         SpriteFactory.getInstance().addSprite("verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
 
-        Model g = null;
+        creationPartie();
+
         try {
             g = new Model("MoyenAge", gameID);
         } catch (RemoteException e) {
@@ -136,5 +141,70 @@ public class Game {
 
         gameID = value;
         System.out.println(value);
+    }
+
+
+    private void creationPartie(){
+        JFrame fenetre = new JFrame();
+        fenetre.setLayout(new FlowLayout());
+        fenetre.setLocationRelativeTo(null);
+        fenetre.setTitle("Creation de la partie");
+        fenetre.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+        JPanel jpIA = new JPanel();
+        JLabel labIA = new JLabel("Choisissez votre adversaire : ");
+        jpIA.add(labIA);
+        String intelligence[]={ "IACroix", "IACroixLineaire","IARandom","IARandomPlus","IASmartRandom"};
+        JComboBox<String> jIA = new JComboBox<String>(intelligence);
+        jpIA.add(jIA);
+        fenetre.add(jpIA);
+
+        JPanel jpEpoque = new JPanel();
+        JLabel labEpoque = new JLabel("Choisissez l'epoque du jeux : ");
+        jpEpoque.add(labEpoque);
+        String epoques[]={ "MoyenAge", "Renaissance","Espace"};
+        JComboBox<String> jEpoque = new JComboBox<String>(epoques);
+        jpEpoque.add(jEpoque);
+        fenetre.add(jpEpoque);
+
+        JPanel jpButton = new JPanel();
+        JButton jbQuitter = new JButton("Quitter");
+        JButton jbLancer = new JButton("Lancer");
+
+        jbQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fenetre.dispose();
+            }
+        });
+
+        jbLancer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String iaName = jIA.getSelectedItem().toString();
+                String epoqueName = jEpoque.getSelectedItem().toString();
+                Engine.getInstance().getGame().createModel(epoqueName,iaName);
+                fenetre.dispose();
+            }
+        });
+
+        jpButton.add(jbQuitter);
+        jpButton.add(jbLancer);
+        fenetre.add(jpButton);
+
+        fenetre.setSize(400,200);
+        fenetre.setVisible(true);
+    }
+
+    public void createModel(String epoque, String ia){
+
+        //TODO : ajouter numero de partie + ajouter ia dans constructeur
+        try{
+            g = new Model(epoque,0);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

@@ -33,6 +33,8 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         this.score = new int[2];
         Arrays.fill(score,0);
 
+        //TODO : utiliser parametre IA
+
         this.players = new Player[2];
 
         this.players[0] = new Human(0,this, gameID);
