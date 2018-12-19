@@ -25,101 +25,113 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Model(String e, int gameID) throws RemoteException {
+    public Model(String epoqueName, int gameID, String aiName) throws RemoteException {
+
         super();
         this.gameID = gameID;
 
-        setEpoque(e,true);
+        setEpoque(epoqueName,true);
         this.score = new int[2];
         Arrays.fill(score,0);
-
-        //TODO : utiliser parametre IA
 
         this.players = new Player[2];
 
         this.players[0] = new Human(0,this, gameID);
 
-        this.players[1] = new IARandomPlus(1,this, gameID);
+        setTypeofPlayer(1, aiName);
 
         playerTurn = 0;
 
     }
 
-    public int getScore(int k) {
-        return score[k];
-    }
+    public int getScore(int playerID) { return score[playerID]; }
 
-    public String getTypeofPlayer(int k){
-        return players[k].toString();
-    }
+    public String getTypeofPlayer(int playerID) { return players[playerID].toString(); }
 
-    public Epoque getEpoque() {
-        return epoque;
-    }
+    public Epoque getEpoque() { return epoque; }
 
-    public void setScore(int id, int score) {
-        this.score[id] = score;
-    }
+    public void setScore(int playerID, int score) { this.score[playerID] = score; }
 
-    public void setTypeofPlayer(int k, String t){
+    public void setTypeofPlayer(int playerID, String typeName){
 
-        if ("Human".equals(t)) {
+        if ("Human".equals(typeName)) {
 
-            players[k] = new Human(k,this, gameID);
+            players[playerID] = new Human(playerID,this, gameID);
 
-        } else if ("IACroix".equals(t)) {
+        } else if ("IACroix".equals(typeName)) {
 
-            players[k] = new IACroix(k,this, gameID);
+            players[playerID] = new IACroix(playerID,this, gameID);
 
-        } else if ("IARandom".equals(t)) {
+        } else if ("IACroixLineaire".equals(typeName)) {
 
-            players[k] = new IARandom(k,this, gameID);
+            players[playerID] = new IACroixLineaire(playerID,this, gameID);
+
+        } else if ("IARandom".equals(typeName)) {
+
+            players[playerID] = new IARandom(playerID,this, gameID);
+
+        } else if ("IARandomPlus".equals(typeName)) {
+
+            players[playerID] = new IARandomPlus(playerID,this, gameID);
+
+        } else if ("IASmartRandom".equals(typeName)) {
+
+            players[playerID] = new IASmartRandom(playerID,this, gameID);
         }
     }
 
     /**
      * Set l'epoque du jeu
-     * @param t
-     * @param b false : pas de generation de bateau
+     * @param epoqueName Le nom de l'époque.
+     * @param generateShips Booléen pour générer des bateaux ou non.
      */
-    public void setEpoque(String t, boolean b) {
+    public void setEpoque(String epoqueName, boolean generateShips) {
 
-        if(t.equals("MoyenAge")) {
+        if(epoqueName.equals("MoyenAge")) {
 
             try {
-                epoque = new MoyenAge(b,this, gameID);
+
+                epoque = new MoyenAge(generateShips, this, gameID);
             } catch (RemoteException e) {
+
                 e.printStackTrace();
             }
-        } else if(t.equals("Renaissance")) {
+        } else if(epoqueName.equals("Renaissance")) {
 
             try {
-                epoque = new Renaissance(b, this, gameID);
+
+                epoque = new Renaissance(generateShips, this, gameID);
             } catch (RemoteException e) {
+
                 e.printStackTrace();
             }
         }
     }
 
-    public int getPlayerTurn(){
-        return playerTurn;
-    }
+    public int getPlayerTurn(){ return playerTurn; }
 
-    public Player getPlayer(int k){
-        return players[k];
-    }
+    public Player getPlayer(int playerID){ return players[playerID]; }
 
     public void nextTurn(){
-        playerTurn = (playerTurn+1)%2;
 
-        if(!getTypeofPlayer(playerTurn).equals("Human")){
-            getPlayer(playerTurn).play(((IA)getPlayer(playerTurn)).jeuxIA());
+        if(!hasWon(0) && !hasWon(1)) {
+
+            playerTurn = (playerTurn + 1) % 2;
+
+            if(!getTypeofPlayer(playerTurn).equals("Human")){
+
+                getPlayer(playerTurn).play(((IA)getPlayer(playerTurn)).jeuxIA());
+            }
+        } else {
+
+            endGame();
+            Engine.getInstance().getGame().endGame();
         }
-
     }
 
-    public boolean hasWon(int idJoueur){
-        return epoque.hasLost(players[idJoueur].opponentID());
+    public boolean hasWon(int playerID){
+
+        return epoque.hasLost(players[playerID].opponentID());
     }
 
     public void endGame() {
@@ -131,12 +143,15 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         endGame.addComponent(new SpriteRenderer("Victoire", endGame));
 
         if(isGameEnded) {
+
             try {
+
                 Thread.sleep(5000);
                 engine.Game.setGameID(engine.Game.getGameID() + 1);
                 Engine.getInstance().exit();
 
             } catch (InterruptedException e) {
+
                 e.printStackTrace();
             }
         }
@@ -148,5 +163,4 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
         return gameID;
     }
-
 }
