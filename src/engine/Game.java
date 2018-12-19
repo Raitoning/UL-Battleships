@@ -1,6 +1,7 @@
 package engine;
 
 import assets.scripts.Model;
+import assets.scripts.data.GameSaverFactory;
 import engine.gameobject.GameObject;
 import engine.input.Input;
 import engine.networking.RMIServer;
@@ -60,6 +61,7 @@ public class Game {
         Model g = null;
         try {
             g = new Model("MoyenAge", gameID);
+            //GameSaverFactory.getInstance().load(g); //test de sauvegarde
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -74,7 +76,8 @@ public class Game {
 
         //GameSaverFactory.getInstance().load(g);
 
-        System.out.println(g.getEpoque().toString());
+        //System.out.println(g.getEpoque().toString());
+
     }
 
     /** This function is called once every frame and updates every GameObjects in the level.
