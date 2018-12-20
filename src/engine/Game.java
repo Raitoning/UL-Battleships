@@ -84,7 +84,7 @@ public class Game {
         SpriteFactory.getInstance().addSprite(tmp +"horizontalTeteFeu", "src/assets/textures/Espace/spacehorizontalheaddown.png");
         SpriteFactory.getInstance().addSprite(tmp +"verticalTeteFeu", "src/assets/textures/Espace/spaceheaddown.png");
 
-        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/Espace/Water.png");
+        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/Espace/space.png");
         SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/Espace/spacemiss.png");
         SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/Espace/spacehit.png");
 
