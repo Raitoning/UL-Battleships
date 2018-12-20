@@ -89,13 +89,6 @@ public abstract class Epoque implements RMIRegistry {
         return battleships[idPlayer];
     }
 
-
-    /**
-     * A implementer, Chemin vers les textures a afficher des bateaux
-     * @return
-     */
-    public abstract String getCheminTexture();
-
     /**
      * Fonction il y a t-il un bateau sur le chemin sur la carte du joueur d'ID idPlayer
      * en position x, y avec une longeur length de maniere verticale ou horizontale

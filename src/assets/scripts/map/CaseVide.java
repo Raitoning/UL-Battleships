@@ -18,12 +18,14 @@ public class CaseVide extends Case {
 
     @Override
     public String nomSprite() {
+        String res = getSpriteFolder();
         if(estToucher()) {
 
-            return "Miss";
+            res +="Miss";
         } else {
 
-            return "Water";
+            res+= "Water";
         }
+        return res;
     }
 }

@@ -1,7 +1,8 @@
 package engine;
 
 import assets.scripts.Model;
-import assets.scripts.data.GameSaverFactory;
+import assets.scripts.epoque.MoyenAge;
+import assets.scripts.epoque.Space;
 import engine.gameobject.GameObject;
 import engine.input.Input;
 import engine.networking.RMIServer;
@@ -42,25 +43,49 @@ public class Game {
 
         gameObjects = new ArrayList<>();
 
-        SpriteFactory.getInstance().addSprite("Water", "src/assets/textures/MoyenAge/Water.png");
-        SpriteFactory.getInstance().addSprite("Boat", "src/assets/textures/MoyenAge/Boat.png");
-        SpriteFactory.getInstance().addSprite("Miss", "src/assets/textures/MoyenAge/Miss.png");
-        SpriteFactory.getInstance().addSprite("Exploded", "src/assets/textures/MoyenAge/Exploded.png");
+
+        String tmp = MoyenAge.NAME;
+        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/MoyenAge/Water.png");
+        SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/MoyenAge/Miss.png");
+        SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/MoyenAge/exploded.png");
         //SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
 
-        SpriteFactory.getInstance().addSprite("horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
-        SpriteFactory.getInstance().addSprite("verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
-        SpriteFactory.getInstance().addSprite("horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
-        SpriteFactory.getInstance().addSprite("verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
-        SpriteFactory.getInstance().addSprite("horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
-        SpriteFactory.getInstance().addSprite("verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
 
-        SpriteFactory.getInstance().addSprite("horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite("horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite("horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
-        SpriteFactory.getInstance().addSprite("verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
+
+        //sprite MoyenAge
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
+
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
+
+        tmp = Space.NAME;
+        //sprite espace
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddle", "src/assets/textures/Espace/spacehorizontalmiddleup.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddle", "src/assets/textures/Espace/spacemiddleup.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueue", "src/assets/textures/Espace/spacehorizontaltailup.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalQueue", "src/assets/textures/Espace/spacetailup.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalTete", "src/assets/textures/Espace/spacehorizontalheadup.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalTete", "src/assets/textures/Espace/spaceheadup.png");
+
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddleFeu", "src/assets/textures/Espace/spacehorizontalmiddledown.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddleFeu", "src/assets/textures/Espace/spacemiddledown.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueueFeu", "src/assets/textures/Espace/spacehorizontaltaildown.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalQueueFeu", "src/assets/textures/Espace/spacetaildown.png");
+        SpriteFactory.getInstance().addSprite(tmp +"horizontalTeteFeu", "src/assets/textures/Espace/spacehorizontalheaddown.png");
+        SpriteFactory.getInstance().addSprite(tmp +"verticalTeteFeu", "src/assets/textures/Espace/spaceheaddown.png");
+
+        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/Espace/Water.png");
+        SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/Espace/spacemiss.png");
+        SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/Espace/spacehit.png");
 
         gameCreation();
 
@@ -82,8 +107,7 @@ public class Game {
 
         //GameSaverFactory.getInstance().load(g);
 
-        //System.out.println(g.getEpoque().toString());
-
+//        System.out.println(g.getEpoque().toString());
     }
 
     /** This function is called once every frame and updates every GameObjects in the level.
@@ -179,7 +203,7 @@ public class Game {
         JLabel epoqueLabel = new JLabel("Choisissez l'epoque du jeux : ");
         epoquePanel.add(epoqueLabel);
 
-        String epoqueNames[] = {"MoyenAge", "Renaissance", "Espace"};
+        String epoqueNames[] = {MoyenAge.NAME, Space.NAME};
 
         JComboBox<String> epoqueComboBox = new JComboBox<>(epoqueNames);
 

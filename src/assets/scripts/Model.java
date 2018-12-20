@@ -2,13 +2,12 @@ package assets.scripts;
 
 import assets.scripts.epoque.Epoque;
 import assets.scripts.epoque.MoyenAge;
-import assets.scripts.epoque.Renaissance;
+import assets.scripts.epoque.Space;
 import assets.scripts.player.*;
 import engine.Engine;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.SpriteRenderer;
 
-import javax.swing.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
@@ -21,16 +20,17 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
     private int playerTurn;
     private boolean isGameEnded = false;
     private int gameID;
+    private String epoqueName;
 
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Model(String epoqueName, int gameID, String aiName) throws RemoteException {
+    public Model(String epName, int gameID, String aiName) throws RemoteException {
 
         super();
         this.gameID = gameID;
-
-        setEpoque(epoqueName,true);
+        epoqueName = epName;
+        setEpoque(epName,true);
         this.score = new int[2];
         Arrays.fill(score,0);
 
@@ -80,6 +80,10 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         }
     }
 
+    public String getNameEpoque(){
+        return epoqueName;
+    }
+
     /**
      * Set l'epoque du jeu
      * @param epoqueName Le nom de l'époque.
@@ -87,7 +91,7 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
      */
     public void setEpoque(String epoqueName, boolean generateShips) {
 
-        if(epoqueName.equals("MoyenAge")) {
+        if(epoqueName.equals(MoyenAge.NAME)) {
 
             try {
 
@@ -96,13 +100,12 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
                 e.printStackTrace();
             }
-        } else if(epoqueName.equals("Renaissance")) {
+        } else if(epoqueName.equals(Space.NAME)) {
 
             try {
 
-                epoque = new Renaissance(generateShips, this, gameID);
+                epoque = new Space(generateShips, this, gameID);
             } catch (RemoteException e) {
-
                 e.printStackTrace();
             }
         }

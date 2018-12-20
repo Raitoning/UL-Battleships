@@ -24,7 +24,7 @@ public class Bateau extends Case {
             }
         }
 
-        return res;
+        return getSpriteFolder() + res;
     }
 
 
