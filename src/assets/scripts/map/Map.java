@@ -125,4 +125,17 @@ public class Map {
             }
         }
     }
+
+    public void explodeBattleship(Battleship b){
+        for (int i = 0; i < b.getLength(); i++) {
+
+            int x=b.getPosition().getX(),y=b.getPosition().getY();
+
+            if (b.isVertical()) {
+                cases[x+i][y].estToucher();
+            } else {
+                cases[x][y+i].estToucher();
+            }
+        }
+    }
 }

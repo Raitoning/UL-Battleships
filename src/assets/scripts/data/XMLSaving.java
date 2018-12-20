@@ -158,8 +158,8 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split("'")[3];
                     int h = Integer.parseInt(""+tmp.charAt(0));
 
-                    /*model.getEpoque().addShip(0,
-                            new Battleship(new Position(x,y),h,l,v,null));*/
+                    model.getEpoque().addShip(0,
+                            new Battleship(new Position(x,y),h,l,v,null));
                 } else if (i==224) {
                     if (!line.equals("\t\t\t</joueur>"))
                         println(vc,"No player type closing found");
@@ -179,8 +179,8 @@ public class XMLSaving extends GameSaverFactory {
                     tmp = line.split("'")[3];
                     int h = Integer.parseInt(""+tmp.charAt(0));
 
-                    /*model.getEpoque().addShip(1,
-                        new Battleship(new Position(x,y),h,l,v,null));*/
+                    model.getEpoque().addShip(1,
+                        new Battleship(new Position(x,y),h,l,v,null));
                 } else if (i==230) {
                     if (!line.equals("\t\t\t</joueur>"))
                         println(vc,"No player type closing found");
