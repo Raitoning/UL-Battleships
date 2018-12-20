@@ -6,6 +6,8 @@ import engine.Vector2;
 
 public class Human extends Player {
 
+    public static final String name = "Humain";
+
 
     public Human(int idJoueur, Model m, int gameID) {
 
@@ -24,6 +26,6 @@ public class Human extends Player {
 
     @Override
     public String toString() {
-        return "Human";
+        return name;
     }
 }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class IACroixLineaire extends IA{
 
+    public static final String NAME = "IA Croix Linéaire";
+
     public IACroixLineaire(int idJoueur, Model m, int gameID) {
 
         super(idJoueur, m,gameID);
@@ -31,7 +33,7 @@ public class IACroixLineaire extends IA{
     @Override
     public String toString() {
 
-        return "IACroixLineaire";
+        return NAME;
     }
 
     @Override

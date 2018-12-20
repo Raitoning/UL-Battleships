@@ -46,30 +46,35 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
     public void setTypeofPlayer(int playerID, String typeName){
 
-        if ("Human".equals(typeName)) {
+        if (typeName.equals(Human.name)) {
 
             players[playerID] = new Human(playerID,this, gameID);
 
-        } else if ("IACroix".equals(typeName)) {
+        } else if (typeName.equals(IACroix.NAME)) {
 
             players[playerID] = new IACroix(playerID,this, gameID);
 
-        } else if ("IACroixLineaire".equals(typeName)) {
+        } else if (typeName.equals(IACroixLineaire.NAME)) {
 
             players[playerID] = new IACroixLineaire(playerID,this, gameID);
 
-        } else if ("IARandom".equals(typeName)) {
+        } else if (typeName.equals(IARandom.NAME)) {
 
             players[playerID] = new IARandom(playerID,this, gameID);
 
-        } else if ("IARandomPlus".equals(typeName)) {
+        } else if (typeName.equals(IARandomPlus.NAME)) {
 
             players[playerID] = new IARandomPlus(playerID,this, gameID);
 
-        } else if ("IASmartRandom".equals(typeName)) {
+        } else if (typeName.equals(IASmartRandom.NAME)) {
 
             players[playerID] = new IASmartRandom(playerID,this, gameID);
         }
+    }
+
+    public void changerIA(String nomIA){
+        setTypeofPlayer(1, nomIA);
+        ((IA)players[1]).clean();
     }
 
     public String getNameEpoque(){

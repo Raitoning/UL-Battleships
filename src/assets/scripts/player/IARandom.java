@@ -7,6 +7,8 @@ import assets.scripts.map.Map;
 
 public class IARandom extends IA{
 
+    public static final String NAME = "IA Aléatoire";
+
     public IARandom(int idJoueur, Model m, int gameID) {
 
         super(idJoueur, m, gameID);
@@ -27,7 +29,7 @@ public class IARandom extends IA{
     @Override
     public String toString() {
 
-        return "IARandom";
+        return NAME;
     }
 
     @Override

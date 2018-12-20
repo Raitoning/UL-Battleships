@@ -5,6 +5,8 @@ import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 import engine.Vector2;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class IA extends Player{
@@ -52,7 +54,7 @@ public abstract class IA extends Player{
         }
     }
 
-    protected void clean(){
+    public void clean(){
         ArrayList<Case> tmp = new ArrayList<>();
 
         for(Case b: ar){

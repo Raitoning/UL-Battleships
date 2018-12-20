@@ -3,6 +3,7 @@ package engine;
 import assets.scripts.Model;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Space;
+import assets.scripts.player.*;
 import engine.gameobject.GameObject;
 import engine.input.Input;
 import engine.networking.RMIServer;
@@ -190,8 +191,8 @@ public class Game {
         JLabel aiLabel = new JLabel("Choisissez votre adversaire : ");
         aiPanel.add(aiLabel);
 
-        String aiNames[] = { "IACroix", "IACroixLineaire", "IARandom",
-                "IARandomPlus", "IASmartRandom"};
+        String aiNames[] = {IACroix.NAME, IACroixLineaire.NAME, IARandom.NAME,
+                IARandomPlus.NAME, IASmartRandom.NAME};
 
         JComboBox<String> aiComboBox = new JComboBox<>(aiNames);
 

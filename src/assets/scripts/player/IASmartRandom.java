@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class IASmartRandom extends IA{
 
+    public static final String NAME = "IA Aléatoire Intélligente";
+
     public IASmartRandom(int idJoueur, Model m, int gameID) {
 
         super(idJoueur, m, gameID);
@@ -29,7 +31,7 @@ public class IASmartRandom extends IA{
     @Override
     public String toString() {
 
-        return "IARandom";
+        return NAME;
     }
 
     @Override
