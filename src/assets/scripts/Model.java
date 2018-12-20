@@ -10,11 +10,9 @@ import engine.gameobject.component.SpriteRenderer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Arrays;
 
 public class Model extends UnicastRemoteObject implements NetworkedGame {
 
-    private int score[];
     private Player players[];
     private Epoque epoque;
     private int playerTurn;
@@ -31,8 +29,6 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         this.gameID = gameID;
         epoqueName = epName;
         setEpoque(epName,true);
-        this.score = new int[2];
-        Arrays.fill(score,0);
 
         this.players = new Player[2];
 
@@ -44,13 +40,9 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
     }
 
-    public int getScore(int playerID) { return score[playerID]; }
-
     public String getTypeofPlayer(int playerID) { return players[playerID].toString(); }
 
     public Epoque getEpoque() { return epoque; }
-
-    public void setScore(int playerID, int score) { this.score[playerID] = score; }
 
     public void setTypeofPlayer(int playerID, String typeName){
 

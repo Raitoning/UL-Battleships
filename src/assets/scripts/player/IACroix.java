@@ -20,13 +20,11 @@ public class IACroix extends IA{
                     ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
             }
         }
-        System.out.println(ar.size());
     }
 
     @Override
     public void play(Case c) {
         super.play(c);
-        //TODO
     }
 
     @Override

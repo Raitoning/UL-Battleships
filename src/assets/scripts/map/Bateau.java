@@ -27,7 +27,19 @@ public class Bateau extends Case {
         return getSpriteFolder() + res;
     }
 
-
+    @Override
+    public void subitTir() {
+        super.subitTir();
+        int x,y,joueur;
+        y = getPosY();
+        x = getPosX();
+        if(x > Map.NBCASES) {
+            x -= Map.NBCASES+1;
+            joueur = 1;
+        }
+        else joueur = 0;
+        model.getEpoque().getBattleshipAt(joueur,x,y).hit();
+    }
 
     @Override
     public String toString() {

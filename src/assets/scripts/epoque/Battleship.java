@@ -7,10 +7,10 @@ public class Battleship {
 
     Position coinHautGauche;
 
-    int pv;
-    int hauteur;
-    int largeur;
-
+    private int pv;
+    private int hauteur;
+    private int largeur;
+    private Map map;
 
     /**
      * Constructeur d'un bateau et le place sur la Map map
@@ -23,7 +23,7 @@ public class Battleship {
      */
     public Battleship(Position coinHautGauche, int pv, int longeur, boolean vertical, Map map) {
         this.pv = pv;
-
+        this.map = map;
         if (vertical){
             this.hauteur = longeur;
             this.largeur = 1;
@@ -43,9 +43,14 @@ public class Battleship {
     /**
      * Fonction a completer, quand un bateau se fait toucher.
      */
-    // TODO: Appeler cette fonction quand le bateau est touché.
     public void hit(){
-        pv-=1;
+        if(isAlive()) {
+            pv -= 1;
+            System.out.println(pv);
+            if (pv == 0) {
+                map.explodeBattleship(this);
+            }
+        }
     }
 
     /**
@@ -74,11 +79,6 @@ public class Battleship {
 
     public int getPv() {
         return pv;
-    }
-
-    public void destroy() {
-
-        coinHautGauche = null;
     }
 
     public boolean isAlive(){

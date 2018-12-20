@@ -215,13 +215,6 @@ public class XMLSaving extends GameSaverFactory {
 
         flotFiltre.println("<model>");
 
-        // ----------Scores-------------------
-        flotFiltre.println("\t<score>");
-        for (int i=0;i<2;i++) {
-            flotFiltre.println("\t\t<joueur id='"+i+"'>"+ model.getScore(i)+"</joueur>");
-
-        }
-        flotFiltre.println("\t</score>");
         // ----------Type de Joueur-------------------
         flotFiltre.println("\t<type>");
         for (int i=0;i<2;i++) {
@@ -231,7 +224,7 @@ public class XMLSaving extends GameSaverFactory {
 
         // ----------Epoque-------------------
         flotFiltre.println("\t<epoque>");
-        flotFiltre.println("\t\t<name>"+ model.getEpoque().name()+"</name>");
+        flotFiltre.println("\t\t<name>"+ model.getNameEpoque()+"</name>");
 
         // ----------Map-------------------
         flotFiltre.println("\t\t<map>");
@@ -313,16 +306,7 @@ public class XMLSaving extends GameSaverFactory {
                     final Element node = (Element) racineNoeuds.item(i);
 
                     final String name = node.getNodeName();
-                    if(name.equals("score")){
-                        println(v,"\n*************Score************");
-                        final Element joueur = (Element) node.getElementsByTagName("joueur").item(0);
-                        println(v,"score: "+joueur.getTextContent()+" ");
-                        println(v,"id : " + joueur.getAttribute("id"));
-                        final Element joueur2 = (Element) node.getElementsByTagName("joueur").item(1);
-                        println(v,"score: "+joueur2.getTextContent()+" ");
-                        println(v,"id : " + joueur2.getAttribute("id"));
-
-                    }else if(name.equals("type")){
+                    if(name.equals("type")){
                         println(v,"\n*************Type Of Players************");
                         final Element joueur = (Element) node.getElementsByTagName("joueur").item(0);
                         println(v,"type: "+joueur.getTextContent()+" ");
@@ -402,20 +386,17 @@ public class XMLSaving extends GameSaverFactory {
                 }
             }
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+
             e.printStackTrace();
         }
-
-
     }
 
-    private void println(boolean v, String s){
-        if (v)
+    private void println(boolean v, String s) {
+
+        if(v) {
+
             System.out.println(s);
+        }
     }
-
 }

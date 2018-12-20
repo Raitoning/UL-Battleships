@@ -115,27 +115,17 @@ public class Map {
         return sb.toString();
     }
 
-    public void destroy() {
-
-        for(Case[] ligne: cases) {
-
-            for(Case c: ligne) {
-
-                c.destroy();
-            }
-        }
-    }
-
     public void explodeBattleship(Battleship b){
         for (int i = 0; i < b.getLength(); i++) {
 
             int x=b.getPosition().getX(),y=b.getPosition().getY();
 
             if (b.isVertical()) {
-                cases[x+i][y].estToucher();
+                cases[x][y+i].subitTir();
             } else {
-                cases[x][y+i].estToucher();
+                cases[x+i][y].subitTir();
             }
         }
+
     }
 }

@@ -67,15 +67,15 @@ public abstract class Epoque implements RMIRegistry {
             }
 
             if (i == 6){
-                addboat(idPlayer, i/2 , i/2, v, p);
+                addShip(idPlayer, i/2 , i/4, v, p);
             } else {
-                addboat(idPlayer, i , i/2, v, p);
+                addShip(idPlayer, i , i/2, v, p);
             }
         }
 
     }
 
-    private void addboat(int idPlayer, int length, int hp,boolean v,Position p){
+    private void addShip(int idPlayer, int length, int hp, boolean v, Position p){
         getBattleships(idPlayer).add(
                 new Battleship(p, hp, length, v,maps[idPlayer]));
     }
@@ -150,7 +150,7 @@ public abstract class Epoque implements RMIRegistry {
      * @param y
      * @return Le bateau ou null s'il n'y en a pas.
      */
-    public Battleship getAt(int idJoueur, int x, int y){
+    public Battleship getBattleshipAt(int idJoueur, int x, int y){
         for (Battleship b: getBattleships(idJoueur)) {
             for (int i = 0; i < b.getLength(); i++) {
                 if (b.isVertical()) {
@@ -178,35 +178,17 @@ public abstract class Epoque implements RMIRegistry {
                 '\n';
     }
 
-    public abstract String name();
-
     public void updateCaseAt(int i, int x, int y, Case c){
         maps[i].updateAt(c,x,y);
     }
 
-    public void addShip(int i,Battleship b){
-        battleships[i].add(b);
-    }
+//    public void addShip(int i,Battleship b){
+//        battleships[i].add(b);
+//    }
 
     private void battleshipsVoidInit(){
         battleships[0]= new ArrayList<>(4);
         battleships[1]= new ArrayList<>(4);
-    }
-
-    public void destroy() {
-
-        maps[0].destroy();
-        maps[1].destroy();
-
-        for(ArrayList<Battleship> ships : battleships) {
-
-            for (Battleship ship: ships) {
-
-                ship.destroy();
-            }
-        }
-
-        model = null;
     }
 
     public boolean hasLost(int idJoueur){

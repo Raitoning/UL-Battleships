@@ -12,10 +12,4 @@ public class Space extends Epoque {
     public Space(boolean b, Model m, int gameID) throws RemoteException {
         super(b,m, gameID);
     }
-
-    @Override
-    public String name() {
-        return NAME;
-    }
-
 }

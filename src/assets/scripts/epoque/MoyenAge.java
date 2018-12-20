@@ -13,11 +13,4 @@ public class MoyenAge extends Epoque {
     public MoyenAge(boolean init, Model m, int gameID) throws RemoteException {
         super(init,m, gameID);
     }
-
-
-    @Override
-    public String name() {
-        return NAME;
-    }
-
 }
