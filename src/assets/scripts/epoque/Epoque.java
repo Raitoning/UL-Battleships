@@ -63,7 +63,11 @@ public abstract class Epoque implements RMIRegistry {
                 y = r.nextInt(Map.NBCASES-1);
                 v = r.nextBoolean();
                 p = new Position(x,y);
-                p = repositionIfOutOfBounds(p,v,i);
+                if (i == 6) {
+                    p = repositionIfOutOfBounds(p, v, i/2);
+                } else {
+                    p = repositionIfOutOfBounds(p, v, i);
+                }
             }
 
             if (i == 6){
