@@ -70,4 +70,8 @@ public abstract class Case extends GameObject{
         return estToucher;
     }
 
+    protected String getSpriteFolder(){
+        return model.getNameEpoque();
+    }
+
 }
