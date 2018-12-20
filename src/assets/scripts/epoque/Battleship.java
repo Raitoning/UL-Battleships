@@ -43,6 +43,7 @@ public class Battleship {
     /**
      * Fonction a completer, quand un bateau se fait toucher.
      */
+    // TODO: Appeler cette fonction quand le bateau est touché.
     public void hit(){
         pv-=1;
     }

@@ -219,8 +219,9 @@ public abstract class Epoque implements RMIRegistry {
     public boolean hasLost(int idJoueur){
         boolean r = true;
 
-        for(Battleship b:battleships[idJoueur]){
-            if(b.isAlive()){
+        for(Battleship b:battleships[idJoueur]) {
+
+            if(b.isAlive()) {
                r = false;
             }
         }
