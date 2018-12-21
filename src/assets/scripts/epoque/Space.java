@@ -23,10 +23,6 @@ public class Space extends Epoque {
 
     public Space(boolean b, Model m, int gameID) throws RemoteException {
         super(b,m, gameID);
-        vieBateaux.put(2,2);
-        vieBateaux.put(3,3);
-        vieBateaux.put(4,4);
-        vieBateaux.put(5,5);
     }
 
     @Override
