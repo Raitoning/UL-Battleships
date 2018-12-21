@@ -16,7 +16,6 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
     private Player players[];
     private Epoque epoque;
     private int playerTurn;
-    private boolean isGameEnded = false;
     private int gameID;
     private String epoqueName;
 
@@ -138,24 +137,10 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         GameObject endGame = new GameObject(gameID);
         endGame.getTransform().setPosition(10.5f, 5f);
         endGame.getTransform().setScale(10f, 10f);
+        if(hasWon(0))
+            endGame.addComponent(new SpriteRenderer("Victoire", endGame));
+        else         endGame.addComponent(new SpriteRenderer("Defaite", endGame));
 
-        endGame.addComponent(new SpriteRenderer("Victoire", endGame));
-
-        if(isGameEnded) {
-
-            try {
-
-                Thread.sleep(5000);
-                engine.Game.setGameID(engine.Game.getGameID() + 1);
-                Engine.getInstance().exit();
-
-            } catch (InterruptedException e) {
-
-                e.printStackTrace();
-            }
-        }
-
-        isGameEnded = true;
     }
 
     public int getGameID() {

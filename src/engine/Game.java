@@ -124,10 +124,6 @@ public class Game {
             gameObject.update();
         }
 
-        if(Input.getKey(KeyEvent.VK_SPACE)) {
-
-            endGame();
-        }
     }
 
     /**
