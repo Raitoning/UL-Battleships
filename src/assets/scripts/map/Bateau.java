@@ -6,8 +6,8 @@ public class Bateau extends Case {
 
     private String texture = "Water";
 
-    public Bateau(int x, int y, Model m, String t, int id) {
-        super(x,y,m,id);
+    public Bateau(Position p ,int x, int y, Model m, String t, int id) {
+        super(p,x,y,m,id);
         texture =t;
         spriteRenderer.setName(nomSprite());
     }

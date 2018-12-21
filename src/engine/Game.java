@@ -1,6 +1,8 @@
 package engine;
 
 import assets.scripts.Model;
+import assets.scripts.data.GameSaverFactory;
+import assets.scripts.data.XMLSaving;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Space;
 import assets.scripts.player.*;
@@ -10,11 +12,9 @@ import engine.networking.RMIServer;
 //import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 //import java.rmi.AlreadyBoundException;
 //import java.rmi.RemoteException;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,7 +34,7 @@ import java.util.Objects;
 public class Game {
 
     private ArrayList<GameObject> gameObjects;
-    private Model g;
+    private Model g = null;
     private static int gameID = 0;
 
     private RMIServer rmiServer;
@@ -103,6 +103,7 @@ public class Game {
         MenuItem loadItem = new MenuItem("Charger une partie...");
 
         MenuItem saveItem = new MenuItem("Sauvegarder la partie");
+                saveItem.addActionListener(e -> GameSaverFactory.getInstance().save(g));
 
         MenuItem exitItem = new MenuItem("Quitter");
         exitItem.addActionListener(e -> Engine.getInstance().exit());

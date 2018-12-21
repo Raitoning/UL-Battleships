@@ -7,6 +7,7 @@ import assets.scripts.map.Map;
 import java.io.*;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,10 +36,21 @@ public class XMLSaving extends GameSaverFactory {
 
     @Override
     public void save(Model model) {
-        try {
-            saveFile(new File("random.xml"), model);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        //TODO : finir test + tester sauvegarde + chargement
+        if(model != null) {
+            try {
+                JFileChooser j = new JFileChooser();
+                j.showDialog(null,"oui");
+                String dest = j.getName();
+                if(dest == null)
+                    return;
+                if(dest.equals(""))
+                    return;
+                saveFile(new File(dest), model);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

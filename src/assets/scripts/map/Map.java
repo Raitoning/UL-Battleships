@@ -44,7 +44,7 @@ public class Map {
                 else if(i == b.getLength()-1)
                     name += "Tete";
                 else name += "Middle";
-                updateAt(new Bateau((NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model,name,gameID), b.getPosition().getX(), b.getPosition().getY() + i);
+                updateAt(new Bateau(b.getPosition(),(NBCASES + 1) * idJoueur + b.getPosition().getX(), b.getPosition().getY() + i, model,name,gameID), b.getPosition().getX(), b.getPosition().getY() + i);
             } else {
                 name = "horizontal";
                 if(i == 0){
@@ -53,7 +53,7 @@ public class Map {
                 else if(i == b.getLength()-1)
                     name += "Queue";
                 else name += "Middle";
-                updateAt(new Bateau((NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, name,gameID), b.getPosition().getX() + i, b.getPosition().getY());
+                updateAt(new Bateau(b.getPosition(),(NBCASES + 1) * idJoueur +b.getPosition().getX() + i, b.getPosition().getY(), model, name,gameID), b.getPosition().getX() + i, b.getPosition().getY());
             }
         }
     }
@@ -64,13 +64,15 @@ public class Map {
      */
     public void casesEmptyInit(){
 
-
+        Position pos;
         for(int i = 0; i < cases.length; i++) {
 
             for (int j = 0;j < cases[0].length; j++) {
 
-                if (cases[i][j]==null)
-                cases[i][j]=new CaseVide(((NBCASES + 1) * idJoueur) + i, j,model, gameID);
+                if (cases[i][j]==null){
+                    pos = new Position(i,j);
+                    cases[i][j] = new CaseVide(pos,((NBCASES + 1) * idJoueur) + i, j,model, gameID);
+                }
             }
         }
     }
@@ -127,5 +129,9 @@ public class Map {
             }
         }
 
+    }
+
+    public int getIdJoueur(){
+        return idJoueur;
     }
 }

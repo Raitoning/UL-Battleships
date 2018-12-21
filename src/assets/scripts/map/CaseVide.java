@@ -5,9 +5,9 @@ import assets.scripts.Model;
 public class CaseVide extends Case {
 
 
-    public CaseVide(int x, int y, Model m, int gameID){
+    public CaseVide(Position p , int x, int y, Model m, int gameID){
 
-        super(x,y,m, gameID);
+        super(p,x,y,m, gameID);
         transform.position().setZ(2f);
     }
 
