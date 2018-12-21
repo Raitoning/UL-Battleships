@@ -13,6 +13,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 //import java.rmi.AlreadyBoundException;
 //import java.rmi.RemoteException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -49,7 +51,8 @@ public class Game {
         SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/MoyenAge/Water.png");
         SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/MoyenAge/Miss.png");
         SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/MoyenAge/exploded.png");
-        //SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
+        SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
+        SpriteFactory.getInstance().addSprite("Defaite", "src/assets/textures/Defaite.png");
 
 
 
@@ -180,11 +183,10 @@ public class Game {
 
     private void gameCreation() {
 
-        JFrame settingsWindow = new JFrame();
+        JDialog settingsWindow = new JDialog();
         settingsWindow.setLayout(new FlowLayout());
         settingsWindow.setLocationRelativeTo(null);
         settingsWindow.setTitle("Création de la partie");
-        settingsWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel aiPanel = new JPanel();
 

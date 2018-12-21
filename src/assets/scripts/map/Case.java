@@ -1,6 +1,7 @@
 package assets.scripts.map;
 
 import assets.scripts.Model;
+import assets.scripts.player.Human;
 import engine.gameobject.GameObject;
 import engine.gameobject.component.GraphicRaycaster;
 import engine.gameobject.component.SpriteRenderer;
@@ -42,7 +43,8 @@ public abstract class Case extends GameObject{
 
     @Override
     public void onRaycast(int num){
-        if(model.getTypeofPlayer(model.getPlayerTurn()).equals("Human") && num == 1 && !estToucher){
+
+        if(model.getTypeofPlayer(model.getPlayerTurn()).equals(Human.name) && num == 1 && !estToucher){
             model.getPlayer(model.getPlayerTurn()).play(this);
         }
     }

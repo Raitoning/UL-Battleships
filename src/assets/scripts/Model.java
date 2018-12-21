@@ -37,7 +37,6 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         setTypeofPlayer(1, aiName);
 
         playerTurn = 0;
-
     }
 
     public String getTypeofPlayer(int playerID) { return players[playerID].toString(); }
@@ -118,7 +117,7 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
             playerTurn = (playerTurn + 1) % 2;
 
-            if(!getTypeofPlayer(playerTurn).equals("Human")){
+            if(!getTypeofPlayer(playerTurn).equals(Human.name)){
 
                 getPlayer(playerTurn).play(((IA)getPlayer(playerTurn)).jeuxIA());
             }

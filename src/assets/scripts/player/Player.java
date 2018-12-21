@@ -24,6 +24,7 @@ public abstract class Player extends GameObject {
     public void play(Case c){
         if(!c.estToucher()){
             c.subitTir();
+
             model.nextTurn();
         }
     }
