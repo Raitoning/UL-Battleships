@@ -21,8 +21,11 @@ public abstract class Case extends GameObject{
 
     protected int posX;
     protected int posY;
+    protected Position p;
 
-    public Case (int x, int y, Model m, int gameID) {
+    public Case (Position pos,int x, int y, Model m, int gameID) {
+
+        p = pos;
 
         model = m;
         estToucher = false;
@@ -61,6 +64,10 @@ public abstract class Case extends GameObject{
 
     public int getPosY(){
         return posY;
+    }
+
+    public Position getP() {
+        return p;
     }
 
     public void subitTir(){

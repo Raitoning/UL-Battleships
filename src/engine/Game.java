@@ -174,7 +174,6 @@ public class Game {
     public static void setGameID(int value) {
 
         gameID = value;
-        System.out.println(value);
     }
 
     private void gameCreation() {
