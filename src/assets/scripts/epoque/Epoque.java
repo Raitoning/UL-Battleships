@@ -9,6 +9,7 @@ import engine.networking.RMIRegistry;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 public abstract class Epoque implements RMIRegistry {
@@ -27,7 +28,6 @@ public abstract class Epoque implements RMIRegistry {
         this.maps = new Map[2];
         model = m;
         this.battleships = new ArrayList[2];
-
 
         maps[0] = new Map(0,model, gameID);
         maps[1] = new Map(1,model, gameID);
@@ -56,6 +56,8 @@ public abstract class Epoque implements RMIRegistry {
         Position p = new Position(x,y);
         boolean v =r.nextBoolean();
 
+        HashMap<Integer, Integer> vie = getVieBattleships();
+
         for (int i =2; i<=6; i++) {
 
             while (isThereAShipOnTheWay(idPlayer, x, y, i, v)) {
@@ -71,9 +73,9 @@ public abstract class Epoque implements RMIRegistry {
             }
 
             if (i == 6){
-                addShip(idPlayer, i/2 , i/4, v, p);
+                addShip(idPlayer, i/2 , vie.get(i/2), v, p);
             } else {
-                addShip(idPlayer, i , i/2, v, p);
+                addShip(idPlayer, i , vie.get(i), v, p);
             }
         }
 
@@ -207,5 +209,7 @@ public abstract class Epoque implements RMIRegistry {
 
         return r;
     }
+
+    protected abstract HashMap<Integer, Integer> getVieBattleships();
 
 }
