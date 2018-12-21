@@ -51,33 +51,32 @@ public abstract class Epoque implements RMIRegistry {
         Random r = new Random();
         battleships[idPlayer]= new ArrayList<>(4);
 
-        int x= r.nextInt(Map.NBCASES-1);
-        int y= r.nextInt(Map.NBCASES-1);
-        Position p = new Position(x,y);
-        boolean v =r.nextBoolean();
-
         HashMap<Integer, Integer> vie = getVieBattleships();
 
         for (int i =2; i<=6; i++) {
-
-            while (isThereAShipOnTheWay(idPlayer, x, y, i, v)) {
-                x = r.nextInt(Map.NBCASES-1);
-                y = r.nextInt(Map.NBCASES-1);
-                v = r.nextBoolean();
-                p = new Position(x,y);
-                if (i == 6) {
-                    p = repositionIfOutOfBounds(p, v, i/2);
-                } else {
-                    p = repositionIfOutOfBounds(p, v, i);
-                }
-            }
-
             if (i == 6){
-                addShip(idPlayer, i/2 , vie.get(i/2), v, p);
+                placeARandomBoat(r,idPlayer,i/2,vie.get(i/2));
             } else {
-                addShip(idPlayer, i , vie.get(i), v, p);
+                placeARandomBoat(r,idPlayer,i,vie.get(i));
             }
         }
+
+    }
+
+    private void placeARandomBoat(Random r, int idPlayer, int taille, int pv){
+
+        boolean v = r.nextBoolean();
+        int x = r.nextInt(Map.NBCASES-taille);
+        int y = r.nextInt(Map.NBCASES-taille);
+
+        while(isThereAShipOnTheWay(idPlayer,x,y,taille,v)){
+            v = r.nextBoolean();
+            x = r.nextInt(Map.NBCASES-taille);
+            y = r.nextInt(Map.NBCASES-taille);
+        }
+
+
+        addShip(idPlayer, taille, pv, v, new Position(x,y));
 
     }
 
@@ -148,7 +147,7 @@ public abstract class Epoque implements RMIRegistry {
         return pos;
     }
 
-    
+
 
 
     /**
