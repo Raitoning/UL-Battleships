@@ -67,6 +67,30 @@ public class XMLSaving extends GameSaverFactory {
         flotFiltre.println("\t<epoque>");
         flotFiltre.println("\t\t<name>"+ model.getNameEpoque()+"</name>");
 
+        // ----------Battleships-------------------
+
+        flotFiltre.println("\t\t<battleships>");
+        for (int i=0;i<2;i++) {
+
+            flotFiltre.println("\t\t\t<joueur id='"+i+"'>");
+
+
+
+            for (Battleship b : model.getEpoque().getBattleships(i)) {
+
+                flotFiltre.println("\t\t\t\t<battleship x='" + b.getPosition().getX()+
+                        "' y='"+ b.getPosition().getY()+"' l='"+b.getLength()+"' v='" +
+                        b.isVertical() + "' h='"+ b.getPv()+"'> </battleship>");
+            }
+
+
+
+            flotFiltre.println("\t\t\t</joueur>");
+        }
+
+        flotFiltre.println("\t\t</battleships>");
+
+
         // ----------Map-------------------
         flotFiltre.println("\t\t<map>");
         for (int i=0;i<2;i++) {
@@ -83,30 +107,6 @@ public class XMLSaving extends GameSaverFactory {
         }
 
         flotFiltre.println("\t\t</map>");
-
-
-        // ----------Battleships-------------------
-
-        flotFiltre.println("\t\t<battleships>");
-        for (int i=0;i<2;i++) {
-
-            flotFiltre.println("\t\t\t<joueur id='"+i+"'>");
-
-
-
-            for (Battleship b : model.getEpoque().getBattleships(i)) {
-
-                flotFiltre.println("\t\t\t\t<battleship x='" + b.getPosition().getX()+
-                            "' y='"+ b.getPosition().getY()+"' l='"+b.getLength()+"' v='" +
-                            b.isVertical() + "' h='"+ b.getPv()+"'> </battleship>");
-            }
-
-
-
-            flotFiltre.println("\t\t\t</joueur>");
-        }
-
-        flotFiltre.println("\t\t</battleships>");
 
         flotFiltre.println("\t</epoque>");
 
