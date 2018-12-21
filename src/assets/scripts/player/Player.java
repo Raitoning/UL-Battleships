@@ -16,7 +16,7 @@ public abstract class Player extends GameObject {
         this.idJoueur = idJoueur;
         this.gameID = gameID;
 
-        camera = new Camera(10.5f, 0f, 10f, this);
+        camera = new Camera(11f, 0f, 10f, this);
 
         addComponent(camera);
     }
