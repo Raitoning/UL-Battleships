@@ -17,7 +17,8 @@ public abstract class IA extends Player{
     public IA(int idJoueur, Model m, int gameID){
         super(idJoueur,m,gameID);
 
-        ar =new ArrayList<>();
+        ar = new ArrayList<>();
+        priority = new ArrayList<>();
 
         transform.position().setX(15.5f);
         transform.position().setY(4.5f);

@@ -119,6 +119,23 @@ public class Game {
 
         // TODO: ajouter les MenuItem pour toutes les IA.
 
+        MenuItem aiCroixItem = new MenuItem(IACroix.NAME);
+        aiCroixItem.addActionListener(e -> g.changerIA(IACroix.NAME));
+        MenuItem aiCroixLineaireItem = new MenuItem(IACroixLineaire.NAME);
+        aiCroixLineaireItem.addActionListener(e -> g.changerIA(IACroixLineaire.NAME));
+        MenuItem aiRandom = new MenuItem(IARandom.NAME);
+        aiRandom.addActionListener(e -> g.changerIA(IARandom.NAME));
+        MenuItem aiRandomPlus = new MenuItem(IARandomPlus.NAME);
+        aiRandomPlus.addActionListener(e -> g.changerIA(IARandomPlus.NAME));
+        MenuItem aiSmartRandom = new MenuItem(IASmartRandom.NAME);
+        aiSmartRandom.addActionListener(e -> g.changerIA(IASmartRandom.NAME));
+
+        aiMenu.add(aiCroixItem);
+        aiMenu.add(aiCroixLineaireItem);
+        aiMenu.add(aiRandom);
+        aiMenu.add(aiRandomPlus);
+        aiMenu.add(aiSmartRandom);
+
         menuBar.add(aiMenu);
 
         outputWindow.setMenuBar(menuBar);
