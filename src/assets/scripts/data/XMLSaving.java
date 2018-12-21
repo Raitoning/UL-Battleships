@@ -8,6 +8,7 @@ import java.io.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,17 +38,19 @@ public class XMLSaving extends GameSaverFactory {
     @Override
     public void save(Model model) {
 
-        //TODO : finir test + tester sauvegarde + chargement
         if(model != null) {
             try {
                 JFileChooser j = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
+                j.setFileFilter(filter);
                 j.showDialog(null,"oui");
-                String dest = j.getName();
-                if(dest == null)
-                    return;
-                if(dest.equals(""))
-                    return;
-                saveFile(new File(dest), model);
+                String dest = j.getSelectedFile()+"";
+                if(dest != null)
+                    if(!dest.equals("")){
+                        if (!dest.endsWith(".xml"))
+                            dest += ".xml";
+                        saveFile(new File(dest), model);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
