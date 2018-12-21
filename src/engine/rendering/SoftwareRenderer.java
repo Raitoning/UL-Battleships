@@ -82,6 +82,7 @@ public class SoftwareRenderer {
         window = null;
     }
 
+    // TODO: Fix the null window exception.
     /** Cull, sort and render sprites to the rendering zone. Can clear the buffer with a determined color before rendering.
      *
      * @version 18.12.12-tailored-wastelands
@@ -195,11 +196,6 @@ public class SoftwareRenderer {
             sprites.add(sprite);
         }
     }
-
-    /** Remove a sprite from the rendering list.
-     *
-     * @param sprite The SpriteRenderer containing the sprite to remove from the rendering list.
-     */
     public void removeSpriteFromQueue(SpriteRenderer sprite) {
 
         sprites.remove(sprite);

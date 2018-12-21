@@ -38,6 +38,7 @@ public class Game {
     private static int gameID = 0;
 
     private RMIServer rmiServer;
+    private JFrame outputWindow;
 
     /** Constructs a new level. Only once should be used at run-time.
      *
@@ -46,15 +47,12 @@ public class Game {
 
         gameObjects = new ArrayList<>();
 
-
         String tmp = MoyenAge.NAME;
         SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/MoyenAge/Water.png");
         SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/MoyenAge/Miss.png");
         SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/MoyenAge/exploded.png");
         SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
         SpriteFactory.getInstance().addSprite("Defaite", "src/assets/textures/Defaite.png");
-
-
 
         //sprite MoyenAge
         SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
@@ -91,6 +89,40 @@ public class Game {
         SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/Espace/spacemiss.png");
         SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/Espace/spacehit.png");
 
+        outputWindow = Engine.getInstance().getRenderer().getWindow();
+
+        MenuBar menuBar = new MenuBar();
+
+        // Menu Fichier
+        Menu fileMenu = new Menu("Fichier");
+
+        MenuItem newGameItem = new MenuItem("Nouvelle partie");
+        newGameItem.addActionListener(e -> endGame());
+
+        // TODO: ajouter les ActionListener pour les boutons charger et sauvegarder.
+        MenuItem loadItem = new MenuItem("Charger une partie...");
+
+        MenuItem saveItem = new MenuItem("Sauvegarder la partie");
+
+        MenuItem exitItem = new MenuItem("Quitter");
+        exitItem.addActionListener(e -> Engine.getInstance().exit());
+
+        fileMenu.add(newGameItem);
+        fileMenu.add(loadItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(exitItem);
+
+        menuBar.add(fileMenu);
+
+        // Menu IA.
+        Menu aiMenu = new Menu("IA");
+
+        // TODO: ajouter les MenuItem pour toutes les IA.
+
+        menuBar.add(aiMenu);
+
+        outputWindow.setMenuBar(menuBar);
+
         gameCreation();
 
 //        try {
@@ -123,7 +155,6 @@ public class Game {
 
             gameObject.update();
         }
-
     }
 
     /**
@@ -131,6 +162,9 @@ public class Game {
      * @since 18.12.12-tailored-wastelads
      */
     public void endGame() {
+
+//        outputWindow.setVisible(false);
+        outputWindow.setEnabled(false);
 
         gameCreation();
 
@@ -174,6 +208,7 @@ public class Game {
     public static void setGameID(int value) {
 
         gameID = value;
+        System.out.println(value);
     }
 
     private void gameCreation() {
@@ -224,6 +259,8 @@ public class Game {
             String epoqueName = Objects.requireNonNull(epoqueComboBox.getSelectedItem()).toString();
             createModel(epoqueName, iaName);
             settingsWindow.dispose();
+            outputWindow.setEnabled(true);
+            outputWindow.setVisible(true);
         });
 
         buttonsPanel.add(quitButton);
