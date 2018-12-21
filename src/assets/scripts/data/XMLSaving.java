@@ -12,6 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+import engine.Engine;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -43,16 +45,25 @@ public class XMLSaving extends GameSaverFactory {
                 JFileChooser j = new JFileChooser();
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
                 j.setFileFilter(filter);
-                j.showDialog(null,"oui");
+                int result = j.showDialog(null,"Sauvegarder");
                 String dest = j.getSelectedFile()+"";
-                if(dest != null)
+
+                if(dest != null && result == JFileChooser.APPROVE_OPTION)
                     if(!dest.equals("")){
                         if (!dest.endsWith(".xml"))
                             dest += ".xml";
                         saveFile(new File(dest), model);
-                }
+                        JOptionPane.showMessageDialog(null,
+                                "Sauvegarde réussite !",
+                                "Sauvegarde",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
             } catch (IOException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "Erreur dans la créatio nde la sauvegarde !",
+                        "Sauvegarde",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
