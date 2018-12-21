@@ -24,10 +24,6 @@ public class MoyenAge extends Epoque {
 
     public MoyenAge(boolean init, Model m, int gameID) throws RemoteException {
         super(init,m, gameID);
-        vieBateaux.put(2,2);
-        vieBateaux.put(3,3);
-        vieBateaux.put(4,4);
-        vieBateaux.put(5,5);
     }
 
     @Override

@@ -148,6 +148,8 @@ public abstract class Epoque implements RMIRegistry {
         return pos;
     }
 
+    
+
 
     /**
      * Retourne le bateau présent a la position x,y du joueur id Joueur
