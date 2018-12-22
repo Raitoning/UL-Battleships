@@ -42,7 +42,12 @@ public class Camera implements Component {
 
     private void computeVerticalSpriteSizeTarget() {
 
-        verticalSpriteSizeTarget = ((float)Engine.getInstance().getRenderer().getHeight() * (maxRenderArea.getY() - minRenderArea.getY())) / orthographicSize;
+        verticalSpriteSizeTarget = ((float) Engine.getInstance().getRenderer().getHeight() * (maxRenderArea.getY() - minRenderArea.getY())) / orthographicSize;
+    }
+
+    public int getRenderPriority() {
+
+        return renderPriority;
     }
 
     public void setRenderPriority(int value) {
@@ -50,9 +55,9 @@ public class Camera implements Component {
         renderPriority = value;
     }
 
-    public int getRenderPriority() {
+    public Vector2 getMinRenderArea() {
 
-        return renderPriority;
+        return minRenderArea;
     }
 
     public void setMinRenderArea(Vector2 minRenderArea) {
@@ -63,9 +68,9 @@ public class Camera implements Component {
         computeVerticalSpriteSizeTarget();
     }
 
-    public Vector2 getMinRenderArea() {
+    public Vector2 getMaxRenderArea() {
 
-        return minRenderArea;
+        return maxRenderArea;
     }
 
     public void setMaxRenderArea(Vector2 maxRenderArea) {
@@ -76,21 +81,16 @@ public class Camera implements Component {
         computeVerticalSpriteSizeTarget();
     }
 
-    public Vector2 getMaxRenderArea() {
-
-        return maxRenderArea;
-    }
-
     public Vector2 worldToCamera(Vector3 position) {
 
-        return new Vector2( (((position.getX() - (gameObject.getTransform().position().getX()  - (orthographicSize * aspectRatio) / 2)) / (orthographicSize * aspectRatio))),
-                1f - (position.getY()  - (gameObject.getTransform().position().getY()  - orthographicSize / 2)) / orthographicSize);
+        return new Vector2((((position.getX() - (gameObject.getTransform().position().getX() - (orthographicSize * aspectRatio) / 2)) / (orthographicSize * aspectRatio))),
+                1f - (position.getY() - (gameObject.getTransform().position().getY() - orthographicSize / 2)) / orthographicSize);
     }
 
     public Vector2 cameraToWorld(Vector2 cameraCoordinates) {
 
-        return new Vector2 ((orthographicSize * cameraCoordinates.getX()) - (orthographicSize /2f) + gameObject.getTransform().position().getX(),
-                (orthographicSize * cameraCoordinates.getY()) - (orthographicSize /2f) + gameObject.getTransform().position().getY());
+        return new Vector2((orthographicSize * cameraCoordinates.getX()) - (orthographicSize / 2f) + gameObject.getTransform().position().getX(),
+                (orthographicSize * cameraCoordinates.getY()) - (orthographicSize / 2f) + gameObject.getTransform().position().getY());
     }
 
     public float getOrthographicSize() {

@@ -1,6 +1,5 @@
 package engine.networking;
 
-import javax.naming.NamingException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,15 +12,18 @@ import java.rmi.registry.Registry;
  * From this class, you can connect to an existing RMI registry.
  * </p>
  *
- * @author  Raitoning
+ * <b>Note:</b> This class is marked as deprecated because it's implementation is not finshed and shouldn't work at all. Use it as your own risks.
+ *
+ * @author Raitoning
  * @version 2018.12.05
- * @since   2018.12.05
+ * @since 2018.12.05
+ * @deprecated
  */
 
 @Deprecated
 public class RMIClient {
 
-    public RMIClient(String registryName) throws NamingException,
+    public RMIClient(String registryName) throws
             RemoteException, NotBoundException {
 
         Registry registry = LocateRegistry.getRegistry(7777);

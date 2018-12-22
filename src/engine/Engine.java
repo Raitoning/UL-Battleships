@@ -14,9 +14,9 @@ import java.awt.event.KeyEvent;
  * and is responsible for the "Main thread", where the game loop happen and where everything is updated once per frame.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.12-tailored-wastelands
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class Engine {
 
@@ -46,16 +46,31 @@ public class Engine {
         input = Input.getInstance();
         physics = Physics.getInstance();
 
-        softwareRenderer = new SoftwareRenderer(1280,640);
+        softwareRenderer = new SoftwareRenderer(1280, 640);
 
         game = new Game();
 
         update();
     }
 
+    /**
+     * Get the Engine instance.
+     *
+     * @return The running Engine instance, or instanciates a new one.
+     */
+    public static Engine getInstance() {
+
+        if (instance == null) {
+
+            instance = new Engine();
+        }
+
+        return instance;
+    }
+
     private void update() {
 
-        while(isRunning) {
+        while (isRunning) {
 
             frameStartTime = System.nanoTime();
 
@@ -64,7 +79,7 @@ public class Engine {
 
             input.update();
 
-            if(Input.getKey(KeyEvent.VK_ESCAPE)) {
+            if (Input.getKey(KeyEvent.VK_ESCAPE)) {
 
                 isRunning = false;
             }
@@ -72,9 +87,9 @@ public class Engine {
             game.update();
             physics.update();
 
-            if(ecoRenderingMode) {
+            if (ecoRenderingMode) {
 
-                if(Input.hasInput()) {
+                if (Input.hasInput()) {
 
                     softwareRenderer.update();
                 }
@@ -87,11 +102,11 @@ public class Engine {
 
             Time.deltaTime = nanoTimeToFloat() - Time.frameStartTime;
 
-            if(deltaTime/1000000 < (1000/targetFrameRate)) {
+            if (deltaTime / 1000000 < (1000 / targetFrameRate)) {
 
                 try {
 
-                    Thread.sleep((1000/targetFrameRate) - (deltaTime/1000000));
+                    Thread.sleep((1000 / targetFrameRate) - (deltaTime / 1000000));
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();
@@ -99,8 +114,6 @@ public class Engine {
             }
 
             Time.deltaTime = nanoTimeToFloat() - Time.frameStartTime;
-
-//             System.out.println("FPS: " + ((float)1/Time.deltaTime) + " Frametime: " + Time.deltaTime * 1000 + "ms");
         }
 
         System.exit(0);
@@ -108,26 +121,12 @@ public class Engine {
 
     private float nanoTimeToFloat() {
 
-        return ((float)System.nanoTime()/1000000000);
+        return ((float) System.nanoTime() / 1000000000);
     }
 
     private long floatToNanoTime(float value) {
 
-        return (long)(value * 1000000000);
-    }
-
-    /** Get the Engine instance.
-     *
-     * @return The running Engine instance, or instanciates a new one.
-     */
-    public static Engine getInstance() {
-
-        if(instance == null) {
-
-            instance = new Engine();
-        }
-
-        return instance;
+        return (long) (value * 1000000000);
     }
 
     public void exit() {
@@ -136,7 +135,8 @@ public class Engine {
         isRunning = false;
     }
 
-    /** Get the Renderer instance.
+    /**
+     * Get the Renderer instance.
      *
      * @return The running Renderer instance.
      */
@@ -145,7 +145,8 @@ public class Engine {
         return softwareRenderer;
     }
 
-    /** Get the Input instance.
+    /**
+     * Get the Input instance.
      *
      * @return The running Input instance, or instanciates a new one.
      */
@@ -154,7 +155,8 @@ public class Engine {
         return physics;
     }
 
-    /** Get the Model instance.
+    /**
+     * Get the Model instance.
      *
      * @return The running Model.
      */
@@ -162,5 +164,4 @@ public class Engine {
 
         return game;
     }
-
 }

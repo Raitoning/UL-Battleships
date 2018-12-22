@@ -37,9 +37,9 @@ public class KeyboardInput extends KeyAdapter {
 
     void update() {
 
-        for (int i = 0; i < axis.size(); i++) {
+        for (InputAxis axi : axis) {
 
-            axis.get(i).update(inputs);
+            axi.update(inputs);
         }
     }
 
@@ -47,7 +47,7 @@ public class KeyboardInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
 
-        if(!inputs.contains(e.getKeyCode())) {
+        if (!inputs.contains(e.getKeyCode())) {
 
             inputs.add(e.getKeyCode());
         }
@@ -57,7 +57,7 @@ public class KeyboardInput extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         super.keyReleased(e);
 
-        if(inputs.contains(e.getKeyCode())) {
+        if (inputs.contains(e.getKeyCode())) {
 
             inputs.remove(Integer.valueOf(e.getKeyCode()));
         }
@@ -65,16 +65,14 @@ public class KeyboardInput extends KeyAdapter {
 
     boolean getKey(int key) {
 
-        return (inputs.contains(Integer.valueOf(key)));
+        return (inputs.contains(key));
     }
 
     float getAxis(String axisName) {
 
-        for (int i = 0; i < axis.size(); i++) {
+        for (InputAxis tmp : axis) {
 
-            InputAxis tmp = axis.get(i);
-
-            if(tmp.getName().equals(axisName)) {
+            if (tmp.getName().equals(axisName)) {
 
                 return tmp.getValue();
             }
@@ -85,12 +83,6 @@ public class KeyboardInput extends KeyAdapter {
 
     boolean hasInput() {
 
-        if(inputs.size() == 0) {
-
-            return false;
-        } else {
-
-            return true;
-        }
+        return inputs.size() != 0;
     }
 }

@@ -15,9 +15,19 @@ public class SceneManager {
         activeScene = null;
     }
 
+    public static SceneManager getInstance() {
+
+        if (instance == null) {
+
+            instance = new SceneManager();
+        }
+
+        return instance;
+    }
+
     public void update() {
 
-        if(activeScene != null) {
+        if (activeScene != null) {
 
             activeScene.update();
         }
@@ -30,12 +40,12 @@ public class SceneManager {
             activeScene.unload();
         }
 
-        for (int i = 0; i < scenes.size(); i++) {
+        for (Scene scene : scenes) {
 
-            if(scenes.get(i).getName().equals(name)) {
+            if (scene.getName().equals(name)) {
 
-                scenes.get(i).load();
-                activeScene = scenes.get(i);
+                scene.load();
+                activeScene = scene;
             }
         }
     }
@@ -50,7 +60,7 @@ public class SceneManager {
 
         scenes.add(scene);
 
-        if(activeScene == null) {
+        if (activeScene == null) {
 
             activeScene = scene;
             loadScene(scene.getName());
@@ -60,15 +70,5 @@ public class SceneManager {
     public Scene getActiveScene() {
 
         return activeScene;
-    }
-
-    public static SceneManager getInstance() {
-
-        if(instance == null) {
-
-            instance = new SceneManager();
-        }
-
-        return instance;
     }
 }

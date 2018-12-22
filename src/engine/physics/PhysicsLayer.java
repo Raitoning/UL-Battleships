@@ -9,16 +9,17 @@ import java.util.ArrayList;
  * A layer to speratate GameObjects for physics simulation.
  * <p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class PhysicsLayer {
 
     private String name;
     private ArrayList<Collider> colliders;
 
-    /** Constructs a new PhysicsLayer with the desired name.
+    /**
+     * Constructs a new PhysicsLayer with the desired name.
      *
      * @param name The desired name for the new PhysicsLayer.
      */
@@ -28,7 +29,8 @@ public class PhysicsLayer {
         colliders = new ArrayList<>();
     }
 
-    /** Get the name of the PhysicsLayer.
+    /**
+     * Get the name of the PhysicsLayer.
      *
      * @return The name of the PhysicsLayer.
      */
@@ -37,7 +39,8 @@ public class PhysicsLayer {
         return name;
     }
 
-    /** Get the number of Colliders in this PhysicsLayer.
+    /**
+     * Get the number of Colliders in this PhysicsLayer.
      *
      * @return The number of Colliders in this PhysicsLayer.
      */
@@ -46,17 +49,19 @@ public class PhysicsLayer {
         return colliders.size();
     }
 
-    /** Get a Collider by it's index.
+    /**
+     * Get a Collider by it's index.
      *
      * @param index The index of the Collider.
      * @return The Collider.
      */
     Collider getCollider(int index) {
 
-    return colliders.get(index);
+        return colliders.get(index);
     }
 
-    /** Add a new Collider to the layer.
+    /**
+     * Add a new Collider to the layer.
      *
      * @param value The Collider to add.
      */
@@ -65,7 +70,8 @@ public class PhysicsLayer {
         colliders.add(value);
     }
 
-    /** Check if the layer contains a specified Collider.
+    /**
+     * Check if the layer contains a specified Collider.
      *
      * @param value The Collider to check.
      * @return True if the layers contains the Collider, else if it doesn't.
@@ -75,7 +81,8 @@ public class PhysicsLayer {
         return colliders.contains(value);
     }
 
-    /** Remove a Collider from the layer.
+    /**
+     * Remove a Collider from the layer.
      *
      * @param value The Collider to remove.
      */

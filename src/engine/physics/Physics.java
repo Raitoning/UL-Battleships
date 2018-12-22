@@ -4,6 +4,7 @@ import engine.exception.UnknownPhysicsLayerException;
 import engine.gameobject.component.BoxCollider2D;
 import engine.gameobject.component.Collider;
 import engine.gameobject.component.Transform;
+
 import java.util.ArrayList;
 
 /**
@@ -13,9 +14,9 @@ import java.util.ArrayList;
  * </p>
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/Physics.html">https://docs.unity3d.com/ScriptReference/Physics.html</a>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class Physics {
 
@@ -33,9 +34,25 @@ public class Physics {
 
     // TODO: Janky AF Physics, find some better ways.
     // TODO: Fix the trigger detection.
-    /** The update() function is responsible for handling all physics calculations and is called once per frame.
-     * It checks if 2 Colliders intersects and sends messages to their GameObjects in case of trigger.
+
+    /**
+     * Get the instance of the running Physics, or instanciates a new one and returns it.
      *
+     * @return The running Physics instance.
+     */
+    public static Physics getInstance() {
+
+        if (instance == null) {
+
+            instance = new Physics();
+        }
+
+        return instance;
+    }
+
+    /**
+     * The update() function is responsible for handling all physics calculations and is called once per frame.
+     * It checks if 2 Colliders intersects and sends messages to their GameObjects in case of trigger.
      */
     public void update() {
 
@@ -51,13 +68,12 @@ public class Physics {
 
                         Collider b = layers.get(j).getCollider(l);
 
-                        boxCollision((BoxCollider2D)a, (BoxCollider2D) b);
+                        boxCollision((BoxCollider2D) a, (BoxCollider2D) b);
                     }
                 }
             }
         }
     }
-
 
     private boolean doBoxesIntersect(BoxCollider2D a, BoxCollider2D b) {
 
@@ -70,7 +86,7 @@ public class Physics {
 
     private void boxCollision(BoxCollider2D a, BoxCollider2D b) {
 
-        if(doBoxesIntersect(a, b)) {
+        if (doBoxesIntersect(a, b)) {
 
             if (!a.isTrigger() && !b.isTrigger()) {
 
@@ -132,7 +148,7 @@ public class Physics {
                 }
             } else {
 
-                if(a.isTrigger()) {
+                if (a.isTrigger()) {
 
 //                    if(!triggeredColliders.contains(a)) {
 //
@@ -147,7 +163,7 @@ public class Physics {
 
                 }
 
-                if(b.isTrigger()) {
+                if (b.isTrigger()) {
 
 //                    if(!triggeredColliders.contains(b)) {
 //
@@ -155,7 +171,7 @@ public class Physics {
 //                        b.onTriggerEnter2D(a);
 //                    } else {
 
-                        b.onTriggerStay2D(a);
+                    b.onTriggerStay2D(a);
 //                    }
                 }
             }
@@ -180,9 +196,10 @@ public class Physics {
 //            }
     }
 
-    /** Add a Collider to the specified PhysicsLayer. May throw an UnknownPhysicsLayerException if the PhysicsLayer doesn't exists.
+    /**
+     * Add a Collider to the specified PhysicsLayer. May throw an UnknownPhysicsLayerException if the PhysicsLayer doesn't exists.
      *
-     * @param collider The collider to add.
+     * @param collider  The collider to add.
      * @param layerName The desired PhysicsLayer.
      */
     public void addCollider(Collider collider, String layerName) {
@@ -206,7 +223,8 @@ public class Physics {
         }
     }
 
-    /** Add a new PhysicsLayer.
+    /**
+     * Add a new PhysicsLayer.
      *
      * @param name The name of the new PhysicsLayer.
      */
@@ -215,7 +233,8 @@ public class Physics {
         layers.add(new PhysicsLayer(name));
     }
 
-    /** Remove a collider from the physics simulation.
+    /**
+     * Remove a collider from the physics simulation.
      *
      * @param value The Collider to remove.
      */
@@ -228,19 +247,5 @@ public class Physics {
                 layer.removeCollider(value);
             }
         }
-    }
-
-    /** Get the instance of the running Physics, or instanciates a new one and returns it.
-     *
-     * @return The running Physics instance.
-     */
-    public static Physics getInstance() {
-
-        if(instance == null) {
-
-            instance = new Physics();
-        }
-
-        return instance;
     }
 }

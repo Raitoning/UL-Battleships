@@ -8,16 +8,15 @@ package engine.input;
  * </p>
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/Vector2.html">https://docs.unity3d.com/ScriptReference/Vector2.html</a>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018-11-14
- * @since   2018-11-14
+ * @since 2018-11-14
  */
 public class Input {
 
+    public static Input instance;
     private static MouseInput mouseInput;
     private static KeyboardInput keyboardInput;
-
-    public static Input instance;
 
     private Input() {
 
@@ -25,21 +24,14 @@ public class Input {
         keyboardInput = new KeyboardInput();
     }
 
-    /** This function is called once every frame and gather all inputs from the keyboard and the mouse and stock them.
-     *
-     */
-    public void update() {
-
-        keyboardInput.update();
-    }
-
-    /** Get the running Input or instanciates a new one and return it.
+    /**
+     * Get the running Input or instanciates a new one and return it.
      *
      * @return The running instance of Input or a new one.
      */
     public static Input getInstance() {
 
-        if(instance == null) {
+        if (instance == null) {
 
             instance = new Input();
         }
@@ -47,7 +39,8 @@ public class Input {
         return instance;
     }
 
-    /** Get the running KeyboardInput or instanciates a new one and return it.
+    /**
+     * Get the running KeyboardInput or instanciates a new one and return it.
      *
      * @return The running instance of KeyboardInput or a new one.
      */
@@ -56,7 +49,8 @@ public class Input {
         return keyboardInput;
     }
 
-    /** Get the running MouseInput or instanciates a new one and return it.
+    /**
+     * Get the running MouseInput or instanciates a new one and return it.
      *
      * @return The running instance of MouseInput or a new one.
      */
@@ -65,7 +59,8 @@ public class Input {
         return mouseInput;
     }
 
-    /** Get the value of an axis based on it's name. May return an UnknownAxis if no axis with the desired name exists.
+    /**
+     * Get the value of an axis based on it's name. May return an UnknownAxis if no axis with the desired name exists.
      *
      * @param axisName The name of the desired Axis.
      * @return The value of the Axis.
@@ -75,7 +70,8 @@ public class Input {
         return keyboardInput.getAxis(axisName);
     }
 
-    /** Get if the desired key is pushed or not.
+    /**
+     * Get if the desired key is pushed or not.
      *
      * @param key The KeyCode of the key.
      * @return Returns if the key is pushed or not.
@@ -85,7 +81,8 @@ public class Input {
         return keyboardInput.getKey(key);
     }
 
-    /** Returns if the desired mouse button is clicked or not.
+    /**
+     * Returns if the desired mouse button is clicked or not.
      *
      * @param button The identifiant of the mouse button.
      * @return Returns if the desired mouse button is clicked or not.
@@ -95,12 +92,21 @@ public class Input {
         return mouseInput.getMouseButton(button);
     }
 
-    /** Returns if any key or mouse buttons are clicked/pushed.
+    /**
+     * Returns if any key or mouse buttons are clicked/pushed.
      *
      * @return Returns if any key or mouse buttons are clicked/pushed.
      */
     public static boolean hasInput() {
 
         return keyboardInput.hasInput() || mouseInput.hasInput();
+    }
+
+    /**
+     * This function is called once every frame and gather all inputs from the keyboard and the mouse and stock them.
+     */
+    public void update() {
+
+        keyboardInput.update();
     }
 }

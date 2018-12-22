@@ -6,26 +6,21 @@ import assets.scripts.map.Map;
 
 import java.util.ArrayList;
 
-public class IARandomPlus extends IA{
+public class IARandomPlus extends IA {
 
     public static final String NAME = "IA Aléatoire en forme de +";
 
-    public IARandomPlus(int idJoueur, Model m, int gameID) {
+    public IARandomPlus(int idJoueur, Model model, int gameID) {
 
-        super(idJoueur, m, gameID);
+        super(idJoueur, model, gameID);
 
-        priority =new ArrayList<>();
+        priority = new ArrayList<>();
 
-        for(int i = 0; i < Map.NBCASES; i++){
-            for (int j =0;j < Map.NBCASES;j++){
-                ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
+        for (int i = 0; i < Map.NBCASES; i++) {
+            for (int j = 0; j < Map.NBCASES; j++) {
+                cases.add(this.model.getEpoque().getCaseAt(opponentID(), i, j));
             }
         }
-    }
-
-    @Override
-    public void play(Case c) {
-        super.play(c);
     }
 
     @Override
@@ -37,28 +32,29 @@ public class IARandomPlus extends IA{
     @Override
     public Case jeuxIA() {
 
-        int x ; Case res;
+        int x;
+        Case res;
 
         clean();
 
-        if(!priority.isEmpty()){
-            x= (int)(Math.random()*(priority.size()));
+        if (!priority.isEmpty()) {
+            x = (int) (Math.random() * (priority.size()));
             res = priority.get(x);
             priority.remove(x);
 
-        }else {
-            x= (int)(Math.random()*(ar.size()));
-            res = ar.get(x);
+        } else {
+            x = (int) (Math.random() * (cases.size()));
+            res = cases.get(x);
             addVoisins(res);
         }
 
-        ar.remove(x);
+        cases.remove(x);
 
-        if (ar.isEmpty()){
+        if (cases.isEmpty()) {
             extreme();
         }
 
-        if (res.toString().equals(Case.BATEAU)){
+        if (res.toString().equals(Case.BATEAU)) {
             addVoisins(res);
         }
 

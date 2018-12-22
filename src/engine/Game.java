@@ -9,17 +9,16 @@ import assets.scripts.epoque.Space;
 import assets.scripts.map.Position;
 import assets.scripts.player.*;
 import engine.gameobject.GameObject;
-import engine.input.Input;
-import engine.networking.RMIServer;
-//import javax.naming.NamingException;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-//import java.rmi.AlreadyBoundException;
-//import java.rmi.RemoteException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Objects;
+
+//import javax.naming.NamingException;
+//import java.rmi.AlreadyBoundException;
+//import java.rmi.RemoteException;
 
 
 /**
@@ -29,67 +28,68 @@ import java.util.Objects;
  * This class is mostly used for debugging purposes.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.19-tailored-wastelands
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class Game {
 
-    private ArrayList<GameObject> gameObjects;
-    private Model g = null;
     private static int gameID = 0;
-
-    private RMIServer rmiServer;
+    private ArrayList<GameObject> gameObjects;
+    private Model model = null;
+    //    private RMIServer rmiServer;
     private JFrame outputWindow;
 
-    /** Constructs a new level. Only once should be used at run-time.
-     *
+    /**
+     * Constructs a new level. Only once should be used at run-time.
      */
-    public Game() {
+    Game() {
 
         gameObjects = new ArrayList<>();
 
-        String tmp = MoyenAge.NAME;
-        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/MoyenAge/Water.png");
-        SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/MoyenAge/Miss.png");
-        SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/MoyenAge/exploded.png");
+        // Sprite MoyenAge
+        String epoqueName = MoyenAge.NAME;
+
+        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "src/assets/textures/MoyenAge/Water.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "src/assets/textures/MoyenAge/Miss.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "src/assets/textures/MoyenAge/exploded.png");
         SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
         SpriteFactory.getInstance().addSprite("Defaite", "src/assets/textures/Defaite.png");
 
-        //sprite MoyenAge
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
 
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
 
-        tmp = Space.NAME;
-        //sprite espace
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddle", "src/assets/textures/Espace/spacehorizontalmiddleup.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddle", "src/assets/textures/Espace/spacemiddleup.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueue", "src/assets/textures/Espace/spacehorizontaltailup.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalQueue", "src/assets/textures/Espace/spacetailup.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalTete", "src/assets/textures/Espace/spacehorizontalheadup.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalTete", "src/assets/textures/Espace/spaceheadup.png");
+        // Sprite Espace
+        epoqueName = Space.NAME;
 
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalMiddleFeu", "src/assets/textures/Espace/spacehorizontalmiddledown.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalMiddleFeu", "src/assets/textures/Espace/spacemiddledown.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalQueueFeu", "src/assets/textures/Espace/spacehorizontaltaildown.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalQueueFeu", "src/assets/textures/Espace/spacetaildown.png");
-        SpriteFactory.getInstance().addSprite(tmp +"horizontalTeteFeu", "src/assets/textures/Espace/spacehorizontalheaddown.png");
-        SpriteFactory.getInstance().addSprite(tmp +"verticalTeteFeu", "src/assets/textures/Espace/spaceheaddown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "src/assets/textures/Espace/spacehorizontalmiddleup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "src/assets/textures/Espace/spacemiddleup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "src/assets/textures/Espace/spacehorizontaltailup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "src/assets/textures/Espace/spacetailup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "src/assets/textures/Espace/spacehorizontalheadup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "src/assets/textures/Espace/spaceheadup.png");
 
-        SpriteFactory.getInstance().addSprite(tmp +"Water", "src/assets/textures/Espace/space.png");
-        SpriteFactory.getInstance().addSprite(tmp +"Miss", "src/assets/textures/Espace/spacemiss.png");
-        SpriteFactory.getInstance().addSprite(tmp +"Exploded", "src/assets/textures/Espace/spacehit.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "src/assets/textures/Espace/spacehorizontalmiddledown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "src/assets/textures/Espace/spacemiddledown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "src/assets/textures/Espace/spacehorizontaltaildown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "src/assets/textures/Espace/spacetaildown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "src/assets/textures/Espace/spacehorizontalheaddown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "src/assets/textures/Espace/spaceheaddown.png");
+
+        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "src/assets/textures/Espace/space.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "src/assets/textures/Espace/spacemiss.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "src/assets/textures/Espace/spacehit.png");
 
         outputWindow = Engine.getInstance().getRenderer().getWindow();
 
@@ -105,7 +105,7 @@ public class Game {
         loadItem.addActionListener(e -> GameSaverFactory.getInstance().load());
 
         MenuItem saveItem = new MenuItem("Sauvegarder la partie");
-                saveItem.addActionListener(e -> GameSaverFactory.getInstance().save(g));
+        saveItem.addActionListener(e -> GameSaverFactory.getInstance().save(model));
 
         MenuItem exitItem = new MenuItem("Quitter");
         exitItem.addActionListener(e -> Engine.getInstance().exit());
@@ -120,18 +120,16 @@ public class Game {
         // Menu IA.
         Menu aiMenu = new Menu("IA");
 
-        // TODO: ajouter les MenuItem pour toutes les IA.
-
         MenuItem aiCroixItem = new MenuItem(IACroix.NAME);
-        aiCroixItem.addActionListener(e -> g.changerIA(IACroix.NAME));
+        aiCroixItem.addActionListener(e -> model.changerIA(IACroix.NAME));
         MenuItem aiCroixLineaireItem = new MenuItem(IACroixLineaire.NAME);
-        aiCroixLineaireItem.addActionListener(e -> g.changerIA(IACroixLineaire.NAME));
+        aiCroixLineaireItem.addActionListener(e -> model.changerIA(IACroixLineaire.NAME));
         MenuItem aiRandom = new MenuItem(IARandom.NAME);
-        aiRandom.addActionListener(e -> g.changerIA(IARandom.NAME));
+        aiRandom.addActionListener(e -> model.changerIA(IARandom.NAME));
         MenuItem aiRandomPlus = new MenuItem(IARandomPlus.NAME);
-        aiRandomPlus.addActionListener(e -> g.changerIA(IARandomPlus.NAME));
+        aiRandomPlus.addActionListener(e -> model.changerIA(IARandomPlus.NAME));
         MenuItem aiSmartRandom = new MenuItem(IASmartRandom.NAME);
-        aiSmartRandom.addActionListener(e -> g.changerIA(IASmartRandom.NAME));
+        aiSmartRandom.addActionListener(e -> model.changerIA(IASmartRandom.NAME));
 
         aiMenu.add(aiCroixItem);
         aiMenu.add(aiCroixLineaireItem);
@@ -147,27 +145,49 @@ public class Game {
 
 //        try {
 //
-//            g = new Model("MoyenAge", gameID);
+//            model = new Model("MoyenAge", gameID);
 //        } catch (RemoteException e) {
 //            e.printStackTrace();
 //        }
 
 //        try {
 //
-//            rmiServer = new RMIServer("battleships", g);
+//            rmiServer = new RMIServer("battleships", model);
 //        } catch (RemoteException | NamingException | AlreadyBoundException e) {
 //            e.printStackTrace();
 //        }
 
-        //GameSaverFactory.getInstance().save(g);
+        //GameSaverFactory.getInstance().save(model);
 
-        //GameSaverFactory.getInstance().load(g);
+        //GameSaverFactory.getInstance().load(model);
 
-        //System.out.println(g.getEpoque().toString());
+        //System.out.println(model.getEpoque().toString());
     }
 
-    /** This function is called once every frame and updates every GameObjects in the level.
+    /**
+     * Returns the GameID of the runnning Model.
      *
+     * @return The GameID of the runnning Model.
+     * @since 2018.12.12-tailored-wastelands
+     */
+    public static int getGameID() {
+
+        return gameID;
+    }
+
+    /**
+     * Set the GameID of the runnning Model.
+     *
+     * @param value int The new value of the Model's GameID.
+     * @since 2018.12.12-tailored-wastelands
+     */
+    public static void setGameID(int value) {
+
+        gameID = value;
+    }
+
+    /**
+     * This function is called once every frame and updates every GameObjects in the level.
      */
     public void update() {
 
@@ -178,7 +198,6 @@ public class Game {
     }
 
     /**
-     * @version 18.12.19-tailored-wastelands
      * @since 18.12.12-tailored-wastelads
      */
     public void endGame() {
@@ -206,28 +225,6 @@ public class Game {
         }
 
         return null;
-    }
-
-    /** Returns the GameID of the runnning Model.
-     *
-     * @return The GameID of the runnning Model.
-     * @version 2018.12.12-tailored-wastelands
-     * @since 2018.12.12-tailored-wastelands
-     */
-    public static int getGameID() {
-
-        return gameID;
-    }
-
-    /** Set the GameID of the runnning Model.
-     *
-     * @param value int The new value of the Model's GameID.
-     * @version 2018.12.12-tailored-wastelands
-     * @since 2018.12.12-tailored-wastelands
-     */
-    public static void setGameID(int value) {
-
-        gameID = value;
     }
 
     private void gameCreation() {
@@ -264,10 +261,12 @@ public class Game {
 
         JPanel jpChargement = new JPanel();
         JButton jbChargement = new JButton("Charger une partie");
-        jbChargement.addActionListener(e -> { XMLSaving.getInstance().load();
-        settingsWindow.dispose();
-        outputWindow.setEnabled(true);
-        outputWindow.setVisible(true);
+        jbChargement.addActionListener(e -> {
+
+            XMLSaving.getInstance().load();
+            settingsWindow.dispose();
+            outputWindow.setEnabled(true);
+            outputWindow.setVisible(true);
         });
         jpChargement.add(jbChargement);
         settingsWindow.add(jpChargement);
@@ -296,27 +295,31 @@ public class Game {
         buttonsPanel.add(launchButton);
         settingsWindow.add(buttonsPanel);
 
-        settingsWindow.setSize(400,200);
+        settingsWindow.setSize(400, 200);
         settingsWindow.setVisible(true);
     }
 
-    public void createModel(String epoqueName, String aiName) {
+    private void createModel(String epoqueName, String aiName) {
 
         try {
 
             setGameID(getGameID() + 1);
-            g = new Model(epoqueName, getGameID(), aiName);
+            model = new Model(epoqueName, getGameID(), aiName);
 
         } catch (RemoteException e) {
+
             e.printStackTrace();
         }
     }
 
-    public void loadModel(String ep, String adv, ArrayList<Battleship> liste1, ArrayList<Battleship> liste2, ArrayList<Position>casesTouche){
+    public void loadModel(String ep, String adv, ArrayList<Battleship> liste1, ArrayList<Battleship> liste2, ArrayList<Position> casesTouche) {
+
         try {
+
             setGameID(getGameID() + 1);
-            g = new Model(ep,getGameID(),adv,liste1,liste2,casesTouche);
+            model = new Model(ep, getGameID(), adv, liste1, liste2, casesTouche);
         } catch (RemoteException e) {
+
             e.printStackTrace();
         }
     }

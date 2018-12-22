@@ -12,12 +12,12 @@ import java.util.ArrayList;
  * A Factory for sprites.
  *
  * <p>
- *     Allows the engine to load a sprite only once and use it multiple times.
+ * Allows the engine to load a sprite only once and use it multiple times.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class SpriteFactory {
 
@@ -32,7 +32,23 @@ public class SpriteFactory {
         sprites = new ArrayList<>();
     }
 
-    /** Add a new sprite to the engine with the desired name and the path of it's file
+    /**
+     * Get the unique instance of the Factory.
+     *
+     * @return The instance of the Factory
+     */
+    public static SpriteFactory getInstance() {
+
+        if (instance == null) {
+
+            instance = new SpriteFactory();
+        }
+
+        return instance;
+    }
+
+    /**
+     * Add a new sprite to the engine with the desired name and the path of it's file
      *
      * @param name The desired name for the sprite.
      * @param path The path to the file containing the sprite.
@@ -42,11 +58,12 @@ public class SpriteFactory {
         fileReferences.add(new FileReference(name, path));
     }
 
-    /** Get a sprite given it's name. Check if it's already loaded or load it first.
-     *  May throw an UnreferencedSpriteException and return null if the sprite doesn't exists.
+    /**
+     * Get a sprite given it's name. Check if it's already loaded or load it first.
+     * May throw an UnreferencedSpriteException and return null if the sprite doesn't exists.
      *
      * @param name The name of the desired sprite
-     * @return  The BufferedImage of the sprite or null if it doesn't exists.
+     * @return The BufferedImage of the sprite or null if it doesn't exists.
      */
     private BufferedImage getSprite(String name) {
 
@@ -78,11 +95,12 @@ public class SpriteFactory {
         return null;
     }
 
-    /** Get a rescaled sprite given it's name. Check if it's already loaded or load it first.
-     *  May throw an UnreferencedSpriteException and return null if the sprite doesn't exists.
+    /**
+     * Get a rescaled sprite given it's name. Check if it's already loaded or load it first.
+     * May throw an UnreferencedSpriteException and return null if the sprite doesn't exists.
      *
      * @param name The name of the desired rescaled sprite
-     * @return  The BufferedImage of the rescaled sprite or null if it doesn't exists.
+     * @return The BufferedImage of the rescaled sprite or null if it doesn't exists.
      */
     // WORKAROUND: Added 1 pixel in each dimension to get rid of random black bars appearing between sprites.
     public BufferedImage getScaledSprite(String name, GameObject gameObject) {
@@ -104,9 +122,9 @@ public class SpriteFactory {
 
         if (sprite != null) {
 
-            scaleFactor = Engine.getInstance().getRenderer().getVerticalSpriteSizeTarget() / (float)sprite.getWidth();
+            scaleFactor = Engine.getInstance().getRenderer().getVerticalSpriteSizeTarget() / (float) sprite.getWidth();
 
-            sprite = resize(sprite, (int)(sprite.getWidth() * scaleFactor * gameObject.getTransform().scale().getX()) + 1, (int)(sprite.getHeight() * scaleFactor * gameObject.getTransform().scale().getY()) + 1);
+            sprite = resize(sprite, (int) (sprite.getWidth() * scaleFactor * gameObject.getTransform().scale().getX()) + 1, (int) (sprite.getHeight() * scaleFactor * gameObject.getTransform().scale().getY()) + 1);
         }
 
         sprites.add(new SpriteReference(scaledInstanceName, sprite));
@@ -124,19 +142,5 @@ public class SpriteFactory {
         g2d.dispose();
 
         return dimg;
-    }
-
-    /** Get the unique instance of the Factory.
-     *
-     * @return The instance of the Factory
-     */
-    public static SpriteFactory getInstance() {
-
-        if (instance == null) {
-
-            instance = new SpriteFactory();
-        }
-
-        return instance;
     }
 }

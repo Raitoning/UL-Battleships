@@ -8,9 +8,12 @@ package engine.networking;
  * networked multiplayer game.
  * </p>
  *
- * @author  Raitoning
+ * <b>Note:</b> This class is marked as deprecated because it's implementation is not finshed and shouldn't work at all. Use it as your own risks.
+ *
+ * @author Raitoning
  * @version 2018.12.05
- * @since   2018.12.05
+ * @since 2018.12.05
+ * @deprecated
  */
 
 @Deprecated
@@ -18,15 +21,16 @@ public class Networking {
 
     private Networking instance;
 
-    /** Returns the instance of the Networking singleton, or creates a new
+    /**
+     * Returns the instance of the Networking singleton, or creates a new
      * one and returns it.
      *
      * @return The instance of the Networking singleton, or creates a new
-     *         one and returns it.
+     * one and returns it.
      */
     public Networking getInstance() {
 
-        if(instance == null) {
+        if (instance == null) {
 
             instance = new Networking();
         }

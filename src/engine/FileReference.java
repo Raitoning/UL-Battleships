@@ -7,19 +7,20 @@ package engine;
  * Makes it easier to deal with files in the engine.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class FileReference {
 
     private String name;
     private String path;
 
-    /** Construcs a reference to a file with a desired name and the path to the file.
+    /**
+     * Construcs a reference to a file with a desired name and the path to the file.
      *
-     * @param name  The desired name.
-     * @param path  The path to the file.
+     * @param name The desired name.
+     * @param path The path to the file.
      */
     FileReference(String name, String path) {
 
@@ -27,18 +28,20 @@ public class FileReference {
         this.path = path;
     }
 
-    /** Get the name of the reference.
+    /**
+     * Get the name of the reference.
      *
-     * @return  The name of the reference.
+     * @return The name of the reference.
      */
     public String getName() {
 
         return name;
     }
 
-    /** Get the path of the referenced file.
+    /**
+     * Get the path of the referenced file.
      *
-     * @return  The path of the referenced file.
+     * @return The path of the referenced file.
      */
     String getPath() {
 

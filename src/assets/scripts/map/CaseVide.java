@@ -5,26 +5,27 @@ import assets.scripts.Model;
 public class CaseVide extends Case {
 
 
-    public CaseVide(Position p , int x, int y, Model m, int gameID){
+    public CaseVide(Position position, int x, int y, Model model, int gameID) {
 
-        super(p,x,y,m, gameID);
+        super(position, x, y, model, gameID);
         transform.position().setZ(2f);
     }
 
-    public String toString(){
+    public String toString() {
 
         return VIDE;
     }
 
     @Override
     public String nomSprite() {
-        String res = getSpriteFolder();
-        if(estToucher()) {
 
-            res +="Miss";
+        String res = getSpriteFolder();
+        if (estToucher()) {
+
+            res += "Miss";
         } else {
 
-            res+= "Water";
+            res += "Water";
         }
         return res;
     }

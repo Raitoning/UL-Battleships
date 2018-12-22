@@ -6,28 +6,24 @@ import assets.scripts.map.Map;
 
 import java.util.ArrayList;
 
-public class IACroixLineaire extends IA{
+public class IACroixLineaire extends IA {
 
     public static final String NAME = "IA Croix Linéaire";
 
-    public IACroixLineaire(int idJoueur, Model m, int gameID) {
+    public IACroixLineaire(int idJoueur, Model model, int gameID) {
 
-        super(idJoueur, m,gameID);
+        super(idJoueur, model, gameID);
 
-        priority =new ArrayList<>();
+        priority = new ArrayList<>();
 
-        for(int i =0; i < Map.NBCASES;i++){
-            for (int j =0;j < Map.NBCASES;j++){
-                if((i%2==0&&j%2==1)||(i%2==1&&j%2==0))
-                    ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
+        for (int i = 0; i < Map.NBCASES; i++) {
+            for (int j = 0; j < Map.NBCASES; j++) {
+                if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0)) {
+                    cases.add(this.model.getEpoque().getCaseAt(opponentID(), i, j));
+                }
             }
         }
 
-    }
-
-    @Override
-    public void play(Case c) {
-        super.play(c);
     }
 
     @Override
@@ -49,13 +45,12 @@ public class IACroixLineaire extends IA{
             priority.remove(x);
 
         } else {
-            res = ar.get(ar.size() - 1);
+            res = cases.get(cases.size() - 1);
         }
 
-        if (ar.contains(res))
-            ar.remove(res);
+        cases.remove(res);
 
-        if (ar.isEmpty()) {
+        if (cases.isEmpty()) {
             extreme();
         }
 

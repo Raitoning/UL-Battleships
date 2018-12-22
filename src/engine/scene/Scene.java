@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Scene {
 
-    protected String name;
     private static int numberOfScenes = 0;
-    private int id;
+    protected String name;
     protected ArrayList<GameObject> gameObjects;
     protected boolean isLoaded = false;
+    private int id;
 
     public Scene() {
 
@@ -32,10 +32,7 @@ public class Scene {
 
     protected void removeGameObject(GameObject gameObject) {
 
-        if(gameObjects.contains(gameObject)) {
-
-            gameObjects.remove(gameObject);
-        }
+        gameObjects.remove(gameObject);
     }
 
     public String getName() {
@@ -45,11 +42,11 @@ public class Scene {
 
     public void update() {
 
-        if(isLoaded) {
+        if (isLoaded) {
 
-            for (int i = 0; i < gameObjects.size(); i++) {
+            for (GameObject gameObject : gameObjects) {
 
-                gameObjects.get(i).update();
+                gameObject.update();
             }
         }
     }
@@ -66,11 +63,11 @@ public class Scene {
 
     public GameObject getGameObjectByName(String name) {
 
-        for (int i = 0; i < gameObjects.size(); i++) {
+        for (GameObject gameObject : gameObjects) {
 
-            if(gameObjects.get(i).getName().equals(name)) {
+            if (gameObject.getName().equals(name)) {
 
-                return gameObjects.get(i);
+                return gameObject;
             }
         }
 
@@ -81,9 +78,9 @@ public class Scene {
 
         isLoaded = false;
 
-        for (int i = 0; i < gameObjects.size(); i++) {
+        for (GameObject gameObject : gameObjects) {
 
-            gameObjects.get(i).destroy();
+            gameObject.destroy();
         }
 
         gameObjects.clear();

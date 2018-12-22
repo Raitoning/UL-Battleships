@@ -7,12 +7,13 @@ import engine.gameobject.component.Camera;
 
 public abstract class Player extends GameObject {
 
-    private int idJoueur;
-    protected Camera camera;
     protected Model model;
+    Camera camera;
+    private int idJoueur;
 
-    Player(int idJoueur, Model m, int gameID) {
-        model = m;
+    Player(int idJoueur, Model model, int gameID) {
+
+        this.model = model;
         this.idJoueur = idJoueur;
         this.gameID = gameID;
 
@@ -21,8 +22,9 @@ public abstract class Player extends GameObject {
         addComponent(camera);
     }
 
-    public void play(Case c){
-        if(!c.estToucher()){
+    public void play(Case c) {
+
+        if (!c.estToucher()) {
             c.subitTir();
 
             model.nextTurn();
@@ -31,12 +33,15 @@ public abstract class Player extends GameObject {
 
     /**
      * Retourne l'ID du joueur adversaire.
+     *
      * @return L'identifiant du joueur adversaire.
      */
-    public int opponentID(){
-        if (idJoueur == 1){
+    public int opponentID() {
+
+        if (idJoueur == 1) {
             return 0;
-        }else
+        } else {
             return 1;
+        }
     }
 }

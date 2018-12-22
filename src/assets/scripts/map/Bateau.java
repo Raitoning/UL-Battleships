@@ -1,26 +1,28 @@
 package assets.scripts.map;
 
 import assets.scripts.Model;
-import engine.Engine;
 
 public class Bateau extends Case {
 
-    private String texture;
+    private String spriteName;
 
-    public Bateau(Position p ,int x, int y, Model m, String t, int id) {
-        super(p,x,y,m,id);
-        texture =t;
+    public Bateau(Position position, int x, int y, Model model, String spriteName, int gameID) {
+
+        super(position, x, y, model, gameID);
+        this.spriteName = spriteName;
         spriteRenderer.setName(nomSprite());
     }
 
     @Override
     public String nomSprite() {
-        String res = texture;
-        if(estToucher()&& getPosX() < Map.NBCASES)
-            res +="Feu";
-        if(getPosX() > Map.NBCASES){
+
+        String res = spriteName;
+        if (estToucher() && getPosX() < Map.NBCASES) {
+            res += "Feu";
+        }
+        if (getPosX() > Map.NBCASES) {
             res = "Water";
-            if(estToucher()){
+            if (estToucher()) {
                 res = "Exploded";
             }
         }
@@ -30,16 +32,23 @@ public class Bateau extends Case {
 
     @Override
     public void subitTir() {
+
         super.subitTir();
-        int x,y,joueur;
+
+        int x;
+        int y;
+        int joueur;
+
         y = getPosY();
         x = getPosX();
-        if(x > Map.NBCASES) {
-            x -= Map.NBCASES+1;
+
+        if (x > Map.NBCASES) {
+            x -= Map.NBCASES + 1;
             joueur = 1;
+        } else {
+            joueur = 0;
         }
-        else joueur = 0;
-        model.getEpoque().getBattleshipAt(joueur,x,y).hit();
+        model.getEpoque().getBattleshipAt(joueur, x, y).hit();
     }
 
     @Override

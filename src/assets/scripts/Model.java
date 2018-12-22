@@ -25,16 +25,16 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
     /**
      * Construit une instance du jeu à partir d'une Epoque donnée en parametre
      */
-    public Model(String epName, int gameID, String aiName) throws RemoteException {
+    public Model(String epoqueName, int gameID, String aiName) throws RemoteException {
 
         super();
         this.gameID = gameID;
-        epoqueName = epName;
-        setEpoque(epName,true);
+        this.epoqueName = epoqueName;
+        setEpoque(epoqueName, true);
 
         this.players = new Player[2];
 
-        this.players[0] = new Human(0,this, gameID);
+        this.players[0] = new Human(0, this, gameID);
 
         setTypeofPlayer(1, aiName);
 
@@ -44,76 +44,94 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
     /**
      * Constructeur pour le chargement
      */
-    public Model(String epName, int gameID, String aiName, ArrayList<Battleship> listeBateau1, ArrayList<Battleship> listeBateau2, ArrayList<Position> casesTouche) throws RemoteException {
+    public Model(String epoqueName, int gameID, String aiName, ArrayList<Battleship> listeBateau1, ArrayList<Battleship> listeBateau2, ArrayList<Position> casesTouche) throws RemoteException {
 
         super();
+
         this.gameID = gameID;
-        System.out.println(gameID);
-        epoqueName = epName;
-        setEpoque(epName,false);
-        getEpoque().addLoadShip(listeBateau1,0);
-        getEpoque().addLoadShip(listeBateau2,1);
+        this.epoqueName = epoqueName;
+
+        setEpoque(epoqueName, false);
+
+        getEpoque().addLoadShip(listeBateau1, 0);
+        getEpoque().addLoadShip(listeBateau2, 1);
+
         getEpoque().createCase();
+
         getEpoque().setCases(casesTouche);
 
         this.players = new Player[2];
 
-        this.players[0] = new Human(0,this, gameID);
+        this.players[0] = new Human(0, this, gameID);
 
         setTypeofPlayer(1, aiName);
 
         playerTurn = 0;
     }
 
-    public String getTypeofPlayer(int playerID) { return players[playerID].toString(); }
+    public String getTypeofPlayer(int playerID) {
 
-    public Epoque getEpoque() { return epoque; }
+        return players[playerID].toString();
+    }
 
-    public void setTypeofPlayer(int playerID, String typeName){
+    public Epoque getEpoque() {
 
-        if (typeName.equals(Human.name)) {
+        return epoque;
+    }
 
-            players[playerID] = new Human(playerID,this, gameID);
+    private void setTypeofPlayer(int playerID, String typeName) {
 
-        } else if (typeName.equals(IACroix.NAME)) {
+        switch (typeName) {
+            case Human.name:
 
-            players[playerID] = new IACroix(playerID,this, gameID);
+                players[playerID] = new Human(playerID, this, gameID);
 
-        } else if (typeName.equals(IACroixLineaire.NAME)) {
+                break;
+            case IACroix.NAME:
 
-            players[playerID] = new IACroixLineaire(playerID,this, gameID);
+                players[playerID] = new IACroix(playerID, this, gameID);
 
-        } else if (typeName.equals(IARandom.NAME)) {
+                break;
+            case IACroixLineaire.NAME:
 
-            players[playerID] = new IARandom(playerID,this, gameID);
+                players[playerID] = new IACroixLineaire(playerID, this, gameID);
 
-        } else if (typeName.equals(IARandomPlus.NAME)) {
+                break;
+            case IARandom.NAME:
 
-            players[playerID] = new IARandomPlus(playerID,this, gameID);
+                players[playerID] = new IARandom(playerID, this, gameID);
 
-        } else if (typeName.equals(IASmartRandom.NAME)) {
+                break;
+            case IARandomPlus.NAME:
 
-            players[playerID] = new IASmartRandom(playerID,this, gameID);
+                players[playerID] = new IARandomPlus(playerID, this, gameID);
+
+                break;
+            case IASmartRandom.NAME:
+
+                players[playerID] = new IASmartRandom(playerID, this, gameID);
+                break;
         }
     }
 
-    public void changerIA(String nomIA){
+    public void changerIA(String nomIA) {
         setTypeofPlayer(1, nomIA);
-        ((IA)players[1]).clean();
+        ((IA) players[1]).clean();
     }
 
-    public String getNameEpoque(){
+    public String getNameEpoque() {
         return epoqueName;
     }
 
     /**
      * Set l'epoque du jeu
-     * @param epoqueName Le nom de l'époque.
+     *
+     * @param epoqueName    Le nom de l'époque.
      * @param generateShips Booléen pour générer des bateaux ou non.
      */
-    public void setEpoque(String epoqueName, boolean generateShips) {
+    private void setEpoque(String epoqueName, boolean generateShips) {
 
-        if(epoqueName.equals(MoyenAge.NAME)) {
+        if (epoqueName.equals(MoyenAge.NAME)) {
 
             try {
 
@@ -122,7 +140,7 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
                 e.printStackTrace();
             }
-        } else if(epoqueName.equals(Space.NAME)) {
+        } else if (epoqueName.equals(Space.NAME)) {
 
             try {
 
@@ -133,19 +151,25 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         }
     }
 
-    public int getPlayerTurn(){ return playerTurn; }
+    public int getPlayerTurn() {
 
-    public Player getPlayer(int playerID){ return players[playerID]; }
+        return playerTurn;
+    }
 
-    public void nextTurn(){
+    public Player getPlayer(int playerID) {
 
-        if(!hasWon(0) && !hasWon(1)) {
+        return players[playerID];
+    }
+
+    public void nextTurn() {
+
+        if (!hasWon(0) && !hasWon(1)) {
 
             playerTurn = (playerTurn + 1) % 2;
 
-            if(!getTypeofPlayer(playerTurn).equals(Human.name)){
+            if (!getTypeofPlayer(playerTurn).equals(Human.name)) {
 
-                getPlayer(playerTurn).play(((IA)getPlayer(playerTurn)).jeuxIA());
+                getPlayer(playerTurn).play(((IA) getPlayer(playerTurn)).jeuxIA());
             }
         } else {
 
@@ -154,24 +178,28 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         }
     }
 
-    public boolean hasWon(int playerID){
+    private boolean hasWon(int playerID) {
 
         return epoque.hasLost(players[playerID].opponentID());
     }
 
-    public void endGame() {
+    private void endGame() {
 
         GameObject endGame = new GameObject(gameID);
         endGame.getTransform().setPosition(10.5f, 5f);
         endGame.getTransform().setScale(10f, 10f);
-        if(hasWon(0))
+
+        if (hasWon(0)) {
+
             endGame.addComponent(new SpriteRenderer("Victoire", endGame));
-        else         endGame.addComponent(new SpriteRenderer("Defaite", endGame));
+        } else {
+
+            endGame.addComponent(new SpriteRenderer("Defaite", endGame));
+        }
 
     }
 
     public int getGameID() {
-
         return gameID;
     }
 }

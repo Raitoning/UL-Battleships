@@ -4,9 +4,9 @@ import engine.Game;
 import engine.SpriteFactory;
 import engine.Vector2;
 import engine.gameobject.component.Camera;
+import engine.gameobject.component.SpriteRenderer;
 import engine.gameobject.component.Transform;
 import engine.input.Input;
-import engine.gameobject.component.SpriteRenderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * <h1>SoftwareRenderer</h1>
@@ -22,26 +23,26 @@ import java.util.Arrays;
  * This class is responsible of handling the whole rendering process. It creates a JFrame to render with, cull and sort sprites before rendering them.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.12-tailored-wastelands
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class SoftwareRenderer {
 
     private int width;
     private int height;
     private JFrame window;
-    private BufferedImage outputImage;
     private Graphics2D frameBuffer;
     private int[] rawFrameBuffer;
-    private int CLEARCOLOR = new Color(0,0,0).getRGB();
+    private int CLEARCOLOR = new Color(0, 0, 0).getRGB();
     private ArrayList<SpriteRenderer> sprites;
     private ArrayList<SpriteRenderer> renderQueue;
     private float aspectRatio;
     private Camera activeCamera;
     private ArrayList<Camera> cameras;
 
-    /** Constructs a new SoftwareRenderer with the desired width and height of the rendering zone.
+    /**
+     * Constructs a new SoftwareRenderer with the desired width and height of the rendering zone.
      *
      * @param w Width of the rendering zone.
      * @param h Height of the rendering zone.
@@ -60,11 +61,11 @@ public class SoftwareRenderer {
 
     public void newOuputWindow(int w, int h) {
 
-        outputImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage outputImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         frameBuffer = outputImage.createGraphics();
         rawFrameBuffer = ((DataBufferInt) outputImage.getRaster().getDataBuffer()).getData();
 
-        aspectRatio = (float)width/(float)height;
+        aspectRatio = (float) width / (float) height;
 
         window = new JFrame("UL-Battleships");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,14 +83,12 @@ public class SoftwareRenderer {
         window = null;
     }
 
-    // TODO: Fix the null window exception.
-    /** Cull, sort and render sprites to the rendering zone. Can clear the buffer with a determined color before rendering.
-     *
-     * @version 18.12.12-tailored-wastelands
+    /**
+     * Cull, sort and render sprites to the rendering zone. Can clear the buffer with a determined color before rendering.
      */
     public void update() {
 
-        if(window != null) {
+        if (window != null) {
 
             Arrays.fill(rawFrameBuffer, CLEARCOLOR);
 
@@ -97,7 +96,7 @@ public class SoftwareRenderer {
 
             for (int i = cameras.size() - 1; i > -1; i--) {
 
-                if(cameras.get(i).getGameObject().getGameID() == Game.getGameID()) {
+                if (cameras.get(i).getGameObject().getGameID() == Game.getGameID()) {
 
                     activeCamera = cameras.get(i);
 
@@ -129,30 +128,31 @@ public class SoftwareRenderer {
 
                     x = (int) (width * activeCamera.getMinRenderArea().getX());
 
-                    y = (int) (height * ( 1f - activeCamera.getMaxRenderArea().getY()));
+                    y = (int) (height * (1f - activeCamera.getMaxRenderArea().getY()));
 
                     frameBuffer.drawImage(renderTexture, null, x, y);
 
                     renderTextureFrameBuffer.dispose();
                 }
             }
-            window.repaint();
+
+            if (window != null) {
+
+                window.repaint();
+            }
         }
     }
 
-    /**
-     * @version 18.12.12-tailored-wastelands
-     */
     private void cull() {
 
-         renderQueue.clear();
+        renderQueue.clear();
 
-         SpriteRenderer sprite;
-         Transform transform;
+        SpriteRenderer sprite;
+        Transform transform;
 
         for (SpriteRenderer spriteRenderer : sprites) {
 
-            if(spriteRenderer.getGameObject().getGameID() == Game.getGameID()) {
+            if (spriteRenderer.getGameObject().getGameID() == Game.getGameID()) {
 
                 sprite = spriteRenderer;
                 transform = sprite.getGameObject().getTransform();
@@ -171,8 +171,6 @@ public class SoftwareRenderer {
             }
 
         }
-
-//         System.out.println("Sprite to render: " + renderQueue.size());
     }
 
     private void zSort() {
@@ -182,26 +180,29 @@ public class SoftwareRenderer {
 
     private void cameraSort() {
 
-        cameras.sort((o1, o2) -> Integer.compare(o1.getRenderPriority(), o2.getRenderPriority()));
+        cameras.sort(Comparator.comparingInt(Camera::getRenderPriority));
     }
 
-    /** Add a sprite to the sprite list to render. It will be culled and sorted before rendering.
+    /**
+     * Add a sprite to the sprite list to render. It will be culled and sorted before rendering.
      *
      * @param sprite The SpriteRenderer containing the sprite to render.
      */
     public void addSpriteToQueue(SpriteRenderer sprite) {
 
-        if(!sprites.contains(sprite)) {
+        if (!sprites.contains(sprite)) {
 
             sprites.add(sprite);
         }
     }
+
     public void removeSpriteFromQueue(SpriteRenderer sprite) {
 
         sprites.remove(sprite);
     }
 
-    /** Get the aspect ratio of the rendering zone.
+    /**
+     * Get the aspect ratio of the rendering zone.
      *
      * @return The aspect ratio of the rendering zone.
      */
@@ -210,7 +211,8 @@ public class SoftwareRenderer {
         return aspectRatio;
     }
 
-    /** Get the vertical size targeted when rescaling sprites.
+    /**
+     * Get the vertical size targeted when rescaling sprites.
      *
      * @return The target size for sprites for the current rendering camera.
      */
@@ -219,7 +221,8 @@ public class SoftwareRenderer {
         return activeCamera.getVerticalSpriteSizeTarget();
     }
 
-    /** Get the activeCamera used for rendering.
+    /**
+     * Get the activeCamera used for rendering.
      *
      * @return The activeCamera used for rendering.
      */
@@ -238,13 +241,14 @@ public class SoftwareRenderer {
         return cameras.size();
     }
 
-    /** Set the activeCamera used to render its content.
+    /**
+     * Set the activeCamera used to render its content.
      *
      * @param camera The activeCamera to use for rendering.
      */
     public void addCamera(Camera camera) {
 
-        if(!cameras.contains(camera)) {
+        if (!cameras.contains(camera)) {
 
             cameras.add(camera);
         }
@@ -255,7 +259,8 @@ public class SoftwareRenderer {
         cameras.remove(camera);
     }
 
-    /** Get the width of the rendering zone.
+    /**
+     * Get the width of the rendering zone.
      *
      * @return The width of the rendering zone.
      */
@@ -264,7 +269,8 @@ public class SoftwareRenderer {
         return width;
     }
 
-    /** Get the height of the rendering zone.
+    /**
+     * Get the height of the rendering zone.
      *
      * @return The height of the rendering zone.
      */
@@ -273,7 +279,8 @@ public class SoftwareRenderer {
         return height;
     }
 
-    /** Get the output window
+    /**
+     * Get the output window
      *
      * @return The output window
      */

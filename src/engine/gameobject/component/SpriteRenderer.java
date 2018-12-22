@@ -7,18 +7,19 @@ import engine.gameobject.GameObject;
  * <h1>SpriteRenderer</h1>
  * A component used to add a sprite to a GameObject and displays it.
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class SpriteRenderer implements Component {
 
     private GameObject gameObject;
     private String name;
 
-    /** Creates a new SpriteRenderer given the name of the sprite to use.
+    /**
+     * Creates a new SpriteRenderer given the name of the sprite to use.
      *
-     * @param name Name of the sprite to display.
+     * @param name       Name of the sprite to display.
      * @param gameObject The GameObject this Component is attached to.
      */
     public SpriteRenderer(String name, GameObject gameObject) {
@@ -29,7 +30,8 @@ public class SpriteRenderer implements Component {
         Engine.getInstance().getRenderer().addSpriteToQueue(this);
     }
 
-    /** Return the GameObject this Component is attached to.
+    /**
+     * Return the GameObject this Component is attached to.
      *
      * @return the GameObject this Component is attached to.
      */
@@ -38,16 +40,8 @@ public class SpriteRenderer implements Component {
         return gameObject;
     }
 
-    /** Set the name of the sprite to use.
-     *
-     * @param value The name of the sprite to use.
-     */
-    public void setName(String value) {
-
-        name = value;
-    }
-
-    /** Get the name of the used sprite.
+    /**
+     * Get the name of the used sprite.
      *
      * @return The name of the used sprite.
      */
@@ -56,7 +50,18 @@ public class SpriteRenderer implements Component {
         return name;
     }
 
-    /** Destroy this component.
+    /**
+     * Set the name of the sprite to use.
+     *
+     * @param value The name of the sprite to use.
+     */
+    public void setName(String value) {
+
+        name = value;
+    }
+
+    /**
+     * Destroy this component.
      *
      * @deprecated STILL EXPERIMENTAL, DO NOT USE IT.
      */

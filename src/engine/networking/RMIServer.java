@@ -1,6 +1,5 @@
 package engine.networking;
 
-import javax.naming.NamingException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,9 +13,12 @@ import java.rmi.registry.Registry;
  * From this class, you can create a registry for clients to connect to.
  * </p>
  *
- * @author  Raitoning
+ * <b>Note:</b> This class is marked as deprecated because it's implementation is not finshed and shouldn't work at all. Use it as your own risks.
+ *
+ * @author Raitoning
  * @version 2018.12.12-tailored-wastelands
- * @since   2018.12.05
+ * @since 2018.12.05
+ * @deprecated
  */
 
 @Deprecated
@@ -26,15 +28,14 @@ public class RMIServer {
     private String registryName;
 
     /**
+     * @param registryName String The name to use for the RMIRegistry.
+     * @param rmiRegistry  RMIRegistry The RMIRegistry to publish.
+     * @throws RemoteException       Throws an RemoteException if the remote isn't an RMIRegistry.
+     * @throws AlreadyBoundException Throws an AlreadyBoundException if the server is already bound to the target RMIRegistry.
      * @deprecated
-     * @param registryName
-     * @param rmiRegistry
-     * @throws RemoteException
-     * @throws NamingException
-     * @throws AlreadyBoundException
      */
     public RMIServer(String registryName, RMIRegistry rmiRegistry) throws RemoteException,
-            NamingException, AlreadyBoundException {
+            AlreadyBoundException {
 
         this.registryName = registryName;
 
@@ -49,9 +50,9 @@ public class RMIServer {
     }
 
     /**
+     * @throws RemoteException   Throws a RemoteException if the remote isn't an RMIRegistry.
+     * @throws NotBoundException Throws an AlreadyBoundException if the server is already bound to the target RMIRegistry.
      * @deprecated
-     * @throws RemoteException
-     * @throws NotBoundException
      */
     public void closeServer() throws RemoteException, NotBoundException {
 

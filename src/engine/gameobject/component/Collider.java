@@ -24,6 +24,7 @@ public abstract class Collider implements Component {
 
         gameObject.onTriggerStay2D(other);
     }
+
     public void onTriggerExit2D(Collider other) {
         gameObject.onTriggerExit2D(other);
     }

@@ -8,16 +8,17 @@ package engine;
  * </p>
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/Vector2.html">https://docs.unity3d.com/ScriptReference/Vector2.html</a>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.11.22
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class Vector2 {
 
     private float x;
     private float y;
 
-    /** Constructs a new vector with given x, y components.
+    /**
+     * Constructs a new vector with given x, y components.
      *
      * @param x X component of the vector.
      * @param y Y component of the vector.
@@ -28,53 +29,18 @@ public class Vector2 {
         this.y = y;
     }
 
-    /** Get the X component of an existing Vector2.
-     *
-     * @return X component of the vector.
-     */
-    public float getX() {
-
-        return x;
-    }
-
-    /** Get the Y component of an existing Vector2.
-     *
-     * @return Y component of the vector.
-     */
-    public float getY() {
-
-        return y;
-    }
-
-    /** Set the X component of an existing Vector2.
-     *
-     * @param x X component of the vector.
-     */
-    public void setX(float x) {
-
-        this.x = x;
-    }
-
-
-    /** Set the Y component of an existing Vector2.
-     *
-     * @param y Y component of the vector.
-     */
-    public void setY(float y) {
-
-        this.y = y;
-    }
-
-    /** Shorthand for writing Vector2(0, 0).
+    /**
+     * Shorthand for writing Vector2(0, 0).
      *
      * @return A Vector2 with both X and Y components set to 0.
      */
     public static Vector2 zero() {
 
-        return new Vector2(0f ,0f);
+        return new Vector2(0f, 0f);
     }
 
-    /** Shorthand for writing Vector2(1, 1).
+    /**
+     * Shorthand for writing Vector2(1, 1).
      *
      * @return A Vector2 with both X and Y components set to 1.
      */
@@ -83,7 +49,48 @@ public class Vector2 {
         return new Vector2(1f, 1f);
     }
 
-    /** Return a readable string of the Vector2 values.
+    /**
+     * Get the X component of an existing Vector2.
+     *
+     * @return X component of the vector.
+     */
+    public float getX() {
+
+        return x;
+    }
+
+    /**
+     * Set the X component of an existing Vector2.
+     *
+     * @param x X component of the vector.
+     */
+    public void setX(float x) {
+
+        this.x = x;
+    }
+
+    /**
+     * Get the Y component of an existing Vector2.
+     *
+     * @return Y component of the vector.
+     */
+    public float getY() {
+
+        return y;
+    }
+
+    /**
+     * Set the Y component of an existing Vector2.
+     *
+     * @param y Y component of the vector.
+     */
+    public void setY(float y) {
+
+        this.y = y;
+    }
+
+    /**
+     * Return a readable string of the Vector2 values.
      *
      * @return Return a readable string of the Vector2 values.
      */

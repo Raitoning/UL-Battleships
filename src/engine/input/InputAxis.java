@@ -11,7 +11,7 @@ public class InputAxis {
     private ArrayList<Integer> positiveModifiers;
     private ArrayList<Integer> negativeModifiers;
 
-    InputAxis(String name, ArrayList<Integer> positiveModifiers, ArrayList<Integer> negativeModifiers) {
+    public InputAxis(String name, ArrayList<Integer> positiveModifiers, ArrayList<Integer> negativeModifiers) {
 
         this.name = name;
         this.positiveModifiers = positiveModifiers;
@@ -22,20 +22,20 @@ public class InputAxis {
 
         boolean isModified = false;
 
-        for (int i = 0; i < keyEvents.size(); i++) {
+        for (Integer keyEvent : keyEvents) {
 
-            if(positiveModifiers.contains(Integer.valueOf(keyEvents.get(i)))) {
+            if (positiveModifiers.contains(keyEvent)) {
 
                 isModified = true;
                 value = Mathf.clamp(value + 1f, -1f, 1f);
-            } else if(negativeModifiers.contains(Integer.valueOf(keyEvents.get(i)))) {
+            } else if (negativeModifiers.contains(keyEvent)) {
 
                 isModified = true;
                 value = Mathf.clamp(value - 1f, -1f, 1f);
             }
         }
 
-        if(!isModified) {
+        if (!isModified) {
 
             value = 0f;
         }

@@ -5,22 +5,23 @@ package engine;
  * A collection of common math functions.
  * <b>Note:</b> <a href="https://docs.unity3d.com/ScriptReference/Mathf.html">https://docs.unity3d.com/ScriptReference/Mathf.html</a>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.11.26
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class Mathf {
 
-    /** Clamps a value between a minimum float and maximum float value.
+    /**
+     * Clamps a value between a minimum float and maximum float value.
      *
-     * @param in The value to clamp.
+     * @param in  The value to clamp.
      * @param min The minimum value
      * @param max The maximum value
      * @return The clamped value.
      */
     public static float clamp(float in, float min, float max) {
 
-        if(in < min) {
+        if (in < min) {
 
             in = min;
         } else if (in > max) {
@@ -31,7 +32,8 @@ public class Mathf {
         return in;
     }
 
-    /** Linearly interpolates between a and b by t.
+    /**
+     * Linearly interpolates between a and b by t.
      *
      * @param a The value to interpolate from.
      * @param b The value to interpolate to.

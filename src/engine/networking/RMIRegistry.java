@@ -10,14 +10,14 @@ import java.rmi.Remote;
  * registry of for RMI networking.
  * </p>
  *
- * @author  Raitoning
+ * <b>Note:</b> This interface is marked as deprecated because it's implementation is not finshed and shouldn't work at all. Use it as your own risks.
+ *
+ * @author Raitoning
  * @version 2018.12.05
- * @since   2018.12.05
+ * @since 2018.12.05
+ * @deprecated
  */
 
 @Deprecated
 public interface RMIRegistry extends Remote {
-
-
-
 }

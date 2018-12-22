@@ -5,25 +5,20 @@ import assets.scripts.map.Case;
 import assets.scripts.map.Map;
 
 
-public class IARandom extends IA{
+public class IARandom extends IA {
 
     public static final String NAME = "IA Aléatoire";
 
-    public IARandom(int idJoueur, Model m, int gameID) {
+    public IARandom(int idJoueur, Model model, int gameID) {
 
-        super(idJoueur, m, gameID);
+        super(idJoueur, model, gameID);
 
-        for(int i =0; i < Map.NBCASES;i++){
-            for (int j =0;j < Map.NBCASES;j++){
-                ar.add(model.getEpoque().getCaseAt(opponentID(),i,j));
+        for (int i = 0; i < Map.NBCASES; i++) {
+            for (int j = 0; j < Map.NBCASES; j++) {
+                cases.add(this.model.getEpoque().getCaseAt(opponentID(), i, j));
             }
         }
 
-    }
-
-    @Override
-    public void play(Case c) {
-        super.play(c);
     }
 
     @Override
@@ -34,9 +29,10 @@ public class IARandom extends IA{
 
     @Override
     public Case jeuxIA() {
-        int x = (int)(Math.random()*(ar.size()));
-        Case res = ar.get(x);
-        ar.remove(x);
+
+        int x = (int) (Math.random() * (cases.size()));
+        Case res = cases.get(x);
+        cases.remove(x);
         return res;
     }
 

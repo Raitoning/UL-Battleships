@@ -10,19 +10,20 @@ import java.io.IOException;
  * A reference to an image file containing the sprite.
  *
  * <p>
- *     Makes easier to import sprites into the engine and then using them.
+ * Makes easier to import sprites into the engine and then using them.
  * </p>
  *
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.03
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class SpriteReference {
 
     private String name;
     private BufferedImage sprite;
 
-    /** Constructs a new SpriteReference given the desired name and the path to the file.
+    /**
+     * Constructs a new SpriteReference given the desired name and the path to the file.
      *
      * @param name Desired name for the sprite.
      * @param path Path of the file to use.
@@ -44,7 +45,8 @@ public class SpriteReference {
         this.sprite = sprite;
     }
 
-    /** Get the name of the sprite.
+    /**
+     * Get the name of the sprite.
      *
      * @return The name of the sprite.
      */
@@ -52,7 +54,8 @@ public class SpriteReference {
         return name;
     }
 
-    /** Get the BufferedImage of the sprite.
+    /**
+     * Get the BufferedImage of the sprite.
      *
      * @return The BufferedImage of the sprite.
      */

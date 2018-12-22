@@ -13,9 +13,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
- * @author  Raitoning
+ * @author Raitoning
  * @version 2018.12.12-tailored-wastelands
- * @since   2018.11.14
+ * @since 2018.11.14
  */
 public class MouseInput extends MouseAdapter {
 
@@ -60,7 +60,7 @@ public class MouseInput extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
 
-        if(!inputs.contains(e.getButton())) {
+        if (!inputs.contains(e.getButton())) {
 
             inputs.add(e.getButton());
         }
@@ -108,7 +108,7 @@ public class MouseInput extends MouseAdapter {
                 if (worldCoordinates.getY() >= transform.position().getY() - (transform.scale().getY() / 2f) &&
                         worldCoordinates.getY() <= transform.position().getY() + (transform.scale().getY() / 2f)) {
 
-                    if(listener.getGameObject().getGameID() == Game.getGameID()) {
+                    if (listener.getGameObject().getGameID() == Game.getGameID()) {
 
                         listener.raycasted(indexOfCamera);
                     }
