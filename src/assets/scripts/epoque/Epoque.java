@@ -49,6 +49,7 @@ public abstract class Epoque implements RMIRegistry {
      */
     public void addLoadShip(ArrayList<Battleship> liste,int map){
         for(int i =0;i < liste.size();i++){
+            battleships[map].add(liste.get(i));
             liste.get(i).setMap(maps[map]);
             maps[map].add(liste.get(i));
         }
