@@ -46,6 +46,12 @@ public class XMLSaving extends GameSaverFactory {
                                 "Chargement de partie",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }
+                    else{
+                        JOptionPane.showMessageDialog(null,
+                                "Erreur : veuillez selectionner un fichier xml !",
+                                "Chargement de partie",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
                 }
         } catch (IOException e) {
             e.printStackTrace();

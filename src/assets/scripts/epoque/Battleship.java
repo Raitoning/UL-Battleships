@@ -28,7 +28,6 @@ public class Battleship {
             this.hauteur = longeur;
             this.largeur = 1;
 
-
         } else {
             this.hauteur = 1;
             this.largeur = longeur;

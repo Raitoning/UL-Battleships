@@ -265,7 +265,8 @@ public class Game {
 
         JPanel jpChargement = new JPanel();
         JButton jbChargement = new JButton("Charger une partie");
-        jbChargement.addActionListener(e -> XMLSaving.getInstance().load());
+        jbChargement.addActionListener(e -> { XMLSaving.getInstance().load();
+        settingsWindow.dispose();});
         jpChargement.add(jbChargement);
         settingsWindow.add(jpChargement);
 
