@@ -60,9 +60,6 @@ public abstract class Epoque implements RMIRegistry {
      */
     public void createCase(){
         for(int i = 0;i < 2;i++){
-            for(int j = 0;j <battleships[i].size();j++){
-                maps[i].add(battleships[i].get(j));
-            }
             maps[i].casesEmptyInit();
         }
     }

@@ -109,10 +109,7 @@ public class Map {
 
             for (int j = 0;j < cases[0].length; j++) {
 
-
-                if(cases[j][i].estToucher)
-                    sb.append("[0]");
-                else sb.append(cases[j][i].toString());
+                sb.append(cases[j][i].toString());
             }
             sb.append('\n');
         }

@@ -179,7 +179,7 @@ public class XMLSaving extends GameSaverFactory {
 
         // Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            boolean v = true; //Passer à true pour afficher les contenus du fichierXML
+            boolean v = false; //Passer à true pour afficher les contenus du fichierXML
         try {
             // Etape 2 : création d'un parseur
             final DocumentBuilder builder = factory.newDocumentBuilder();

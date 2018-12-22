@@ -40,7 +40,6 @@ public class Bateau extends Case {
         }
         else joueur = 0;
         model.getEpoque().getBattleshipAt(joueur,x,y).hit();
-        System.out.println(model.getEpoque().toString());
     }
 
     @Override

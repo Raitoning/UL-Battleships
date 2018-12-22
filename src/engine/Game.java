@@ -228,7 +228,6 @@ public class Game {
     public static void setGameID(int value) {
 
         gameID = value;
-        System.out.println(value);
     }
 
     private void gameCreation() {
@@ -266,7 +265,10 @@ public class Game {
         JPanel jpChargement = new JPanel();
         JButton jbChargement = new JButton("Charger une partie");
         jbChargement.addActionListener(e -> { XMLSaving.getInstance().load();
-        settingsWindow.dispose();});
+        settingsWindow.dispose();
+        outputWindow.setEnabled(true);
+        outputWindow.setVisible(true);
+        });
         jpChargement.add(jbChargement);
         settingsWindow.add(jpChargement);
 

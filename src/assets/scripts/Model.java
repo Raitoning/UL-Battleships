@@ -48,6 +48,7 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
 
         super();
         this.gameID = gameID;
+        System.out.println(gameID);
         epoqueName = epName;
         setEpoque(epName,false);
         getEpoque().addLoadShip(listeBateau1,0);
