@@ -50,7 +50,7 @@ public class Battleship {
     public void hit(){
         if(isAlive()) {
             pv -= 1;
-            System.out.println(pv);
+
             if (pv == 0) {
                 map.explodeBattleship(this);
             }
