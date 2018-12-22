@@ -43,14 +43,9 @@ public abstract class Case extends GameObject{
 
     @Override
     public void onRaycast(int num){
-
         if(model.getTypeofPlayer(model.getPlayerTurn()).equals(Human.name) && num == 1 && !estToucher){
             model.getPlayer(model.getPlayerTurn()).play(this);
         }
-    }
-
-    public static Case fromString(String s, int x, int y, Model m){
-        return null;
     }
 
     public abstract String nomSprite();

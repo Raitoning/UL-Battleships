@@ -1,6 +1,7 @@
 package assets.scripts.map;
 
 import assets.scripts.Model;
+import engine.Engine;
 
 public class Bateau extends Case {
 
@@ -39,6 +40,7 @@ public class Bateau extends Case {
         }
         else joueur = 0;
         model.getEpoque().getBattleshipAt(joueur,x,y).hit();
+        System.out.println(model.getEpoque().toString());
     }
 
     @Override

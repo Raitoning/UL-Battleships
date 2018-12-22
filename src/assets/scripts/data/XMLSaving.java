@@ -28,7 +28,7 @@ public class XMLSaving extends GameSaverFactory {
     }
 
     @Override
-    public void load(Model model) {
+    public void load() {
 
         try {
             JFileChooser j = new JFileChooser();
@@ -74,7 +74,7 @@ public class XMLSaving extends GameSaverFactory {
                             dest += ".xml";
                         saveFile(new File(dest), model);
                         JOptionPane.showMessageDialog(null,
-                                "Sauvegarde réussite !",
+                                "Sauvegarde réussie !",
                                 "Sauvegarde",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -300,7 +300,6 @@ public class XMLSaving extends GameSaverFactory {
                     }
                 }
             }
-            //Model m = new Model(ep,0,adv,liste1,liste2,casesTouche);
             Engine.getInstance().getGame().loadModel(ep,adv,liste1,liste2,casesTouche);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {

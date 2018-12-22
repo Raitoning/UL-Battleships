@@ -101,8 +101,8 @@ public class Game {
         MenuItem newGameItem = new MenuItem("Nouvelle partie");
         newGameItem.addActionListener(e -> endGame());
 
-        MenuItem loadItem = new MenuItem("Charger une partie...");
-        loadItem.addActionListener(e -> GameSaverFactory.getInstance().load(g));
+        MenuItem loadItem = new MenuItem("Charger une partie");
+        loadItem.addActionListener(e -> GameSaverFactory.getInstance().load());
 
         MenuItem saveItem = new MenuItem("Sauvegarder la partie");
                 saveItem.addActionListener(e -> GameSaverFactory.getInstance().save(g));
@@ -262,6 +262,12 @@ public class Game {
 
         epoquePanel.add(epoqueComboBox);
         settingsWindow.add(epoquePanel);
+
+        JPanel jpChargement = new JPanel();
+        JButton jbChargement = new JButton("Charger une partie");
+        jbChargement.addActionListener(e -> XMLSaving.getInstance().load());
+        jpChargement.add(jbChargement);
+        settingsWindow.add(jpChargement);
 
         JPanel buttonsPanel = new JPanel();
         JButton quitButton = new JButton("Quitter");
