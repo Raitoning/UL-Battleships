@@ -3,8 +3,10 @@ package engine;
 import assets.scripts.Model;
 import assets.scripts.data.GameSaverFactory;
 import assets.scripts.data.XMLSaving;
+import assets.scripts.epoque.Battleship;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Space;
+import assets.scripts.map.Position;
 import assets.scripts.player.*;
 import engine.gameobject.GameObject;
 import engine.input.Input;
@@ -99,8 +101,8 @@ public class Game {
         MenuItem newGameItem = new MenuItem("Nouvelle partie");
         newGameItem.addActionListener(e -> endGame());
 
-        // TODO: ajouter les ActionListener pour les boutons charger et sauvegarder.
         MenuItem loadItem = new MenuItem("Charger une partie...");
+        loadItem.addActionListener(e -> GameSaverFactory.getInstance().load(g));
 
         MenuItem saveItem = new MenuItem("Sauvegarder la partie");
                 saveItem.addActionListener(e -> GameSaverFactory.getInstance().save(g));
@@ -289,13 +291,22 @@ public class Game {
         settingsWindow.setVisible(true);
     }
 
-    private void createModel(String epoqueName, String aiName) {
+    public void createModel(String epoqueName, String aiName) {
 
         try {
 
             setGameID(getGameID() + 1);
             g = new Model(epoqueName, getGameID(), aiName);
 
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadModel(String ep, String adv, ArrayList<Battleship> liste1, ArrayList<Battleship> liste2, ArrayList<Position>casesTouche){
+        try {
+            setGameID(getGameID() + 1);
+            g = new Model(ep,getGameID(),adv,liste1,liste2,casesTouche);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

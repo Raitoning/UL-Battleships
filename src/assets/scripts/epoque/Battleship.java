@@ -40,6 +40,10 @@ public class Battleship {
             map.add(this);
     }
 
+    public void setMap(Map m){
+        map = m;
+    }
+
     /**
      * Fonction a completer, quand un bateau se fait toucher.
      */

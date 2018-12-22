@@ -35,11 +35,53 @@ public abstract class Epoque implements RMIRegistry {
         if (init) {
             battleshipInit(0);
             battleshipInit(1);
+            maps[0].casesEmptyInit();
+            maps[1].casesEmptyInit();
         } else {
             battleshipsVoidInit();
         }
-        maps[0].casesEmptyInit();
-        maps[1].casesEmptyInit();
+    }
+
+    /**
+     * recuperatio ndes données des battleship
+     * @param liste
+     * @param map
+     */
+    public void addLoadShip(ArrayList<Battleship> liste,int map){
+        for(int i =0;i < liste.size();i++){
+            liste.get(i).setMap(maps[map]);
+            maps[map].add(liste.get(i));
+        }
+    }
+
+    /**
+     * On crée les cases danss le cas d'un chargement
+     */
+    public void createCase(){
+        for(int i = 0;i < 2;i++){
+            for(int j = 0;j <battleships[i].size();j++){
+                maps[i].add(battleships[i].get(j));
+            }
+            maps[i].casesEmptyInit();
+        }
+    }
+
+    /**
+     * On modifie les cases endommagée chargée
+     * @param listeTouche
+     */
+    public void setCases(ArrayList<Position> listeTouche){
+
+        Position courant ;
+        for(int i =0;i < listeTouche.size();i++){
+            courant = listeTouche.get(i);
+            if(courant.getX() > Map.NBCASES){
+                maps[1].at(courant.getX()-1-Map.NBCASES,courant.getY()).loadToucher();
+            }
+            else{
+                maps[0].at(courant.getX(),courant.getY()).loadToucher();
+            }
+        }
     }
 
     /**
@@ -189,13 +231,13 @@ public abstract class Epoque implements RMIRegistry {
         maps[i].updateAt(c,x,y);
     }
 
-//    public void addShip(int i,Battleship b){
-//        battleships[i].add(b);
-//    }
+    /*public void addShip(int i,Battleship b){
+        battleships[i].add(b);
+    }*/
 
     private void battleshipsVoidInit(){
-        battleships[0]= new ArrayList<>(4);
-        battleships[1]= new ArrayList<>(4);
+        battleships[0]= new ArrayList<>();
+        battleships[1]= new ArrayList<>();
     }
 
     public boolean hasLost(int idJoueur){

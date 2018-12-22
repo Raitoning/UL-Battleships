@@ -1,8 +1,10 @@
 package assets.scripts;
 
+import assets.scripts.epoque.Battleship;
 import assets.scripts.epoque.Epoque;
 import assets.scripts.epoque.MoyenAge;
 import assets.scripts.epoque.Space;
+import assets.scripts.map.Position;
 import assets.scripts.player.*;
 import engine.Engine;
 import engine.gameobject.GameObject;
@@ -10,6 +12,7 @@ import engine.gameobject.component.SpriteRenderer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Model extends UnicastRemoteObject implements NetworkedGame {
 
@@ -28,6 +31,29 @@ public class Model extends UnicastRemoteObject implements NetworkedGame {
         this.gameID = gameID;
         epoqueName = epName;
         setEpoque(epName,true);
+
+        this.players = new Player[2];
+
+        this.players[0] = new Human(0,this, gameID);
+
+        setTypeofPlayer(1, aiName);
+
+        playerTurn = 0;
+    }
+
+    /**
+     * Constructeur pour le chargement
+     */
+    public Model(String epName, int gameID, String aiName, ArrayList<Battleship> listeBateau1, ArrayList<Battleship> listeBateau2, ArrayList<Position> casesTouche) throws RemoteException {
+
+        super();
+        this.gameID = gameID;
+        epoqueName = epName;
+        setEpoque(epName,false);
+        getEpoque().addLoadShip(listeBateau1,0);
+        getEpoque().addLoadShip(listeBateau2,1);
+        getEpoque().createCase();
+        getEpoque().setCases(casesTouche);
 
         this.players = new Player[2];
 

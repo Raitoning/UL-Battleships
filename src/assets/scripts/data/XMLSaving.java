@@ -2,11 +2,12 @@ package assets.scripts.data;
 
 import assets.scripts.Model;
 import assets.scripts.epoque.Battleship;
-import assets.scripts.map.Map;
+import assets.scripts.map.*;
 
 import java.io.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
@@ -30,9 +31,28 @@ public class XMLSaving extends GameSaverFactory {
     public void load(Model model) {
 
         try {
-            loadFile(new File("random.xml"), model);
+            JFileChooser j = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
+            j.setFileFilter(filter);
+            int result = j.showDialog(null,"Charger");
+            String dest = j.getSelectedFile()+"";
+
+            if(dest != null && result == JFileChooser.APPROVE_OPTION)
+                if(!dest.equals("")){
+                    if (dest.endsWith(".xml")){
+                        loadFile(new File(dest));
+                        JOptionPane.showMessageDialog(null,
+                                "Chargement effectué !",
+                                "Chargement de partie",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Erreur : impossible de charger la partie !",
+                    "Chargement de partie",
+                    JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -63,7 +83,7 @@ public class XMLSaving extends GameSaverFactory {
                 JOptionPane.showMessageDialog(null,
                         "Erreur dans la créatio nde la sauvegarde !",
                         "Sauvegarde",
-                        JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -125,7 +145,8 @@ public class XMLSaving extends GameSaverFactory {
 
             for(int k=0; k< Map.NBCASES;k++){
                 for (int j=0;j<Map.NBCASES;j++){
-                    flotFiltre.println("\t\t\t\t<case x='"+k+"' y='"+j+"'>"+ model.getEpoque().getCaseAt(i,k,j)+"</case>");
+                    if(model.getEpoque().getCaseAt(i,k,j).estToucher())
+                        flotFiltre.println("\t\t\t\t<case x='"+k+"' y='"+j+"'>"+ model.getEpoque().getCaseAt(i,k,j)+"</case>");
                 }
             }
 
@@ -142,11 +163,17 @@ public class XMLSaving extends GameSaverFactory {
     }
 
 
-    public void loadFile(File file,Model model) throws IOException{
+    public void loadFile(File file) throws IOException{
+        String ep = "";
+        String adv = "";
+        ArrayList<Position> casesTouche = new ArrayList<>();
+
+        ArrayList<Battleship> liste1 = new ArrayList<>();
+        ArrayList<Battleship> liste2 = new ArrayList<>();
 
         // Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            boolean v = false; //Passer à true pour afficher les contenus du fichierXML
+            boolean v = true; //Passer à true pour afficher les contenus du fichierXML
         try {
             // Etape 2 : création d'un parseur
             final DocumentBuilder builder = factory.newDocumentBuilder();
@@ -181,11 +208,14 @@ public class XMLSaving extends GameSaverFactory {
                         final Element joueur2 = (Element) node.getElementsByTagName("joueur").item(1);
                         println(v,"Type: "+joueur2.getTextContent()+" ");
                         println(v,"id : " + joueur2.getAttribute("id"));
-
+                        //on recupère le type d'adversaire
+                        adv = joueur2.getTextContent();
                     } else if(name.equals("epoque")){
                         println(v,"\n*************Epoque************");
                         final Element ename = (Element) node.getElementsByTagName("name").item(0);
                         println(v,"type: "+ename.getTextContent());
+                        ep = ename.getTextContent();
+
                         println(v,"\n*************Map************");
                         final Element map = (Element) node.getElementsByTagName("map").item(0);
 
@@ -199,19 +229,25 @@ public class XMLSaving extends GameSaverFactory {
                                 println(v,"case: "+case1.getTextContent()+" x:"
                                         + case1.getAttribute("x")+" y:"
                                         + case1.getAttribute("y"));
+                                int x = Integer.parseInt(case1.getAttribute("x"));
+                                int y = Integer.parseInt(case1.getAttribute("y"));
+                                casesTouche.add(new Position(x,y));
                             }
                         }
 
                         final Element joueur2 = (Element) map.getElementsByTagName("joueur").item(1);
                         println(v,"id : " + joueur2.getAttribute("id"));
-                        final NodeList casesj2 = joueur.getChildNodes();
+                        final NodeList casesj2 = joueur2.getChildNodes();
                         final int nbCasesj2 = casesj2.getLength();
                         for (int j = 0; j<nbCasesj2; j++) {
                             if(casesj2.item(j).getNodeType() == Node.ELEMENT_NODE) {
-                                final Element case1 = (Element) casesj2.item(j);
-                                println(v,"case: "+case1.getTextContent()+" x:"
-                                        + case1.getAttribute("x")+" y:"
-                                        + case1.getAttribute("y"));
+                                final Element case2 = (Element) casesj2.item(j);
+                                println(v,"case: "+case2.getTextContent()+" x:"
+                                        + case2.getAttribute("x")+" y:"
+                                        + case2.getAttribute("y"));
+                                int x = Integer.parseInt(case2.getAttribute("x"));
+                                int y = Integer.parseInt(case2.getAttribute("y"));
+                                casesTouche.add(new Position(x+Map.NBCASES+1,y));
                             }
                         }
 
@@ -231,6 +267,12 @@ public class XMLSaving extends GameSaverFactory {
                                         +" l:" + ship1.getAttribute("l")
                                         +" v:" + ship1.getAttribute("v")
                                         +" h:" + ship1.getAttribute("h"));
+                                int longeur = Integer.parseInt(ship1.getAttribute("l"));
+                                int posx = Integer.parseInt(ship1.getAttribute("x"));
+                                int posy = Integer.parseInt(ship1.getAttribute("y"));
+                                int hp = Integer.parseInt(ship1.getAttribute("h"));
+                                boolean verti = Boolean.parseBoolean(ship1.getAttribute("v"));
+                                liste1.add(new Battleship(new Position(posx,posy),hp,longeur,verti,null));
                             }
                         }
 
@@ -238,20 +280,28 @@ public class XMLSaving extends GameSaverFactory {
                         println(v,"id : " + player2.getAttribute("id"));
                         final NodeList ships2 = player2.getChildNodes();
                         final int nbshipsj2 = ships2.getLength();
-                        for (int j = 0; j<nbshipsj2; j++) {
-                            if(ships2.item(j).getNodeType() == Node.ELEMENT_NODE) {
-                                final Element ship2 = (Element) ships1.item(j);
+                        for (int k = 0; k<nbshipsj2; k++) {
+                            if(ships2.item(k).getNodeType() == Node.ELEMENT_NODE) {
+                                final Element ship2 = (Element) ships2.item(k);
                                 println(v,"case: "+ship2.getTextContent()
                                         +" x:" + ship2.getAttribute("x")
                                         +" y:" + ship2.getAttribute("y")
                                         +" l:" + ship2.getAttribute("l")
                                         +" v:" + ship2.getAttribute("v")
                                         +" h:" + ship2.getAttribute("h"));
+                                int longeur = Integer.parseInt(ship2.getAttribute("l"));
+                                int posx = Integer.parseInt(ship2.getAttribute("x"));
+                                int posy = Integer.parseInt(ship2.getAttribute("y"));
+                                int hp = Integer.parseInt(ship2.getAttribute("h"));
+                                boolean verti = Boolean.parseBoolean(ship2.getAttribute("v"));
+                                liste2.add(new Battleship(new Position(posx,posy),hp,longeur,verti,null));
                             }
                         }
                     }
                 }
             }
+            //Model m = new Model(ep,0,adv,liste1,liste2,casesTouche);
+            Engine.getInstance().getGame().loadModel(ep,adv,liste1,liste2,casesTouche);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
 

@@ -10,9 +10,6 @@ public abstract class Case extends GameObject{
 
     public static String VIDE = "[ ]";
     public static String BATEAU = "[B]";
-    public static String TIRRATE = "[o]";
-    public static String TIRSURBATEAU = "[x]";
-    public static String BATEAUDETRUIT = "[^]";
 
     protected boolean estToucher;
 
@@ -68,6 +65,11 @@ public abstract class Case extends GameObject{
 
     public Position getP() {
         return p;
+    }
+
+    public void loadToucher(){
+        estToucher = true;
+        spriteRenderer.setName(nomSprite());
     }
 
     public void subitTir(){

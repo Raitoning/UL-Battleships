@@ -4,7 +4,7 @@ import assets.scripts.Model;
 
 public class Bateau extends Case {
 
-    private String texture = "Water";
+    private String texture;
 
     public Bateau(Position p ,int x, int y, Model m, String t, int id) {
         super(p,x,y,m,id);
