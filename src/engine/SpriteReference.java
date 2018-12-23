@@ -2,7 +2,6 @@ package engine;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -33,7 +32,7 @@ public class SpriteReference {
         this.name = name;
 
         try {
-            sprite = ImageIO.read(new File(path));
+            sprite = ImageIO.read(getClass().getResource(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
