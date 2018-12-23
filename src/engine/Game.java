@@ -50,46 +50,46 @@ public class Game {
         // Sprite MoyenAge
         String epoqueName = MoyenAge.NAME;
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "src/assets/textures/MoyenAge/Water.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "src/assets/textures/MoyenAge/Miss.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "src/assets/textures/MoyenAge/exploded.png");
-        SpriteFactory.getInstance().addSprite("Victoire", "src/assets/textures/Victoire.png");
-        SpriteFactory.getInstance().addSprite("Defaite", "src/assets/textures/Defaite.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "/assets/textures/MoyenAge/Water.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "/assets/textures/MoyenAge/Miss.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "/assets/textures/MoyenAge/exploded.png");
+        SpriteFactory.getInstance().addSprite("Victoire", "/assets/textures/Victoire.png");
+        SpriteFactory.getInstance().addSprite("Defaite", "/assets/textures/Defaite.png");
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "src/assets/textures/MoyenAge/horizontalMiddle.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "src/assets/textures/MoyenAge/verticalMiddle.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "src/assets/textures/MoyenAge/horizontalQueue.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "src/assets/textures/MoyenAge/verticalQueue.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "src/assets/textures/MoyenAge/horizontalTete.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "src/assets/textures/MoyenAge/verticalTete.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "/assets/textures/MoyenAge/horizontalMiddle.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "/assets/textures/MoyenAge/verticalMiddle.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "/assets/textures/MoyenAge/horizontalQueue.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "/assets/textures/MoyenAge/verticalQueue.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "/assets/textures/MoyenAge/horizontalTete.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "/assets/textures/MoyenAge/verticalTete.png");
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "src/assets/textures/MoyenAge/horizontalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "src/assets/textures/MoyenAge/verticalMiddleFeu.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "src/assets/textures/MoyenAge/horizontalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "src/assets/textures/MoyenAge/verticalQueueFeu.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "src/assets/textures/MoyenAge/horizontalTeteFeu.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "src/assets/textures/MoyenAge/verticalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "/assets/textures/MoyenAge/horizontalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "/assets/textures/MoyenAge/verticalMiddleFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "/assets/textures/MoyenAge/horizontalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "/assets/textures/MoyenAge/verticalQueueFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "/assets/textures/MoyenAge/horizontalTeteFeu.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "/assets/textures/MoyenAge/verticalTeteFeu.png");
 
         // Sprite Espace
         epoqueName = Space.NAME;
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "src/assets/textures/Espace/spacehorizontalmiddleup.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "src/assets/textures/Espace/spacemiddleup.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "src/assets/textures/Espace/spacehorizontaltailup.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "src/assets/textures/Espace/spacetailup.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "src/assets/textures/Espace/spacehorizontalheadup.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "src/assets/textures/Espace/spaceheadup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddle", "/assets/textures/Espace/spacehorizontalmiddleup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddle", "/assets/textures/Espace/spacemiddleup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueue", "/assets/textures/Espace/spacehorizontaltailup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueue", "/assets/textures/Espace/spacetailup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTete", "/assets/textures/Espace/spacehorizontalheadup.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTete", "/assets/textures/Espace/spaceheadup.png");
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "src/assets/textures/Espace/spacehorizontalmiddledown.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "src/assets/textures/Espace/spacemiddledown.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "src/assets/textures/Espace/spacehorizontaltaildown.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "src/assets/textures/Espace/spacetaildown.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "src/assets/textures/Espace/spacehorizontalheaddown.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "src/assets/textures/Espace/spaceheaddown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalMiddleFeu", "/assets/textures/Espace/spacehorizontalmiddledown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalMiddleFeu", "/assets/textures/Espace/spacemiddledown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalQueueFeu", "/assets/textures/Espace/spacehorizontaltaildown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalQueueFeu", "/assets/textures/Espace/spacetaildown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "horizontalTeteFeu", "/assets/textures/Espace/spacehorizontalheaddown.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "verticalTeteFeu", "/assets/textures/Espace/spaceheaddown.png");
 
-        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "src/assets/textures/Espace/space.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "src/assets/textures/Espace/spacemiss.png");
-        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "src/assets/textures/Espace/spacehit.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Water", "/assets/textures/Espace/space.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Miss", "/assets/textures/Espace/spacemiss.png");
+        SpriteFactory.getInstance().addSprite(epoqueName + "Exploded", "/assets/textures/Espace/spacehit.png");
 
         outputWindow = Engine.getInstance().getRenderer().getWindow();
 
